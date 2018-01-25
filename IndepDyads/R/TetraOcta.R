@@ -13,6 +13,12 @@ xyz2ternxyz <- function(xyz){
 	ternxyz
 }
 
+
+
+
+
+
+
 # pp <- dget("Data/TALrglview2.R")
 
 startYr <- 1800
@@ -71,11 +77,25 @@ for (n in ns){
 
 
 
+# equal aspect ratio
+x <- diff(par3d("bbox")[1:2])
+y <- diff(par3d("bbox")[3:4])
+z <- diff(par3d("bbox")[5:6])
+decorate3d(xlim = c(startYr, endYr), ylim = c(0, omega-25), zlim = c(0, omega-25), 
+		aspect = c(x, y, z), box = FALSE, axes = FALSE, xlab = "", ylab = "", zlab = "")
+
+# need a way to move parallax w mouse roller
 
 
 
 
+# draw triangle:
+#rgl.triangles(xyztern$x,xyztern$y,xyztern$z,alpha=0.1,color = gray(.8),
+#		ambient="black",specular="black",emission="black",shininess=0)
 
+#draw quad:
+#rgl.quads(xyztern$x,xyztern$y,xyztern$z,alpha=0.3,color = gray(.8),
+#		ambient="black",specular="white",emission="black")
 
 
 

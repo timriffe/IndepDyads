@@ -13,6 +13,30 @@ xyz2ternxyz <- function(xyz){
 	ternxyz
 }
 
+# tetrahedron function
+# this will need apctdl logic
+tetrahedron_a <- function(){
+	
+}
+
+
+
+# let's start with unit space: c(-2,2) for everything?
+xlim <- c(-2,2)
+ylim <- c(-2,2)
+zlim <- c(-2,2)
+
+# set up device
+
+plot3d(xlim = xlim, ylim = ylim, zlim = zlim, 
+		box = FALSE, 
+		aspect = c(3, 1, 1),
+		axes = FALSE, 
+		type ='n',
+		xlab = "",
+		ylab = "",
+		zlab = "")
+bg3d("white")
 
 
 

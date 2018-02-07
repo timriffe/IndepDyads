@@ -1,7 +1,7 @@
 
 # construct a tetrahedral octahedral honecomb w cubic dual.
 
-
+setwd("/home/tim/git/IndepDyads/IndepDyads/")
 library(rgl)
 
 #source("R/Functions.R")
@@ -53,24 +53,24 @@ tetrahedron_a <- function(){
 medians <- function(){
 	verts <- tetverts()
 	edges <- tetrahedron_a()
-	medians <- data.frame(x1 = verts$x,y1verts$y,z1=verts$z,
-			
-
-	x2 = c(verts$x[4]/3 + edges["A","xm"]*2/3,
-	       verts$x[3]/3 + edges["D","xm"]*2/3,
-           verts$x[4]/3 + edges["P","xm"]*2/3,
-           verts$x[1]/3 + edges["A","xm"]*2/3),
-	y2 = c(verts$y[4]/3 + edges["A","ym"]*2/3,
-			verts$y[3]/3 + edges["D","ym"]*2/3,
-			verts$y[4]/3 + edges["P","ym"]*2/3,
-			verts$y[1]/3 + edges["A","ym"]*2/3),
-	z2 = c(verts$z[4]/3 + edges["A","zm"]*2/3,
-			verts$z[3]/3 + edges["D","zm"]*2/3,
-			verts$z[4]/3 + edges["P","zm"]*2/3,
-			verts$z[1]/3 + edges["A","zm"]*2/3))
+	meds  <- data.frame(x1 = verts$x, y1 = verts$y, z1 = verts$z)
+	# need opposite centroids.
 	
-	rownames(medians) <- c("TAL","CDL","TPD","APC")
-	medians
+	# should use 3 opposite verts. Ergo 
+	# v1 connects to v3 / 3 + (v1 + v2)/3
+
+	centroid <- function(verti = 1,verts){
+		this.tri <- as.matrix(verts[-verti, ])
+		P1 <- this.tri[1, ]
+		PM <- colMeans(this.tri[-1, ])
+		PM + (P1 - PM) / 3
+	}
+	cents   <- t(sapply(1:4,centroid,verts=verts))
+	meds$x2 <- cents[,"x"]
+	meds$y2 <- cents[,"y"]
+	meds$z2 <- cents[,"z"]
+	rownames(meds) <- c("TAL","CDL","TPD","APC")
+	meds
 }
 
 AssignColour <- function (x) {
@@ -129,11 +129,19 @@ for (i in 1:3){
 triads <- c("APC","TPD","CDL","TAL")
 meds <- medians()
 for (i in 1:4){
-
-	
 	rgl.linestrips(
 			x = c(meds[triads[i],"x1"], meds[triads[i],"x2"]), 
 			y = c(meds[triads[i],"y1"], meds[triads[i],"y2"]), 
 			z = c(meds[triads[i],"z1"], meds[triads[i],"z2"]), 
 			color = "#00FFFF50", lwd = 2)
+	text3d(x = meds[triads[i],"x2"],meds[triads[i],"y2"],meds[triads[i],"z2"],triads[i], cex = 1.5,col="black")
 }
+
+text3d(-.5,-.5,-.5,"Tim Riffe (2018)", cex = 1.5,col="black")
+text3d(1,1,1,"demographic time view axes", cex = 1.5,col="black")
+
+writeWebGL(dir = "Figures/RGL")
+getwd()
+
+
+barplot(t(matrix(runif(10),ncol = 2)))

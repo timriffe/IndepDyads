@@ -12,6 +12,11 @@ Q         <- read.spss(path)
 # Hm <-   read.spss("U:/quebec/Quebec/Quebec/FrenchCanadian.individuals.2012-01-27/RPQA.MarcKlemp.individus.2012-01-27.sav")
 Q         <- as.data.frame(Q)
 
+# NB check for age heaping for Pancho.
+
+
+
+
 #Q$Lf2 <- Q$dateDecesAnnee - Q$dateNaissAnnee 
 #image(log(acast(Q, dateDecesAnnee~Lf2,length)))
 # ---------------------------------------#
@@ -73,6 +78,22 @@ Q$DD 							<- as.Date(DD)
 # calculate decimal lifespan
 Q$L       <- decimal_date(Q$DD) - decimal_date(Q$BD)
 Q$L[Q$L < 0] <- 0
+
+# a once-off check for heaping for Pancho. None found.
+#Q$bd <- decimal_date(Q$BD)
+#yearsap <- 1600:1800
+#agesap <- 0:100
+#AP <- matrix(nrow = 101,ncol = 201,dimnames=list(0:100,1600:1800))
+#for (a in agesap){
+#	for (p in 1:length(yearsap)){
+#		
+#		AP[a+1,p] <- sum(floor(yearsap[p] - Q$bd) == a &
+#						Q$dateNaissAnnee <= yearsap[p] & 
+#						Q$dateDecesAnnee >= yearsap[p], na.rm = TRUE)
+#	}
+#}
+#barplot(AP[,"1800"],space = 0, border = NA)
+#abline(v=seq(0,100,by=10),col = "white")
 
 
 # LP plane

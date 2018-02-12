@@ -15,7 +15,8 @@
 \usepackage{appendix}
 \usepackage{amsmath}
 \usepackage{amsthm}
-
+% for ASY interactive 3d figure
+\usepackage[inline]{asymptote}
 \usepackage{amssymb} % for approx greater than
 \usepackage{caption}
 \usepackage{placeins} % for \FloatBarrier
@@ -182,6 +183,13 @@ is also a space-filling tesselation, with each of its eight vertices
 forming the centroid of a tetrahedron. It is for our
 purposes therefore spatially redundant with the tetrahedral-octahedral
 honeycomb.
+
+\begin{figure}
+\input{tetratex.tex}
+\end{figure}
+
+
+
 % bibliography
 \bibliographystyle{chicago}
 \bibliography{references}  

@@ -15,14 +15,21 @@ xyz2ternxyz <- function(xyz){
 	ternxyz
 }
 
-# tetrahedron function
-# this will need apctdl logic
+# tetrahedron function- rework this to a unit sphere tetrahedron.
 tetverts <- function(){
 	verts <- data.frame(x=c(0,1,.5,.5),y=c(0,0,sqrt(3)/2,sqrt(3)/6),z=c(0,0,0,sqrt(3)/2))
 	rownames(verts) <- 1:4
 	verts
 }
 
+tetverts_unit <- function(rad = 1){
+	verts <- matrix(c(c( sqrt(8/9), 0 , -1/3 ),
+    c( -sqrt(2/9), sqrt(2/3), -1/3 ),
+    c( -sqrt(2/9), -sqrt(2/3), -1/3 ),
+    c( 0 , 0 , 1 )),ncol = 3,byrow=TRUE,dimnames=list(1:4,c("x","y","z"))) * rad
+	verts <- as.data.frame(verts)
+	verts
+}
 
 tetrahedron_a <- function(){
 	
@@ -58,7 +65,7 @@ medians <- function(){
 	
 	# should use 3 opposite verts. Ergo 
 	# v1 connects to v3 / 3 + (v1 + v2)/3
-
+	
 	centroid <- function(verti = 1,verts){
 		this.tri <- as.matrix(verts[-verti, ])
 		P1 <- this.tri[1, ]
@@ -86,9 +93,9 @@ tet <- tetrahedron_a()
 
 
 # let's start with unit space: c(-2,2) for everything?
-xlim <- c(-2,2)
-ylim <- c(-2,2)
-zlim <- c(-2,2)
+xlim <- c(-3,3)
+ylim <- c(-3,3)
+zlim <- c(-3,3)
 
 # set up device
 
@@ -102,18 +109,18 @@ plot3d(xlim = xlim, ylim = ylim, zlim = zlim,
 		zlab = "")
 bg3d("white")
 for (i in 1:nrow(tet)){
-  rgl.linestrips(
-		x = c(tet$x1[i], tet$x2[i]), 
-		y = c(tet$y1[i], tet$y2[i]), 
-		z = c(tet$z1[i], tet$z2[i]), 
-		color = AssignColour(tet$edge[i]), lwd = 4)
-  text3d(x = tet$xm[i], y = tet$ym[i], z = tet$zm[i], tet$edge[i], col = AssignColour(tet$edge[i]), cex = 2)
+	rgl.linestrips(
+			x = c(tet$x1[i], tet$x2[i]), 
+			y = c(tet$y1[i], tet$y2[i]), 
+			z = c(tet$z1[i], tet$z2[i]), 
+			color = AssignColour(tet$edge[i]), lwd = 4)
+	text3d(x = tet$xm[i], y = tet$ym[i], z = tet$zm[i], tet$edge[i], col = "black", cex = 3)
 }
 verts <- tetverts()
 # label vertices for now:
-for (i in 1:4){
-	text3d(x = verts$x,verts$y,verts$z,1:4, cex = 2,col="black")
-}
+#for (i in 1:4){
+#	text3d(x = verts$x,verts$y,verts$z,1:4, cex = 2,col="black")
+#}
 
 # the three independant view axes (bimedian)
 indeps <- matrix(c("A","T","L","D","C","P"),ncol=2)
@@ -134,13 +141,13 @@ for (i in 1:4){
 			y = c(meds[triads[i],"y1"], meds[triads[i],"y2"]), 
 			z = c(meds[triads[i],"z1"], meds[triads[i],"z2"]), 
 			color = "#00FFFF50", lwd = 2)
-	text3d(x = meds[triads[i],"x2"],meds[triads[i],"y2"],meds[triads[i],"z2"],triads[i], cex = 1.5,col="black")
+	text3d(x = meds[triads[i],"x2"],meds[triads[i],"y2"],meds[triads[i],"z2"],triads[i], cex = 1,col="black")
 }
 
-text3d(-.5,-.5,-.5,"Tim Riffe (2018)", cex = 1.5,col="black")
-text3d(1,1,1,"demographic time view axes", cex = 1.5,col="black")
+#text3d(-.5,-.5,-.5,"Tim Riffe (2018)", cex = 1.5,col="black")
+#text3d(1,1,1,"demographic time view axes", cex = 1.5,col="black")
 
-writeWebGL(dir = "Figures/RGL")
+writeASY(title = "tetratex",outtype="pdflatex")
 getwd()
 
 

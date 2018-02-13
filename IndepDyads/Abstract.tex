@@ -21,7 +21,7 @@
 \usepackage{caption}
 \usepackage{placeins} % for \FloatBarrier
 \usepackage{graphicx}
-%\usepackage{subcaption}
+\usepackage{subcaption}
 \usepackage{longtable}
 \usepackage{setspace}
 \usepackage{booktabs}
@@ -129,8 +129,8 @@
 \begin{abstract}
 \absdiv{Background} There are countless Lexis-like relationships between
 linearly dependant time measures, and these can be combined into higher-order
-Lexis identities with dense linear dependencies. One such relationship is the demographic time identity between age, period, cohort, time to death,
-length of life, and time of death. Certain subsets of time measures in this
+Lexis identities with dense linear interdependencies. One such relationship is
+the demographic time identity between age, period, cohort, time to death, length of life, and time of death. Certain subsets of time measures in this
 and other higher order identities consist in time measures that are independant
 of one another.
 \absdiv{Objective} We aim to describe the relationship between
@@ -140,7 +140,7 @@ time dyads. We aim to determine whether data structured on such time dyads might
 be useful in demographic research.
 \absdiv{Data and Methods} We illustrate concepts visually based on data from the
 Colonial Qu\'{e}bec Population Register.
-\absdiv{Results}
+\absdiv{Results} 
 \absdiv{Conclusions}
 \end{abstract}
 
@@ -153,8 +153,8 @@ geometric construct were considered in any depth. Figure~\ref{fig:tet}
 shows the tetragedral graph of the demographic time identity between age
 (A), period (P), cohort (C), time to death (T), death cohort (D), and length
 of life (L). Independant dyads are those that do not share any vertex in the
-graph, and these appear already as perpendicular in the present graph
-representation: CT, LP, and AD.
+graph, and these appear already as perpendicular but disjoint in the present
+graph representation: CT, LP, and AD.
 
 \begin{figure}[h!]
 \centering
@@ -165,30 +165,47 @@ labelled by the six time indices. Reproduced from
 \includegraphics[width=4in]{Figures/TetraHedronEdgesOnly.pdf}%
 \end{figure}
 
-Pairs of independant dyads can be extended onto a Cartesian plane, which is
-already an isometric projection, and these planes can also represent
-cross-sections of a 3d demographic time space. The independant planes can also
+As with any arbitrary pair of quantitative variables, independant
+temporal dyads can define a standard Cartesian plane. Such planes are
+already an isometric projection, and these planes can also represent cross-sections of a 3d demographic time space. The independant planes can also
 be conceived of a angles of view on the demographic time space. 
 
-\subsection{Angles of view}
+\subsection{View axes}
 An angle of view directly at any of the four faces of the demographic
 time tetrahedron reveals the plane-perspective defined by one of the
 Lexis-like identities.\footnote{In other words, set the viewing axis as
-\emph{normal} to one of the faces of the plane.} Independant dyad planes are
-revealed when the viewing angle is such that the midpoints of opposite
-tetrahedral edges are aligned. There are three pairs of
+\emph{normal} to one of the faces of the plane.} These four view axes map to
+the four medians of a tetrahedron, depicted in Figure~\ref{fig:depviewaxes}
+with cyan lines.
+Independant dyad planes are revealed when the viewing angle is such that the midpoints of opposite tetrahedral edges are aligned. There are three pairs of
 opposite edges (LP, TC, AD), and therefore three viewing angles of this kind.
-This turns out to being identical to the angle required to directly view a face of the cube-dual of an octahedron in the same structure tetrahedral-octahedral structure. The cube dual
-is also a space-filling tesselation, with each of its eight vertices
-forming the centroid of a tetrahedron. It is for our
-purposes therefore spatially redundant with the tetrahedral-octahedral
-honeycomb.
+These map to the bimedians of the tetrahedron, depicted in
+Figure~\ref{fig:indepviewaxes} with magenta lines. 
 
 \begin{figure}
-\input{tetratex.tex}
+\begin{subfigure}{.5\textwidth}
+\input{DepViewAxes.tex}
+\caption{The four view axes of the triad dependencies map to the medians of the
+tetrahedron.}
+\label{fig:depviewaxes}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\input{IndepViewAxes.tex}
+\caption{The three view axes of independant dyads map to the bimedians of the
+tetrahedron.}
+\label{fig:indepviewaxes}
+\end{subfigure}
+\caption{The seven principal view axes of the demographic time identity.
+Figures are interactive if viewed in a recent version of Adobe Reader. Click
+the figure to activate. A mouse wheel (or right click and drag) can be used to
+zoom. Left click and drag to rotate.}
+\label{fig:viewaxes}
 \end{figure}
 
-
+This turns out to being
+identical to the angle required to directly view a face of the cube-dual of an octahedron in the same structure tetrahedral-octahedral structure. The cube dual is also a space-filling tesselation, with each of its eight vertices forming the centroid of a tetrahedron. It is for our
+purposes therefore spatially redundant with the tetrahedral-octahedral
+honeycomb.
 
 % bibliography
 \bibliographystyle{chicago}

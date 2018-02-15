@@ -125,7 +125,8 @@ epidemicr <- c(1733,1757,1759,1761,1772,1776,1703,1687,1715)
 
 colramp <- colorRampPalette(RColorBrewer::brewer.pal(9,"Blues"),space="Lab")
 brks <- seq(0,9,by=.5)
-png("Figures/QuebecLP.png",width=700,height=400)
+#png("Figures/QuebecLP.png",width=700,height=400)
+pdf("Figures/QuebecLP.pdf",width=7,height=4)
 image(years,0:108,log(t(LP)),asp=1,breaks=brks,col=colramp(length(brks)-1),
 		xlab = "Period", ylab = "Length of life", ylim=c(0,100), las = 1)
 #contour(years,0:108,log(t(LP)),add=TRUE,levels=brks2,lwd=.5,col = gray(.2))
@@ -147,7 +148,8 @@ TC <- TC[nrow(TC):1, ]
 
 colramp <- colorRampPalette(RColorBrewer::brewer.pal(9,"Blues"),space="Lab")
 brks <- seq(0,9,by=.5)
-png("Figures/QuebecTC.png",width=700,height=400)
+#png("Figures/QuebecTC.png",width=700,height=400)
+pdf("Figures/QuebecTC.pdf",width=7,height=4)
 image(as.integer(colnames(TC)),as.integer(rownames(TC)),log(t(TC)),asp=1,breaks=brks,col=colramp(length(brks)-1),
 		xlab = "Birth cohort", ylab = "Thanatological age", ylim=c(0,100),las=1)
 dev.off()
@@ -159,7 +161,8 @@ LD <- LD[,-ncol(LD)]
 LD <- LD[nrow(LD):1, ]
 AD <- apply(LD,2,cumsum)
 AD <- AD[nrow(AD):1, ]
-png("Figures/QuebecAD.png",width=700,height=400)
+#png("Figures/QuebecAD.png",width=700,height=400)
+pdf("Figures/QuebecAD.pdf",width=7,height=4)
 image(as.integer(colnames(AD)),as.integer(rownames(AD)),log(t(AD)),asp=1,breaks=brks,col=colramp(length(brks)-1),
 		xlab = "Year of death", ylab = "Age", ylim=c(0,100),las=1)
 dev.off()

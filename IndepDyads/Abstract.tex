@@ -122,6 +122,22 @@ Colonial Qu\'{e}bec Population Register and from the US Health and Retirement st
 \absdiv{Conclusions} We show independant sets of time measures to be consistent with the temporal identities within which they are nested. We demonstrate that these perspectives can be useful for pattern detection and characterization in demographic research.
 \end{abstract}
 
+\section{Data}
+We illustrate concepts using two data sources: the \emph{le registre de la
+population du Qu\'{e}bec ancien} (RPQA) \citep{desjardins1998}, and RAND version
+P of the United States Health and Retirement Study (HRS) \citep{HRS, RAND}. The
+RPQA data are used to illustrate perspectives on population structure,
+whereas the HRS data are used to illustrate how independant time perspectives
+relate can be used to take cross-sections of phenomena with multiple time
+dimensions.
+
+\subsection{RPQA}
+
+\subsection{HRS} 
+We select a single phenomenon to visualize based on information in the HRS. We
+follow the data smoothing steps described by \citet{riffe2017hle} to prepare the
+data, and summarize these here.
+
 \section{Geometric relationships}
 The demographic time identity maps to the edges of a tetrahedron. When extended
 into three dimensions, the tedtrahedron tesselates with octahedra in a 2:1
@@ -196,15 +212,20 @@ space.
 
 \subsection{Life lines}
 The planes defined by any of the triad identities have a clear relationship with
-life lines passing through the space, a key ingredient to make any sort of
-inference about variation over the life course. 
+life course, either looking back to birth (APC), forward to death (TPD),
+looking in both directions symmetrically (TAL), or compressed to a whole (LCD).
+a key ingredient to make any sort of inference about variation over the life course.
 
 
 \section{Independant time surfaces with heterogeneity}
 Here use example of Quebec surfaces with interpretation.
-\subsection{LP}
+\subsection{LP: Lifespan and Period}
 
-\subsubsection{JC to TR 14-01-2018}
+Subsection structure: orientation of lifelines, definition of space.
+Expectations a priori about how mortality and fertility should influence shape
+of surface. show picture of Quebec exposure, discuss peculiarities,
+
+\begin{small}
 Here for each P, we ask how many people are alive that will one day die at age
 L. The people with L=100 in 2016 have a distribution of calendar years
 of birth (birth cohorts) along the P axis, and an identically shaped
@@ -217,6 +238,7 @@ This number should be increasing with period if mortality is
 improving. The distribution of the prevalence of L=100 as a function
 of period could be an interesting indicator of mortality trends, and
 likewise for other values of L.
+\end{small}
 
 \begin{figure}
 \centering
@@ -224,6 +246,8 @@ likewise for other values of L.
 \caption{Population structure by length of life and year. Logged counts}
 \label{fig:lpq}
 \end{figure}
+
+\begin{small}
 In this orientation, an individual born in 1700 that will eventually die at age
 80 contributes 1 to the count at age 80 from 1700 all the way to 1780 (or so), so the individual increments a horizontal stripe to the surface. Infant deaths are very short segments in the bottom, whereas long lives are maximally overlapped. It would appear births were not collected after 1800, and some other data collection milestone happens in 1825. The triangles at the bottom look like artifacts at first, but actually they are mortality shocks (wow!). Take a given triangle: each is right-aligned on moment of death (otherwise a given lifeline would be higher up in y and extend further to the right in x). These shocks likely extend up into higher ages, but they get blurred out by higher baseline mortality in higher ages. I guess growth happens in the contours for the most part because the population was growing exponentially.
 
@@ -235,10 +259,10 @@ extend very far up, detectably as far up as life length 70.  There is a parallel
 
 Death info here comes from burial records, which had some age constraints in
 data collection: (1800-1825:deaths of 50+ only; 1826-1850: deaths of 75+ only).
-That explains the block edges on the right of LP, and the angle edges in TC. I'm also not very sure what accounts for the exceptions to these edges, but my guess would be that it owes to there being multiple potential sources for date of death.
-Here it is again, with known epidemics (i.e. main disease can be guessed) marked
-with red rectangles (if spanning more than 1 year) or lines below the x-axis.
-The information came from: Ryan M. Mazan's 2011 dissertation: Analyzing Epidemics in New France: The Measles Epidemic of 1714-15, Figure 1.1 link. Values in his graph come from the same data source (I gather), but dates, and epidemic type (e.g. Typhus, measles, smallpox, etc) were cross checked with other historical documents. These match the right edge of most of the triangles, and the others may have just been lesser or unstudied epidemics, or ones that I just missed. The left oblique edge of each triangle is in general more visible than the vertical right edge, at least in the early part of the series, because growth in the early phase (pre 1663 if I recall) was largely from migration.
+That explains the block edges on the right of LP, and the angle edges in TC. I'm
+also not very sure what accounts for the exceptions to these edges, but my guess would be that it owes to there being multiple potential sources for date of death. Here it is again, with known epidemics (i.e. main disease can be guessed) marked with red rectangles (if spanning more than 1 year)
+\citep[cf Figure 1.1][]{mazan2011}Typhus, measles, smallpox, etc) were cross
+checked with other historical documents. These match the right edge of most of the triangles, and the others may have just been lesser or unstudied epidemics, or ones that I just missed. The left oblique edge of each triangle is in general more visible than the vertical right edge, at least in the early part of the series, because growth in the early phase (pre 1663 if I recall) was largely from migration.
 
 Missingness in LP:
 Data collection began in 1621, but lifelines in the LP figure begin well left of that. This is because a person dying at some old age right at the start of the series will have of course been born well before the series itself began. Anything to the left of 1621 is incomplete in a sense, because we're missing the lifetlines that would overlap the pre 1621 lives we already have (e.g. a life extinguished at age 50 in 1620). So, we could of course crop the surface at 1621, no problem. However, we have the same problem on the right side of the series. Ignoring the block shapes for now.  A person dying in 1850 at age 60 would clearly overlap with part of the blue we have, but would here be excluded. The right-side zone of still-incomplete observation in LP is the upper-right triangle of the whole surface; so, draw a line inward from the lower right corner at slope -1. Anything above that is still missing the early part of some lives. Those funny observation blocks offset said missingness to some degree, a happy accident. As a rule, missingness is higher in LP as we go up the y axis on the right side.
@@ -249,6 +273,7 @@ I used this as an example in another recent paper (link). I found this striking.
  Lifespan contours are those with slope -1. One explanation would be that smoking determines length of life before age 70 and things simply don't change thereafter (you can't undo being an ever smoker). As I recall dental visits had contours with this slope, but the surface was not monotonic. It's just a guess that strong patterns like these would carry over into LP.
 
 The Quebec data has an incredible observation window, but no health except fertility (and extended family events). Lifeline surfaces like those produced for Quebec can be inferred from any Lexis surface of death counts.
+\end{small}
 
 \subsection{TC}
 

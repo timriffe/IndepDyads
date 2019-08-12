@@ -36,7 +36,9 @@
 \usepackage[most]{tcolorbox}
 \usepackage[normalem]{ulem}
 \usepackage{amsfonts}
-
+\usepackage{etoolbox}
+\AtBeginEnvironment{quote}{\singlespace\small}
+\AtEndEnvironment{quote}{\endsinglespace}
 % columns for longtable
 %\usepackage{arydshln} % Dashed lines in matrices
 
@@ -88,7 +90,7 @@
 \begin{document}
 
 
-\title{A note on independant time measures}
+\title{A note on independent time measures}
 
 %\author{Tim Riffe \and Neil Mehta \and Daniel Schneider \and Mikko Myrskyl\"a}
 \author[1]{Tim Riffe\thanks{riffe@demogr.mpg.de}}
@@ -105,60 +107,36 @@
 
 \vspace{-2em}
 \begin{abstract}
-\absdiv{Background} There are countless Lexis-like relationships between
-linearly dependant time measures, and these can be combined into higher-order
-Lexis identities with dense linear interdependencies. One such relationship is
-the demographic time identity between age, period, cohort, time to death, length of life, and time of death. Certain subsets of time measures in this
-and other higher order identities consist in time measures that are independant
-of one another.
+\absdiv{Background} The demographic time identity consists in a linear relationship between six fundamental time measures: Age, period, cohort, time to death, length of life, and time of death. Certain subsets of time measures in this and other higher order identities consist in time measures that are independant of one another.
 \absdiv{Objective} We aim to describe the relationship between
-independent time measures and the identities within which they are nested, with
-special attention to the demographic time identity and its three independant
-time dyads. We also aim to determine whether data structured on such time dyads
-might be useful in demographic research.
-\absdiv{Data and Methods} We illustrate concepts visually based on data from the
-Colonial Qu\'{e}bec Population Register and from the US Health and Retirement study.
+independent time measures and the identities within which they are nested, with special attention to the demographic time identity and its three independant time dyads. We also aim to determine whether data structured on such time dyads might be useful in demographic research.
+\absdiv{Data and Methods} We illustrate concepts visually based on data from the Colonial Qu\'{e}bec Population Register and from the US Health and Retirement study.
 \absdiv{Results}  We show that a Cartesian mapping of independant time dyads form a redundant mapping of the same demographic timespace. These add three previously undescribed demographic perspectives to the four Lexis-like perspectives, for a total of seven proposed standard perspectives. 
-\absdiv{Conclusions} We show independant sets of time measures to be consistent
-with the temporal identities within which they are nested. We demonstrate that
-these perspectives can be useful for pattern detection and characterization
-in demographic research.
+\absdiv{Conclusions} We show independant sets of time measures to be consistent with the temporal identities within which they are nested. We demonstrate that these perspectives can be useful for pattern detection and characterization in demographic research.
 \end{abstract}
 
-\textcolor{red}{This isn't even a first draft! Literally it contains copied and
-pasted email conversations at this point. It needs a deep revision before even
-becoming a manuscript stub. So please read w caution.}
+\textcolor{red}{This isn't even a first draft! Literally it contains copied and pasted email conversations at this point. It needs a deep revision before even becoming a manuscript stub. So please read w caution.}
 
-\section{Data}
-We illustrate concepts using two data sources: the \emph{le registre de la
-population du Qu\'{e}bec ancien} (RPQA) \citep{desjardins1998}, and RAND version
-P of the United States Health and Retirement Study (HRS) \citep{HRS, RAND}. The
-RPQA data are used to illustrate perspectives on population structure,
-whereas the HRS data are used to illustrate how independant time perspectives
-relate can be used to take cross-sections of phenomena with multiple time
-dimensions.
+\section{Background}
+Dated events on a timeline form the foundation of numerous empirical approaches to detect, estimate, and describe patterns in processes and outcomes in the social sciences. Process patterns might be called transitions, and there are several varieties of these (continuous/discrete, conditional/unconditional, forward/backward \citep{brouard2019backward}, and more). Outcome patterns refer to either things such as prevalence, distribution properties (e.g. expectancies), sequences, episode statistics, and others. Outcome patterns can either be calculated from a process model or observed directly from data. Examples of process patterns include age-structured rates of fertility, mortality, or migration. Examples of outcome patterns include trends in length of life, healthy life expectancy, counts of births structured in some way, or employment trajectories. 
 
-\subsection{RPQA}
-[Provide a minimal description of RPQA data here, as it may be unfamiliar.]
+This paper deals with the calendar relationships that underpin all such knowledge of the world. Specifically, most empirical work that describes processes and outcomes makes use of a limited subset of the temporal structure that it might. Previous work \citep{riffe2017demographictime} describes the relationship between events in time, and the durations between them. A given set of event types determines a further set of durations. Taken together, a set of events and their implied durations comprise a dense linear relationship that one might call a temporal \emph{identity}. The most common of these in empirical research is the \emph{Lexis} identity between period (date), cohort(date), and age (duration). There are countless Lexis-like relationships between linearly dependant time measures, and these can be combined into higher-order Lexis identities with dense linear interdependencies. A primary example of a higher order Lexis identity is the so-called \emph{demographic time identity}, which defines a relationship between age (A), period (P), cohort (C), time until death (T), time of death (D), and length of life (L). 
 
-\subsection{HRS} 
-We select a single phenomenon to visualize based on information in the HRS. We
-follow the data smoothing steps described by \citet{riffe2017hle} to prepare the
-data, and summarize these here.
-[write description of data prep here. HRS data likely familiar]
+In describing the demographic time identity, \citet{riffe2017demographictime} give an almost exhaustive account of the so-called \emph{informative} and \emph{uninformative} dyads. Informative dyads are those sets of two time measures (APCTDL) that imply a third time measure via identity. For example, AP implies C. Four such 3-part (triad) identities are described at length, with examples and diagram depiction (APC, TPD, CPD, TAL). The complete 6-part identity between all these time measures was related to the faces of a tetrahedron, or as the edge subsets of the tetrahedral network diagram. Uninformative dyads are sets of two time measures that do not directly relate, and which therefore do not imply a third time measure. The three examples given are LP, AD, and CT, which are depicted in the authors' Tab.~(2) and discussed in the text as follows:
+\begin{quote}
+Triad identities are more meaningful than uninformative dyads. This is so even in the absence of data, due to the underlying relationship between measures. Each of the triad identities can accommodate some version of a lifeline, for instance \citep[p5][]{riffe2017demographictime}. 
+\end{quote}
+
+Contrary to the above, in the present note we aim to show how uniformative dyads can reveal meaningful relationships in data. For both semantics and precision, we suggest calling these \emph{independent} dyads rather than uniformative dyads. We relate independent dyad diagrams to lifelines in 2d. We relate 2d independent planes to the 3d demographic time identity, showing how these are also cross-sections of the same 3d volume, but which follow a cubic rather than a tetrahedral structure. We show how data structured on independent time measures may still reveal meaningful patterns using historical data from Quebec. We speculate on a way to view and interpret data structured by the demographic time identity using arbitarily defined planes as cross-sections. We speculate on how data structured by independent time measures may be meaningful in general.
+
+% \subsection{HRS} 
+% We select a single phenomenon to visualize based on information in the HRS. We
+% follow the data smoothing steps described by \citet{riffe2017hle} to prepare the
+% data, and summarize these here.
+% [write description of data prep here. HRS data likely familiar]
 
 \section{Geometric relationships}
-The demographic time identity can be represented as a tetrahedral graph and it
-therefore maps to the edges of a tetrahedron.
-When extended into three dimensions, the tetrahedron tesselates with octahedra in a 2:1
-ratio. In its original description \citep{riffe2017demographictime}, neither
-independant pairs of time measures nor the significance of octahedra in this
-geometric construct were considered. Figure~\ref{fig:tet}
-shows the tetragedral graph of the demographic time identity between age
-(A), period (P), cohort (C), time to death (T), death cohort (D), and length
-of life (L). Independant dyads are those that do not share any vertex in the
-graph, and these appear already as perpendicular but disjoint in the present
-graph representation: CT, LP, and AD.
+The demographic time identity can be represented as a tetrahedral graph and it therefore maps to the edges of a tetrahedron. When extended into three dimensions, the tetrahedron tesselates with octahedra in a 2:1 ratio. In its original description \citep{riffe2017demographictime}, neither independant pairs of time measures nor the significance of octahedra in this geometric construct were considered. Figure~\ref{fig:tet} shows the tetragedral graph of the demographic time identity between age (A), period (P), cohort (C), time to death (T), death cohort (D), and length of life (L). Independant dyads are those that do not share any vertex in the graph, and these appear as perpendicular but disjoint in the present graph representation: CT, LP, and AD.
 
 \begin{figure}[h!]
 \centering
@@ -169,39 +147,46 @@ labelled by the six time indices. Reproduced from
 \includegraphics[width=4in]{Figures/TetraHedronEdgesOnly.pdf}%
 \end{figure}
 
-Any arbitrary pair of quantitative variables can define the axes of a standard Cartesian plane. When Cartesian axes are defined by two independant time measures, the resultant plane is already an isometric projection. However, planes of this kind can also represent cross-sections of the same 3d demographic timespace previously defined \citep{riffe2017demographictime}. The independant dyads can also be conceived of as \emph{axes of view} on the demographic time space.
+Any arbitrary pair of quantitative variables can define the axes of a standard Cartesian plane. When Cartesian axes are defined by two independant time measures, the resultant plane is already an isometric projection. However, planes of this kind can also represent cross-sections of the same 3d demographic timespace previously defined \citep{riffe2017demographictime}. The independent dyads can also be conceived of as \emph{axes of view} on the demographic time space.
 
 \subsection{View axes}
 An angle of view directly at any of the four faces of the demographic time tetrahedron reveals the plane-perspective of a Lexis-like identities. In other words, the viewing axis is set as \emph{normal} to one of the faces of the tetrahedron. Interactive figure~\ref{fig:viewaxes} may help visualize the notion of viewing axes--- the view on a plane is orthogonal if an axis line is reduced to appear as a point in the centroid of the tetrahedron. The view axes of the four triad identities map to the four medians (axes of 3-fold symmetry) of the tetrahedron, depicted in
-Figure~\ref{fig:depviewaxes} with cyan colored lines. Independant dyad planes are revealed when the viewing angle is such that the midpoints of opposite tetrahedral edges are aligned. There are three pairs of opposite edges (LP, TC, AD), and therefore three viewing angles of this kind, which map to the bimedians of the tetrahedron (axes of 2-fold symmetry), depicted in Figure~\ref{fig:indepviewaxes} with magenta lines.
+Figure~\ref{fig:depviewaxes} with cyan colored lines. Independent dyad planes are revealed when the viewing angle is such that the midpoints of opposite tetrahedral edges are aligned. There are three pairs of opposite edges (LP, TC, AD), and therefore three viewing angles of this kind, which map to the bimedians of the tetrahedron (axes of 2-fold symmetry), depicted in Figure~\ref{fig:indepviewaxes} with magenta lines.
 
 \begin{figure}
-\begin{subfigure}{.48\textwidth}
+\centering
+\begin{minipage}[t]{0.45\textwidth}
 \input{ASY/DepViewAxes.tex}
-\caption{The four view axes of the triad dependencies map to the medians of the
-tetrahedron.}
+\caption{The four view axes of the triad dependencies map to the medians of the tetrahedron.}
 \label{fig:depviewaxes}
-\end{subfigure}
-\begin{subfigure}{.48\textwidth}
-\input{ASY/IndepViewAxes.tex}
-\caption{The three view axes of independant dyads map to the bimedians of the
+\end{minipage}
+\begin{minipage}[t]{0.45\textwidth}
+\input{ASY/DepViewAxes.tex}
+\caption{The three view axes of independent dyads map to the bimedians of the
 tetrahedron.}
 \label{fig:indepviewaxes}
-\end{subfigure}
-\caption{The seven principal view axes of the demographic time identity.
-Figures are interactive if viewed in a recent version of Adobe Reader. Click
-each figure to activate. A mouse wheel (or right click and drag) can be used to
-zoom. Left click and drag to rotate.}
+\end{minipage}
+\caption{The seven principal view axes of the demographic time identity. Figures are interactive if viewed in a recent version of Adobe Reader. Click each figure to activate. A mouse wheel (or right click and drag) can be used to zoom. Left click and drag to rotate. Oops MINIPAGE alignment trick increments figure numbers, we want Fig 2a, 2b and 2...}
 \label{fig:viewaxes}
 \end{figure}
 
-The choice to view a timespace using the coordinates of an independant dyad implies a different transection of the space. The three independent symmetry lines of Figure~\ref{fig:indepviewaxes} are also orthogonal to the faces of the cube dual of any octahedron in the
-tetrahedral-octahedral timespace. Said cubes also form a space-filling tessellation, and therefore sufficiently and redundantly define the same time space.
+The choice to view a timespace using the coordinates of an independent dyad implies a different transection of the space. The three independent symmetry lines of Figure~\ref{fig:indepviewaxes} are also orthogonal to the faces of the cube dual of any octahedron in the tetrahedral-octahedral timespace. Said cubes also form a space-filling tessellation, and therefore sufficiently and redundantly define the same time space.
 
 \subsection{Life lines}
-The planes defined by any of the triad identities have a clear relationship with life course, either looking back to birth (APC), forward to death (TPD), looking in both directions symmetrically (TAL), or compressed to a whole (LCD). Unambiguous orientation of this kind is a key ingredient to make any sort of inference about variation over the life course. Time planes defined by independent time measures also have a clear relationship with lifelines, but we are not accustomed to thinking of demographic phenomena or demographic change in such terms, nor of visualizing surfaces aligned to independant viewing axes.
+The planes defined by any of the triad identities have a clear relationship with life course, either looking back to birth (APC), forward to death (TPD), looking in both directions symmetrically (TAL), or compressed to a whole (LCD). Unambiguous orientation of this kind is a key ingredient to make any sort of inference about variation over the life course. Time planes defined by independent time measures also have a clear relationship with lifelines, but we are not accustomed to thinking of demographic phenomena or demographic change in such terms, nor of visualizing surfaces aligned to independent viewing axes.
 
-\section{Independant time surfaces of population structure}
+
+\section{Data}
+We illustrate concepts using two data sources: the \emph{le registre de la population du Qu\'{e}bec ancien} (RPQA) \citep{desjardins1998}, and RAND version P of the United States Health and Retirement Study (HRS) \citep{HRS, RAND}. The RPQA data are used to illustrate perspectives on population structure, whereas the HRS data are used to illustrate how independant time perspectives
+relate can be used to take cross-sections of phenomena with multiple time dimensions.
+
+\subsection{RPQA}
+[Provide a minimal description of RPQA data here, as it may be unfamiliar.]
+
+\subsection{HRS}
+Do we do this or not? If so, need to make game plan.
+
+\section{Independent time surfaces of population structure}
 As a first pass to demonstrate concepts, we cross-tabulate Quebec's historical
 population structure by the three sets of independent demographic time measures. Each
 cross-tabulation is represented as a demographic surface using filled
@@ -351,7 +336,7 @@ experiences T = 0, everyone is also included in A = 0 here. If this were a stati
 We see here the same high density in death year 1705 that we detected in the LP
 plane, so maybe it is not a data artifact. Whether there are also high densities of deaths in the other years we identified in the LP plane is not so clear to me; perhaps yes. There appear to be little white rectangles between 1760 and 1800 at ages zero through perhaps 3 or 4. Every lifeline must extend to age zero, so something is wrong here, I think. Again we see the upper envelope increasing with the year of death and rising contour lines.
 
-\section{Independant time surfaces as cross-sections}
+\section{Independent time surfaces as cross-sections}
 Here use example of HRS surfaces produced at novel \emph{cut} angles.
 \subsection{LP}
 

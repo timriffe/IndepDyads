@@ -162,6 +162,7 @@ Fig.~\ref{fig:depviewaxes} with cyan colored lines. Independent dyad planes are 
     \caption{The four view axes of the triad dependencies map to the medians of the tetrahedron. Rotate the tetrahedron so that a given cyan line is reduced to a point: The resulting view is then orthogonal to the outermost identity when flattened to 2d.}
     \label{fig:depviewaxes}
 \end{subfigure}
+~~
 \begin{subfigure}[t]{0.45\linewidth}
     \input{ASY/IndepViewAxes.tex}
     \caption{The three view axes of the independent planes map to the bimedians of the tetrahedron. Rotate the tetrahedron so that a given magenta line is reduced to a point: The resulting view is then orthogonal to independent plane defined on the basis of the two perpendicular edges crossing in the middle of the figure.}
@@ -173,6 +174,7 @@ Fig.~\ref{fig:depviewaxes} with cyan colored lines. Independent dyad planes are 
 
 Given a 3d volume of data structured by the demographic time identity, a cross-section orthagonal to a magenta line from Fig.~\ref{fig:indepviewaxes} is an independent plane. There is no reason not to do this for outcome measures, for example disease prevalence, in search of meaningful patterns. Further, when \emph{slicing} through such a complex timespace, we are agnostic about cut angles in general, but \emph{snapping} to axes defined on the basis of unit time measures leads to easier interpretation.
 
+\pagebreak
 \section{Data}
 We illustrate concepts using two data sources: the \emph{le registre de la population du Qu\'{e}bec ancien} (RPQA) \citep{desjardins1998}, and RAND version P of the United States Health and Retirement Study (HRS) \citep{HRS, RAND}. The RPQA data are used to illustrate perspectives on population structure, whereas the HRS data are used to illustrate how independant time perspectives
 relate can be used to take cross-sections of phenomena with multiple time dimensions.
@@ -181,7 +183,7 @@ relate can be used to take cross-sections of phenomena with multiple time dimens
 [Provide a minimal description of RPQA data here, as it may be unfamiliar.]
 
 \subsection{HRS}
-Do we do this or not? If so, need to make game plan. Maybe recycle prevalence from HLETTD, can cite WP?
+Do we do this or not? If so, need to make game plan (see note at end). Maybe recycle prevalence from HLETTD, can cite WP?
 
 \section{Independent time surfaces of population structure}
 As a first pass to demonstrate concepts, we cross-tabulate Quebec's historical population structure by the three sets of independent demographic time measures. Each cross-tabulation is represented as a demographic surface using filled contour heat maps to create Lexis-like surfaces. These surfaces are distinct from Lexis surfaces in a few important ways. Lexis surfaces are drawn with diagonal lines at a slope equal to the aspect ratio between time units in $y$ and time units in $x$, usually 45$^\circ$ (APC, LCD). Other triad time surfaces might be drawn with descending diagonals (TPD, TAL). Independent surfaces imply both diagonals, at 45$^\circ$ and -45$^\circ$, as the reader may have
@@ -191,8 +193,7 @@ noticed while manipulating Fig.~\ref{fig:indepviewaxes}. At times, one or the ot
 
 
 
-Subsection structure: orientation of lifelines, definition of space.
-Expectations a priori about how mortality and fertility should influence shape of surface. show picture of Quebec exposure, discuss peculiarities due to data collection.
+Subsection structure: orientation of lifelines, definition of space. Expectations a priori about how mortality and fertility should influence shape of surface. show picture of Quebec exposure, discuss peculiarities due to data collection.
 
 Lifespan (L) and period (P) are independent of one another, since an individual destined to live for a total of 80 years lives through a total of 80 years: If we merely know that this person-to-become-80 is alive, then specifying a year does not tell us an age--- this person could be a baby or about to die. Since in these data we know years of birth and death, we know where each year of life for a to-become-80-year-old is to be placed. This individual stays in $y$ position 70, contributing a year of life to each single-year cell between birth and death. If this individual was born in 1700, he/she contributed 1 to
 the count at age 80 from 1700 all the way to 1780 (or so), incrementing a horizontal stripe to the surface. If another to-become-80-year-old is born in 1701, these two lives overlap for 79 years. Infant deaths are very short segments in the bottom. The tragically short lives of infant deaths overlap very little with one another, whereas long lives are maximally overlapped.

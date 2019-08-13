@@ -120,9 +120,9 @@ independent time measures and the identities within which they are nested, with 
 \section{Background}
 Dated events on a timeline form the foundation of numerous empirical approaches to detect, estimate, and describe patterns in processes and outcomes in the social sciences. Process patterns might be called transitions, and there are several varieties of these (continuous/discrete, conditional/unconditional, forward/backward \citep{brouard2019backward}, and more). Outcome patterns refer to either things such as prevalence, distribution properties (e.g. expectancies), sequences, episode statistics, and others. Outcome patterns can either be calculated from a process model or observed directly from data. Examples of process patterns include age-structured rates of fertility, mortality, or migration. Examples of outcome patterns include trends in length of life, healthy life expectancy, counts of births structured in some way, or employment trajectories. 
 
-This paper deals with the calendar relationships that underpin all such knowledge of the world. Specifically, most empirical work that describes processes and outcomes makes use of a limited subset of the temporal structure that it might. Previous work \citep{riffe2017demographictime} describes the relationship between events in time, and the durations between them. A given set of event types determines a further set of durations. Taken together, a set of events and their implied durations comprise a dense linear relationship that one might call a temporal \emph{identity}. The most common of these in empirical research is the \emph{Lexis} identity between period (date), cohort(date), and age (duration). There are countless Lexis-like relationships between linearly dependant time measures, and these can be combined into higher-order Lexis identities with dense linear interdependencies. A primary example of a higher order Lexis identity is the so-called \emph{demographic time identity}, which defines a relationship between age (A), period (P), cohort (C), time until death (T), time of death (D), and length of life (L). 
+This paper deals with the calendar relationships that underpin all such knowledge of the world. Most empirical work that describes processes and outcomes makes use of a limited subset of the temporal structure that is available, and often the implications of relationships between time measures are unrecognized. Previous work \citep{riffe2017demographictime} formalizes the relationship between events in time, and the durations between them. A given set of event types determines a further set of durations. Taken together, a set of events and their implied durations comprise a dense linear relationship that one might call a temporal \emph{identity}. The most common of these in empirical research is the \emph{Lexis} identity between period (date), cohort(date), and age (duration). There are countless Lexis-like relationships between linearly dependant time measures, and these can be combined into higher-order Lexis identities. A primary example of a higher order Lexis identity is the so-called \emph{demographic time identity}, which defines a relationship between age (A), period (P), cohort (C), time until death (T), time of death (D), and length of life (L). 
 
-In describing the demographic time identity, \citet{riffe2017demographictime} give an almost exhaustive account of the so-called \emph{informative} and \emph{uninformative} dyads. Informative dyads are those sets of two time measures (APCTDL) that imply a third time measure via identity. For example, AP implies C. Four such 3-part (triad) identities are described at length, with examples and diagram depiction (APC, TPD, CPD, TAL). The complete 6-part identity between all these time measures was related to the faces of a tetrahedron, or as the edge subsets of the tetrahedral network diagram. Uninformative dyads are sets of two time measures that do not directly relate, and which therefore do not imply a third time measure. The three examples given are LP, AD, and CT, which are depicted in the authors' Tab.~(2) and discussed in the text as follows:
+In describing the demographic time identity, \citet{riffe2017demographictime} give an almost exhaustive account of the so-called \emph{informative} and \emph{uninformative} dyads. Informative dyads are those sets of two time measures (from APCTDL) that imply a third time measure via identity. For example, AP implies C. Four such 3-part (triad) identities are described at length, with examples and diagram depiction (APC, TPD, CPD, TAL). Uninformative dyads are sets of two time measures that do not directly relate, and which therefore do not imply a third time measure. The three examples given are LP, AD, and CT, which are depicted in the authors' Tab.~(2) and discussed in the text as follows:
 \begin{quote}
 Triad identities are more meaningful than uninformative dyads. This is so even in the absence of data, due to the underlying relationship between measures. Each of the triad identities can accommodate some version of a lifeline, for instance \citep[p5][]{riffe2017demographictime}. 
 \end{quote}
@@ -136,45 +136,42 @@ Contrary to the above, in the present note we aim to show how uniformative dyads
 % [write description of data prep here. HRS data likely familiar]
 
 \section{Geometric relationships}
-The demographic time identity can be represented as a tetrahedral graph and it therefore maps to the edges of a tetrahedron. When extended into three dimensions, the tetrahedron tesselates with octahedra in a 2:1 ratio. In its original description \citep{riffe2017demographictime}, neither independant pairs of time measures nor the significance of octahedra in this geometric construct were considered. Figure~\ref{fig:tet} shows the tetragedral graph of the demographic time identity between age (A), period (P), cohort (C), time to death (T), death cohort (D), and length of life (L). Independant dyads are those that do not share any vertex in the graph, and these appear as perpendicular but disjoint in the present graph representation: CT, LP, and AD.
+The demographic time identity can be represented as a tetrahedral graph, with time measures mapped to the six edges of a tetrahedron. The four Lexis-like identities are found on the faces of the tetrahedron. When extended into three dimensions, the tetrahedron tesselates with octahedra in a 2:1 ratio. In its original description \citep{riffe2017demographictime}, neither independant pairs of time measures nor the significance of octahedra in this geometric construct were considered. Figure~\ref{fig:tet} shows the tetragedral graph of the demographic time identity between age (A), period (P), cohort (C), time to death (T), death cohort (D), and length of life (L). Independant dyads are those that do not share any vertex in the graph, and these appear as perpendicular but disjoint in the present graph representation: CT, LP, and AD.
 
 \begin{figure}[h!]
 \centering
+\includegraphics[width=4in]{Figures/TetraHedronEdgesOnly.pdf}
 \caption{Tetrahedral graph of demographic time hexad identity, with edges
 labelled by the six time indices. Reproduced from 
 \citet{riffe2017demographictime}.}
 \label{fig:tet}
-\includegraphics[width=4in]{Figures/TetraHedronEdgesOnly.pdf}%
 \end{figure}
 
-Any arbitrary pair of quantitative variables can define the axes of a standard Cartesian plane. When Cartesian axes are defined by two independant time measures, the resultant plane is already an isometric projection. However, planes of this kind can also represent cross-sections of the same 3d demographic timespace previously defined \citep{riffe2017demographictime}. The independent dyads can also be conceived of as \emph{axes of view} on the demographic time space.
+Independent dyads can be identified in fully expanded time graphs suc as Fig.~\ref{fig:tet} as those pairs of edges that do not share a vertex. In a triad identity there are none, but in the demographic time identity there are three, each consisting in a dated event paired with a duration defined as the elapsed time between the other two dated events. In general, in a time identity defined on the basis of $n$ calendar dated event types, there are $\frac{1}{2}\binom{n+1}{2}\binom{n-1}{2} = 3\binom{n+1}{4}$ independent dyads. For a more complicated example, a multistate model of period, birth, marriage, divorce, and death would therefore imply 45 independent dyads, but would contain a total of 20 triad identities. As $n$ increases, the fraction of possible temporal dyads that are independent approaches 1. To illustrate this point think of the universe of all dates and the potential durations between them: Pick two out of this massive urn and they will almost certainly be independent in this sense.
+
+Any arbitrary pair of quantitative variables can define the axes of a standard Cartesian plane. When Cartesian axes are defined by two independant time measures and in equal time units, the resultant plane is an isometric projection. Let's call this an independent plane for short. There are two ways that an independent plane may be treated: either (i) accounting for a larger temporal identity or (ii) not. Here we limit comments to the 3d case of the demographic time identity. For the first kind (i) planes are cross-sections of the same 3d demographic timespace previously defined in Fig.~\ref{fig:tet}, and the independent dyads can also be conceived of as \emph{axes of view} on the demographic timespace. This idea is described further in Sec.~\ref{sec:viewaxes}. For the second kind (ii), independent planes are the same as any standard Cartesian plane used in data analyses: patterns revealed could be due to real structure or due to sample heterogeneity in other time measures. That is, the larger temporal identity within which these independent measures are nested is \emph{flattened}.
 
 \subsection{View axes}
-An angle of view directly at any of the four faces of the demographic time tetrahedron reveals the plane-perspective of a Lexis-like identities. In other words, the viewing axis is set as \emph{normal} to one of the faces of the tetrahedron. Interactive figure~\ref{fig:viewaxes} may help visualize the notion of viewing axes--- the view on a plane is orthogonal if an axis line is reduced to appear as a point in the centroid of the tetrahedron. The view axes of the four triad identities map to the four medians (axes of 3-fold symmetry) of the tetrahedron, depicted in
-Figure~\ref{fig:depviewaxes} with cyan colored lines. Independent dyad planes are revealed when the viewing angle is such that the midpoints of opposite tetrahedral edges are aligned. There are three pairs of opposite edges (LP, TC, AD), and therefore three viewing angles of this kind, which map to the bimedians of the tetrahedron (axes of 2-fold symmetry), depicted in Figure~\ref{fig:indepviewaxes} with magenta lines.
-
+\label{sec:viewaxes}
+Imagine now the 3d projection of the graph from Fig.~\ref{fig:tet}, a regular tetrahedron. An angle of view directly at any of the four faces of the demographic time tetrahedron reveals the plane-perspective of a Lexis-like identitiy. In other words, the viewing axis is set as \emph{normal} to one of the faces of the tetrahedron. Interactive Fig.~\ref{fig:viewaxes} may help visualize the notion of viewing axes--- the view on a plane is orthogonal if an axis line is reduced to appear as a point in the centroid of the tetrahedron. The view axes of the four triad identities map to the four medians (axes of 3-fold symmetry) of the tetrahedron, depicted in
+Fig.~\ref{fig:depviewaxes} with cyan colored lines. Independent dyad planes are revealed when the viewing angle is such that the midpoints of opposite tetrahedral edges are aligned. There are three pairs of opposite edges (LP, TC, AD), and therefore three viewing angles of this kind, which map to the bimedians of the tetrahedron (axes of 2-fold symmetry), depicted in Figure~\ref{fig:indepviewaxes} with magenta lines.
 \begin{figure}
-\centering
-\begin{minipage}[t]{0.45\textwidth}
-\input{ASY/DepViewAxes.tex}
-\caption{The four view axes of the triad dependencies map to the medians of the tetrahedron.}
-\label{fig:depviewaxes}
-\end{minipage}
-\begin{minipage}[t]{0.45\textwidth}
-\input{ASY/DepViewAxes.tex}
-\caption{The three view axes of independent dyads map to the bimedians of the
-tetrahedron.}
-\label{fig:indepviewaxes}
-\end{minipage}
-\caption{The seven principal view axes of the demographic time identity. Figures are interactive if viewed in a recent version of Adobe Reader. Click each figure to activate. A mouse wheel (or right click and drag) can be used to zoom. Left click and drag to rotate. Oops MINIPAGE alignment trick increments figure numbers, we want Fig 2a, 2b and 2...}
+\begin{subfigure}[t]{0.45\linewidth}
+    \centering
+    \input{ASY/DepViewAxes.tex}
+    \caption{The four view axes of the triad dependencies map to the medians of the tetrahedron. Rotate the tetrahedron so that a given cyan line is reduced to a point: The resulting view is then orthogonal to the outermost identity when flattened to 2d.}
+    \label{fig:depviewaxes}
+\end{subfigure}
+\begin{subfigure}[t]{0.45\linewidth}
+    \input{ASY/IndepViewAxes.tex}
+    \caption{The three view axes of the independent planes map to the bimedians of the tetrahedron. Rotate the tetrahedron so that a given magenta line is reduced to a point: The resulting view is then orthogonal to independent plane defined on the basis of the two perpendicular edges crossing in the middle of the figure.}
+    \label{fig:indepviewaxes}       
+\end{subfigure}
+\caption{The seven principal view axes of the demographic time identity. Figures are interactive if viewed in a recent version of Adobe Reader. Click each figure to activate. A mouse wheel (or right click and drag) can be used to zoom. Left click and drag to rotate.}
 \label{fig:viewaxes}
 \end{figure}
 
-The choice to view a timespace using the coordinates of an independent dyad implies a different transection of the space. The three independent symmetry lines of Figure~\ref{fig:indepviewaxes} are also orthogonal to the faces of the cube dual of any octahedron in the tetrahedral-octahedral timespace. Said cubes also form a space-filling tessellation, and therefore sufficiently and redundantly define the same time space.
-
-\subsection{Life lines}
-The planes defined by any of the triad identities have a clear relationship with life course, either looking back to birth (APC), forward to death (TPD), looking in both directions symmetrically (TAL), or compressed to a whole (LCD). Unambiguous orientation of this kind is a key ingredient to make any sort of inference about variation over the life course. Time planes defined by independent time measures also have a clear relationship with lifelines, but we are not accustomed to thinking of demographic phenomena or demographic change in such terms, nor of visualizing surfaces aligned to independent viewing axes.
-
+Given a 3d volume of data structured by the demographic time identity, a cross-section orthagonal to a magenta line from Fig.~\ref{fig:indepviewaxes} is an independent plane. There is no reason not to do this for outcome measures, for example disease prevalence, in search of meaningful patterns. Further, when \emph{slicing} through such a complex timespace, we are agnostic about cut angles in general, but \emph{snapping} to axes defined on the basis of unit time measures leads to easier interpretation.
 
 \section{Data}
 We illustrate concepts using two data sources: the \emph{le registre de la population du Qu\'{e}bec ancien} (RPQA) \citep{desjardins1998}, and RAND version P of the United States Health and Retirement Study (HRS) \citep{HRS, RAND}. The RPQA data are used to illustrate perspectives on population structure, whereas the HRS data are used to illustrate how independant time perspectives
@@ -184,59 +181,24 @@ relate can be used to take cross-sections of phenomena with multiple time dimens
 [Provide a minimal description of RPQA data here, as it may be unfamiliar.]
 
 \subsection{HRS}
-Do we do this or not? If so, need to make game plan.
+Do we do this or not? If so, need to make game plan. Maybe recycle prevalence from HLETTD, can cite WP?
 
 \section{Independent time surfaces of population structure}
-As a first pass to demonstrate concepts, we cross-tabulate Quebec's historical
-population structure by the three sets of independent demographic time measures. Each
-cross-tabulation is represented as a demographic surface using filled
-contour heat maps to create Lexis-like surfaces. These surfaces are distinct
-from Lexis surfaces in a few important ways. Lexis surfaces are drawn with
-diagonal lines at a slope equal to the aspect ratio between time units in $y$
-and time units in $x$, usually 45$^\circ$ (APC, LCD). Other triad time surfaces
-might be drawn with descending diagonals (TPD, TAL). Independent surfaces
-imply both diagonals, at 45$^\circ$ and -45$^\circ$, as the reader may have
-noticed while manipulating Fig.~\ref{fig:indepviewaxes}. At times, one or the
-other of these diagonals may be revealed in patterns of population structure on
-independent time planes, although such features do not necessarily arise. 
+As a first pass to demonstrate concepts, we cross-tabulate Quebec's historical population structure by the three sets of independent demographic time measures. Each cross-tabulation is represented as a demographic surface using filled contour heat maps to create Lexis-like surfaces. These surfaces are distinct from Lexis surfaces in a few important ways. Lexis surfaces are drawn with diagonal lines at a slope equal to the aspect ratio between time units in $y$ and time units in $x$, usually 45$^\circ$ (APC, LCD). Other triad time surfaces might be drawn with descending diagonals (TPD, TAL). Independent surfaces imply both diagonals, at 45$^\circ$ and -45$^\circ$, as the reader may have
+noticed while manipulating Fig.~\ref{fig:indepviewaxes}. At times, one or the other of these diagonals may be revealed in patterns of population structure on independent time planes, although such features do not necessarily arise. 
 
 \subsection{LP: Lifespan and Period}
 
+
+
 Subsection structure: orientation of lifelines, definition of space.
-Expectations a priori about how mortality and fertility should influence shape
-of surface. show picture of Quebec exposure, discuss peculiarities due to data
-collection.
+Expectations a priori about how mortality and fertility should influence shape of surface. show picture of Quebec exposure, discuss peculiarities due to data collection.
 
-Lifespan (L) and period (P) are independent of one another, since an individual
-destined to live for a total of 80 years lives through a total of 80 years:
-If we merely know that this person-to-become-80 is alive, then specifying a
-year does not tell us an age--- this person could be a baby or about to
-die. Since in these data we know years of birth and death, we know where each
-year of life for a to-become-80-year-old is to be placed. This individual stays
-in $y$ position 70, contributing a year of life to each single-year cell between
-birth and death. If this individual was born in 1700, he/she contributed 1 to
-the count at age 80 from 1700 all the way to 1780 (or so), incrementing a
-horizontal stripe to the surface. If another to-become-80-year-old is born
-in 1701, these two lives overlap for 79 years. Infant deaths are very short
-segments in the bottom. The tragically short lives of infant deaths overlap very
-little with one another, whereas long lives are maximally overlapped.
+Lifespan (L) and period (P) are independent of one another, since an individual destined to live for a total of 80 years lives through a total of 80 years: If we merely know that this person-to-become-80 is alive, then specifying a year does not tell us an age--- this person could be a baby or about to die. Since in these data we know years of birth and death, we know where each year of life for a to-become-80-year-old is to be placed. This individual stays in $y$ position 70, contributing a year of life to each single-year cell between birth and death. If this individual was born in 1700, he/she contributed 1 to
+the count at age 80 from 1700 all the way to 1780 (or so), incrementing a horizontal stripe to the surface. If another to-become-80-year-old is born in 1701, these two lives overlap for 79 years. Infant deaths are very short segments in the bottom. The tragically short lives of infant deaths overlap very little with one another, whereas long lives are maximally overlapped.
 
-Fig.~\ref{fig:lpq} displays the Quebec population structure on an LP surface.
-Higher $y$ values correspond to longer and therefore more overlapped lives. The
-upper regions of the surface are thus smoother with respect to time than lower
-regions. Growth over time in to-be-long-lived individuals could occur due to
-population growth or mortality improvement. For this population, increasing contours over time are primarily
-due to population growth. Shorter lives are found lower in $y$, and these reveal
-the rhythms of mortality. Mortality
-shocks therefore add peculiar relief to the surface. High-mortality years are
-marked with vertical cliffs in population structure: Lives over a broad range of
-ages that are simultaneously extinguished are right-aligned on the LP surface.
-Excess deaths in this case are spread over a range of ages, tracing back to
-births from a range of years, producing the -45$\circ$ feature. Mortality shocks
-therefore produce raised triangles in population structure. A single
-isolated year with an extremely high number of births could produce a raised
-left-edge, but fertility shocks of this kind are far less prominant than
-mortality shocks in this population.
+Fig.~\ref{fig:lpq} displays the Quebec population structure on an LP surface. Higher $y$ values correspond to longer and therefore more overlapped lives. The upper regions of the surface are thus smoother with respect to time than lower regions. Growth over time in to-be-long-lived individuals could occur due to population growth or mortality improvement. For this population, increasing contours over time are primarily due to population growth. Shorter lives are found lower in $y$, and these reveal the rhythms of mortality. Mortality shocks therefore add peculiar relief to the surface. High-mortality years are
+marked with vertical cliffs in population structure: Lives over a broad range of ages that are simultaneously extinguished are right-aligned on the LP surface. Excess deaths in this case are spread over a range of ages, tracing back to births from a range of years, producing the -45$\circ$ feature. Mortality shocks therefore produce raised triangles in population structure. A single isolated year with an extremely high number of births could produce a raised left-edge, but fertility shocks of this kind are far less prominant than mortality shocks in this population.
 
 %\begin{small}
 %Here for each P, we ask how many people are alive that will one day die at age
@@ -274,34 +236,23 @@ mortality shocks in this population.
 %extend very far up, detectably as far up as life length 70.  There is a
 % parallel shift in density to the left of that oblique line space by about 10-15 years.  I am wondering if we are looking at an artifact of some kind of grouping of the data or if there really was a crisis in mortality around 1690, 1705, 1720, 1740, 1750, …  If you have independent estimates of death rates in these years, it would probably be easy to compare those estimates with these apparent events.
 
-Death info here comes from burial records, which had some age constraints in
-data collection: (1800-1825:deaths of 50+ only; 1826-1850: deaths of 75+ only).
-That explains the block edges on the right of LP, and the angle edges in TC. I'm
-also not very sure what accounts for the exceptions to these edges, but my guess would be that it owes to there being multiple potential sources for date of death. Here it is again, with known epidemics (i.e. main disease can be guessed) marked with red rectangles (if spanning more than 1 year)
-\citep[cf Figure 1.1][]{mazan2011}Typhus, measles, smallpox, etc) were cross
-checked with other historical documents. These match the right edge of most of the triangles, and the others may have just been lesser or unstudied epidemics, or ones that I just missed. The left oblique edge of each triangle is in general more visible than the vertical right edge, at least in the early part of the series, because growth in the early phase (pre 1663 if I recall) was largely from migration.
+Death info here comes from burial records, which had some age constraints in data collection: (1800-1825:deaths of 50+ only; 1826-1850: deaths of 75+ only). That explains the block edges on the right of LP, and the angle edges in TC. I'm also not very sure what accounts for the exceptions to these edges, but my guess would be that it owes to there being multiple potential sources for date of death. Here it is again, with known epidemics (i.e. main disease can be guessed) marked with red rectangles (if spanning more than 1 year) \citep[cf Figure 1.1][]{mazan2011}Typhus, measles, smallpox, etc) were cross checked with other historical documents. These match the right edge of most of the triangles, and the others may have just been lesser or unstudied epidemics, or ones that I just missed. The left oblique edge of each triangle is in general more visible than the vertical right edge, at least in the early part of the series, because growth in the early phase (pre 1663 if I recall) was largely from migration.
 
 Missingness in LP:
 Data collection began in 1621, but lifelines in the LP figure begin well left of that. This is because a person dying at some old age right at the start of the series will have of course been born well before the series itself began. Anything to the left of 1621 is incomplete in a sense, because we're missing the lifetlines that would overlap the pre 1621 lives we already have (e.g. a life extinguished at age 50 in 1620). So, we could of course crop the surface at 1621, no problem. However, we have the same problem on the right side of the series. Ignoring the block shapes for now.  A person dying in 1850 at age 60 would clearly overlap with part of the blue we have, but would here be excluded. The right-side zone of still-incomplete observation in LP is the upper-right triangle of the whole surface; so, draw a line inward from the lower right corner at slope -1. Anything above that is still missing the early part of some lives. Those funny observation blocks offset said missingness to some degree, a happy accident. As a rule, missingness is higher in LP as we go up the y axis on the right side.
 
 Now imagine we have an LP surface of the prevalence pi(l,p) of some health condition from HRS. The observation window is much smaller, but we are located high up in the lifespan range. Most of the people whose prevalence should contribute to  pi(90,2015) have not died yet, because many of them are still toddlers. Others not yet included in  pi(90,2015) are those age 80 in 2015 that will not die until 2025. None of this will be a problem if we condition these planes on some other bounding time measure, I guess it's just something to be careful with. My first guess as to conditions that might vary in a regular way over LP would be prevalence of having ever smoked. Here's a screenshot of the TAL plane of the 1915 female birth cohort for ever-smoking prevalence:
 
-I used this as an example in another recent paper (link). I found this striking.
- Lifespan contours are those with slope -1. One explanation would be that smoking determines length of life before age 70 and things simply don't change thereafter (you can't undo being an ever smoker). As I recall dental visits had contours with this slope, but the surface was not monotonic. It's just a guess that strong patterns like these would carry over into LP.
+I used this as an example in another recent paper (link). I found this striking. Lifespan contours are those with slope -1. One explanation would be that smoking determines length of life before age 70 and things simply don't change thereafter (you can't undo being an ever smoker). As I recall dental visits had contours with this slope, but the surface was not monotonic. It's just a guess that strong patterns like these would carry over into LP.
 
 The Quebec data has an incredible observation window, but no health except fertility (and extended family events). Lifeline surfaces like those produced for Quebec can be inferred from any Lexis surface of death counts.
 \end{small}
 
 \subsection{TC}
 
-The thanatological age distribution of a birth cohort specifies that birth
-cohort's life table (distribution of T given C). Conversely, the distribution of
-birth cohorts of people of a given thanatological age reveals mortality history and inequalities in
-survival. If more of the people who will die in 5 years are from recent cohorts
-than from cohorts long ago, this population has high childhood mortality and low survival to old ages.
+The thanatological age distribution of a birth cohort specifies that birth cohort's life table (distribution of T given C). Conversely, the distribution of birth cohorts of people of a given thanatological age reveals mortality history and inequalities in survival. If more of the people who will die in 5 years are from recent cohorts than from cohorts long ago, this population has high childhood mortality and low survival to old ages.
 
-A lifeline on the CT plane extends from 0 upward until the age of death. Ergo,
-someone born in 1700 dying at age 80 contributes 1 to the count in each thanatological age from 0 to 80, the entire countdown. T = 0 is maximally heterogenous with respect to A (or L or D or P), and lifeline overlap decreases in higher T (long-lived people while they're young, i.e. in years closer to C itself). Here's that tabulation of this same data (also logged):
+A lifeline on the CT plane extends from 0 upward until the age of death. Ergo, someone born in 1700 dying at age 80 contributes 1 to the count in each thanatological age from 0 to 80, the entire countdown. T = 0 is maximally heterogenous with respect to A (or L or D or P), and lifeline overlap decreases in higher T (long-lived people while they're young, i.e. in years closer to C itself). Here's that tabulation of this same data (also logged):
 
 \begin{figure}
 \includegraphics[scale=.9]{Figures/QuebecTC.pdf}
@@ -309,40 +260,31 @@ someone born in 1700 dying at age 80 contributes 1 to the count in each thanatol
 \label{fig:tcq}
 \end{figure}
 
-The first thing to pop out at me are birth dearths for particular years,
-possibly the same years that were the right edges of mortality shocks in the LP surface. Also a wider boom or two, which might just be natural growth. Here each vertical strip monotonically decreases as we go up to higher thanatological ages. I agree these are the stationary populations belonging to each birth cohort, each with a radix equal to the actual birth cohort size, so this is a bit more straightforward to wrap one's mind around than LP.
+The first thing to pop out at me are birth dearths for particular years, possibly the same years that were the right edges of mortality shocks in the LP surface. Also a wider boom or two, which might just be natural growth. Here each vertical strip monotonically decreases as we go up to higher thanatological ages. I agree these are the stationary populations belonging to each birth cohort, each with a radix equal to the actual birth cohort size, so this is a bit more straightforward to wrap one's mind around than LP.
 
 It seems that the upper envelope (that is, the thanatological
-age at which the lifelines terminate, as a function of cohort) is rising with increasing cohort, reflecting improvements in cohort life expectancy.  These improvements are visible also in contour lines that are lower than the upper envelope.  You suggested that growth happens in the contours mainly because the population was growing exponentially.  If you wanted to remove the effect of population growth, you could plot a curve of births or a curve of population size or a curve of number of women in the population below the x axis with an inverted y axis and then normalize the counts by births or population size or number of women.  That might reveal additional patterns.  This kind of normalization by some measure of population size might also be applied to the next figure.
+age at which the lifelines terminate, as a function of cohort) is rising with increasing cohort, reflecting improvements in cohort life expectancy.  These improvements are visible also in contour lines that are lower than the upper envelope.  You suggested that growth happens in the contours mainly because the population was growing exponentially. If you wanted to remove the effect of population growth, you could plot a curve of births or a curve of population size or a curve of number of women in the population below the x axis with an inverted y axis and then normalize the counts by births or population size or number of women.  That might reveal additional patterns.  This kind of normalization by some measure of population size might also be applied to the next figure.
 
-​I now detect the affects of the right-side block observation of deaths. Had burial records for younger ages been captured in this data, we would have increasing contours as we go down towards the x axis on the right side. Here we just get the tips of the oldest deaths, each having needed to pass through young ages first, so they trace down to age 0.​
+I now detect the affects of the right-side block observation of deaths. Had burial records for younger ages been captured in this data, we would have increasing contours as we go down towards the x axis on the right side. Here we just get the tips of the oldest deaths, each having needed to pass through young ages first, so they trace down to age 0.
 
 \subsection{AD}
 
-For a given age A, the distribution of the death cohort D of individuals gives
-the conditional life table, conditional on reaching the given age A, and hence gives, for example, the remaining life
-expectancy and the variability of remaining life, among other summaries of the
-conditional life table. Conversely, for a given death cohort D, the distribution
-of age A of individuals specifies the distribution of their birth cohorts and life lengths.
+For a given age A, the distribution of the death cohort D of individuals gives the conditional life table, conditional on reaching the given age A, and hence gives, for example, the remaining life expectancy and the variability of remaining life, among other summaries of the
+conditional life table. Conversely, for a given death cohort D, the distribution of age A of individuals specifies the distribution of their birth cohorts and life lengths.
 
 \begin{figure}
 \includegraphics[scale=.9]{Figures/QuebecAD.pdf}
 \caption{Population structure by age and year of death.}
 \label{fig:adq}
 \end{figure}
-In the AD plane, we have the same sort of vertical overlap. Just as everyone
-experiences T = 0, everyone is also included in A = 0 here. If this were a stationary population then a vertical strip here would be equal to one from the CT plane, but we have lots of non-stationary things happening. Vertical striation here is due to mortality shocks in particular years, and these are strictly positive. Anything dearthy-looking is either due to a 'harvest' or data collection oddities. At least I've never heard of a survival shock. So, to repeat, an individual born in 1700 destined to die at age 80 is located at 1780 in the x axes, and ages from the bottom up. Ergo, the bottom of the surface is young people, as we're used to, but they come from different birth cohorts. As with CT, the population is maximally mixed with respect to C (or L or P or T) at A = 0. An 80 year old and an infant dying in 1780 both contribute to the count at age 0 in 1780.
+In the AD plane, we have the same sort of vertical overlap. Just as everyone experiences T = 0, everyone is also included in A = 0 here. If this were a stationary population then a vertical strip here would be equal to one from the CT plane, but we have lots of non-stationary things happening. Vertical striation here is due to mortality shocks in particular years, and these are strictly positive. Anything dearthy-looking is either due to a 'harvest' or data collection oddities. At least I've never heard of a survival shock. So, to repeat, an individual born in 1700 destined to die at age 80 is located at 1780 in the x axes, and ages from the bottom up. Ergo, the bottom of the surface is young people, as we're used to, but they come from different birth cohorts. As with CT, the population is maximally mixed with respect to C (or L or P or T) at A = 0. An 80 year old and an infant dying in 1780 both contribute to the count at age 0 in 1780.
 
-We see here the same high density in death year 1705 that we detected in the LP
-plane, so maybe it is not a data artifact. Whether there are also high densities of deaths in the other years we identified in the LP plane is not so clear to me; perhaps yes. There appear to be little white rectangles between 1760 and 1800 at ages zero through perhaps 3 or 4. Every lifeline must extend to age zero, so something is wrong here, I think. Again we see the upper envelope increasing with the year of death and rising contour lines.
+We see here the same high density in death year 1705 that we detected in the LP plane, so maybe it is not a data artifact. Whether there are also high densities of deaths in the other years we identified in the LP plane is not so clear to me; perhaps yes. There appear to be little white rectangles between 1760 and 1800 at ages zero through perhaps 3 or 4. Every lifeline must extend to age zero, so something is wrong here, I think. Again we see the upper envelope increasing with the year of death and rising contour lines.
 
 \section{Independent time surfaces as cross-sections}
-Here use example of HRS surfaces produced at novel \emph{cut} angles.
+Here use example of HRS prevalence surfaces produced at novel \emph{cut} angles. I'm thinking maybe small multiples, since each would be a fly-through of cross sections in fixed intervals. There would be 3 independent fly-throughs, and 4 Lexis-like fly throughs. These would be  like Fig.~(7) of \citet{riffe2017demographictime}, which is a fly-though at the TAL viewing angle. So, maybe each fly-through is a column and each perspective is a row? Maybe 10-year jumps in columns to imply 3-4 columns? Total? For example, each TAL slice in that Fig 7 is held for a fixed C. It would have been possible to hold P or D fixed instead, but I guess the actually slices would be identical, just the labels would change. Just need to be clear about it when labelling said panel figure.
 \subsection{LP}
-
 \subsection{TC}
-
-
 \subsection{AD}
 
 % bibliography

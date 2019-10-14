@@ -1,22 +1,63 @@
-%\begin{filecontents*}{example.eps}
-%!PS-Adobe-3.0 EPSF-3.0
-%%BoundingBox: 19 19 221 221
-%%CreationDate: Mon Sep 29 1997
-%%Creator: programmed by hand (JK)
-%%EndComments
+%% BioMed_Central_Tex_Template_v1.06
+%%                                      %
+%  bmc_article.tex            ver: 1.06 %
+%                                       %
 
-%\end{filecontents*}
-%
-%\documentclass{svjour3}                     % onecolumn (standard format)
-%\documentclass[smallcondensed]{svjour3}     % onecolumn (ditto)
-\documentclass[12pt,oneside,a4paper]{article}  
+%%IMPORTANT: do not delete the first line of this template
+%%It must be present to enable the BMC Submission system to
+%%recognise this template!!
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                     %%
+%%  LaTeX template for BioMed Central  %%
+%%     journal article submissions     %%
+%%                                     %%
+%%          <8 June 2012>              %%
+%%                                     %%
+%%                                     %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                 %%
+%% For instructions on how to fill out this Tex template           %%
+%% document please refer to Readme.html and the instructions for   %%
+%% authors page on the biomed central website                      %%
+%% http://www.biomedcentral.com/info/authors/                      %%
+%%                                                                 %%
+%% Please do not use \input{...} to include other tex files.       %%
+%% Submit your LaTeX manuscript as one .tex document.              %%
+%%                                                                 %%
+%% All additional figures and files should be attached             %%
+%% separately and not embedded in the \TeX\ document itself.       %%
+%%                                                                 %%
+%% BioMed Central currently use the MikTex distribution of         %%
+%% TeX for Windows) of TeX and LaTeX.  This is available from      %%
+%% http://www.miktex.org                                           %%
+%%                                                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% additional documentclass options:
+%  [doublespacing]
+%  [linenumbers]   - put the line numbers on margins
+
+%%% loading packages, author definitions
+
+%\documentclass[twocolumn]{bmcart}% uncomment this for twocolumn layout and comment line below
+\documentclass{bmcart}
+
+%%% Load packages
+%\usepackage{amsthm,amsmath}
+%\RequirePackage{natbib}
+%\RequirePackage[authoryear]{natbib}% uncomment this for author-year bibliography
+%\RequirePackage{hyperref}
+\usepackage[utf8]{inputenc} %unicode support
 \usepackage{apacite}
 \usepackage{appendix}
 \usepackage{amsmath}
 \usepackage{amsthm}
 % for ASY interactive 3d figure
-\usepackage[inline]{asymptote}
+%\usepackage[inline]{asymptote}
 \usepackage{amssymb} % for approx greater than
 \usepackage{caption}
 \usepackage{placeins} % for \FloatBarrier
@@ -39,85 +80,205 @@
 \usepackage{etoolbox}
 \AtBeginEnvironment{quote}{\singlespace\small}
 \AtEndEnvironment{quote}{\endsinglespace}
-% columns for longtable
-%\usepackage{arydshln} % Dashed lines in matrices
-
-\usepackage[margin=1in]{geometry}
-%\doublespacing % for review
-
-% line numbers to make review easier
-%\usepackage{lineno}
-%\linenumbers
-
-%\usepackage{soul}% for \st{}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% for section 4 math environments
-%\theoremstyle{definition}
-%\newtheorem{definition}{Definition}[section]
-%\newtheorem{theorem}{Theorem}[section]
-%\newtheorem{proposition}{Proposition}[section]
-%\newtheorem{corollary}{Corollary}[proposition]
-%\newtheorem{remark}{Remark}[section]
-%
+%\usepackage[applemac]{inputenc} %applemac support if unicode package fails
+%\usepackage[latin1]{inputenc} %UNIX support if unicode package fails
 
 
-%\newcommand\ackn[1]{%
-%  \begingroup
-%  \renewcommand\thefootnote{}\footnote{#1}%
-%  \addtocounter{footnote}{-1}%
-%  \endgroup
-%}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                             %%
+%%  If you wish to display your graphics for   %%
+%%  your own use using includegraphic or       %%
+%%  includegraphics, then comment out the      %%
+%%  following two lines of code.               %%
+%%  NB: These line *must* be included when     %%
+%%  submitting to BMC.                         %%
+%%  All figure files must be submitted as      %%
+%%  separate graphics through the BMC          %%
+%%  submission process, not included in the    %%
+%%  submitted article.                         %%
+%%                                             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\renewcommand\Affilfont{\small}
-\newcommand{\absdiv}[1]{%
-  \par\addvspace{.5\baselineskip}% adjust to suit
-  \noindent\textbf{#1}\quad\ignorespaces
-}
 
-%\defcitealias{HMD}{HMD 2016}
+% Toggle show graphics
+%\def\includegraphic{}
+%\def\includegraphics{}
 
-% junk for longtable caption
-%\AtBeginEnvironment{longtable}{\linespread{1}\selectfont}
-%\setlength{\LTcapwidth}{\linewidth}
 
-% sort van Raalte properly
-% #1: sorting key, #2: prefix for citation, #3: prefix for bibliography
-%\DeclareRobustCommand{\VAN}[3]{#2} % set up for citation
-%\newcommand{\tc}{\quad\quad\text{,}}
-%\newcommand{\tp}{\quad\quad\text{.}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Put your definitions there:
+\startlocaldefs
+\endlocaldefs
+
+
+%%% Begin ...
 \begin{document}
 
+%%% Start of article front matter
+\begin{frontmatter}
+
+\begin{fmbox}
+\dochead{Research}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                          %%
+%% Enter the title of your article here     %%
+%%                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title{Independent time measures}
 
-%\author{Tim Riffe \and Neil Mehta \and Daniel Schneider \and Mikko Myrskyl\"a}
-\author[1]{Tim Riffe\thanks{riffe@demogr.mpg.de}}
-\author[2, 3]{Joel E. Cohen}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                          %%
+%% Enter the authors here                   %%
+%%                                          %%
+%% Specify information, if available,       %%
+%% in the form:                             %%
+%%   <key>={<id1>,<id2>}                    %%
+%%   <key>=                                 %%
+%% Comment or delete the keys which are     %%
+%% not used. Repeat \author command as much %%
+%% as required.                             %%
+%%                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\author[
+   addressref={aff1},                   % id's of addresses, e.g. {aff1,aff2}
+   corref={aff1},                       % id of corresponding address, if any
+   noteref={n1},                        % id's of article notes, if any
+   email={riffe@demogr.mpg.de}   % email address
+]{\inits{TR}\fnm{Tim} \snm{Riffe}}
+\author[
+   addressref={aff2, aff3},
+   email={cohen@mail.rockefeller.edu}
+]{\inits{JEC}\fnm{Joel E.} \snm{Cohen}}
 
-\affil[1]{Max-Planck-Institute for Demographic Research}
-\affil[2]{The Rockefeller University}
-\affil[2]{Columbia University}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                          %%
+%% Enter the authors' addresses here        %%
+%%                                          %%
+%% Repeat \address commands as much as      %%
+%% required.                                %%
+%%                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\authorrunning{Short form of author list} % if too long for running head
+\address[id=aff1]{%                           % unique id
+  \orgname{Max-Planck-Institute for Demographic Research} % university, etc
+ % \street{Konrad-Zuse-Str 1},                     %
+ % \postcode{18057}                                % post or zip code
+ % \city{Rostock},                              % city
+ % \cny{DE}                                    % country
+}
+\address[id=aff2]{%
+  \orgname{The Rockefeller University}
+ % \street{D\"{u}sternbrooker Weg 20},
+ % \postcode{24105}
+ % \city{Kiel},
+ % \cny{Germany}
+}
+\address[id=aff3]{%
+  \orgname{Columbia University}
+  %\street{D\"{u}sternbrooker Weg 20},
+  %\postcode{24105}
+  %\city{Kiel},
+  %\cny{Germany}
+}
 
-\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                          %%
+%% Enter short notes here                   %%
+%%                                          %%
+%% Short notes will be after addresses      %%
+%% on first page.                           %%
+%%                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\vspace{-2em}
-\begin{abstract}
-\absdiv{Background} The demographic time identity consists in a linear relationship between all pairs of six fundamental time measures: age, period, cohort, time to death, length of life, and time of death. Certain subsets of time measures in this and other higher order identities consist in time measures that are independent of one another.
-\absdiv{Objective} We aim to describe the relationship between
+\begin{artnotes}
+%\note{Sample of title note}     % note to the article
+\note[id=n1]{Equal contributor} % note, connected to author
+\end{artnotes}
+
+\end{fmbox}% comment this for two column layout
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                          %%
+%% The Abstract begins here                 %%
+%%                                          %%
+%% Please refer to the Instructions for     %%
+%% authors on http://www.biomedcentral.com  %%
+%% and include the section headings         %%
+%% accordingly for your article type.       %%
+%%                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstractbox}
+
+\begin{abstract} % abstract
+\parttitle{Background} 
+The demographic time identity consists in a linear relationship between all pairs of six fundamental time measures: age, period, cohort, time to death, length of life, and time of death. Certain subsets of time measures in this and other higher order identities consist in time measures that are independent of one another.
+\parttitle{Objective} 
+We aim to describe the relationship between
 independent time measures and the identities within which they are nested, with special attention to the demographic time identity and its three independent time dyads. We also aim to determine whether data structured on such time dyads might be useful in demographic research.
-\absdiv{Data and Methods} We illustrate concepts visually based on data from the Colonial Qu\'{e}bec Population Register and from the US Health and Retirement study.
-\absdiv{Results}  We show that a Cartesian mapping of independent time dyads form a redundant mapping of the same demographic timespace. These add three previously undescribed demographic perspectives to the four Lexis-like perspectives, for a total of seven proposed standard perspectives. 
-\absdiv{Conclusions} We show independent sets of time measures to be consistent with the temporal identities within which they are nested. We demonstrate that these perspectives can be useful for pattern detection and characterization in demographic research.
+\parttitle{Data and Methods} 
+We illustrate concepts visually based on data from the Colonial Qu\'{e}bec Population Register and from the US Health and Retirement study.
+\parttitle{Results} 
+We show that a Cartesian mapping of independent time dyads form a redundant mapping of the same demographic timespace. These add three previously undescribed demographic perspectives to the four Lexis-like perspectives, for a total of seven proposed standard perspectives. 
+\parttitle{Conclusions} 
+We show independent sets of time measures to be consistent with the temporal identities within which they are nested. We demonstrate that these perspectives can be useful for pattern detection and characterization in demographic research.
 \end{abstract}
 
-%\textcolor{red}{This isn't even a first draft! Literally it contains copied and pasted email conversations at this point. It needs a deep revision before even becoming a manuscript stub. So please read w caution.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                          %%
+%% The keywords begin here                  %%
+%%                                          %%
+%% Put each keyword in separate \kwd{}.     %%
+%%                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Background}
+\begin{keyword}
+\kwd{sample}
+\kwd{article}
+\kwd{author}
+\end{keyword}
+
+% MSC classifications codes, if any
+%\begin{keyword}[class=AMS]
+%\kwd[Primary ]{}
+%\kwd{}
+%\kwd[; secondary ]{}
+%\end{keyword}
+
+\end{abstractbox}
+%
+%\end{fmbox}% uncomment this for twcolumn layout
+
+\end{frontmatter}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                          %%
+%% The Main Body begins here                %%
+%%                                          %%
+%% Please refer to the instructions for     %%
+%% authors on:                              %%
+%% http://www.biomedcentral.com/info/authors%%
+%% and include the section headings         %%
+%% accordingly for your article type.       %%
+%%                                          %%
+%% See the Results and Discussion section   %%
+%% for details on how to create sub-sections%%
+%%                                          %%
+%% use \cite{...} to cite references        %%
+%%  \cite{koon} and                         %%
+%%  \cite{oreg,khar,zvai,xjon,schn,pond}    %%
+%%  \nocite{smith,marg,hunn,advi,koha,mouse}%%
+%%                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%% start of article main body
+% <put your article body there>
+
+\section*{Background}
+
 Dated events on a timeline form the foundation of numerous empirical approaches to detect, estimate, and describe patterns in processes and outcomes in the social sciences. Process patterns might be called transitions, and there are several varieties of these (continuous/discrete, conditional/unconditional, forward/backward \citep{brouard2019backward}, and more). Outcome patterns refer to either things such as prevalence, distribution properties (e.g. expectancies), sequences, episode statistics, and others. Outcome patterns can either be calculated from a process model or observed directly from data. Examples of process patterns include age-structured rates of fertility, mortality, and migration. Examples of outcome patterns include trends in length of life, healthy life expectancy, counts of births structured in some way, or employment trajectories. 
 
 This paper deals with the calendar relationships that underpin all such knowledge of the world. Most empirical work that describes processes and outcomes makes use of a limited subset of the temporal structure that is available, and often the implications of relationships between time measures are unrecognized. Previous work \citep{riffe2017demographictime} formalizes the relationship between events in time, and the durations between them. A given set of event types determines a further set of durations. Taken together, a set of events and their implied durations comprise a dense linear relationship that one might call a temporal \emph{identity}. The most common of these in empirical demographic research is the \emph{Lexis} identity between period (date), cohort(date), and age (duration). There are countless Lexis-like relationships between linearly dependent time measures, and these can be combined into higher-order Lexis identities. 
@@ -127,44 +288,39 @@ A primary example of a higher order Lexis identity is the so-called \emph{demogr
 Triad identities are more meaningful than uninformative dyads. This is so even in the absence of data, due to the underlying relationship between measures. Each of the triad identities can accommodate some version of a lifeline, for instance \citep[p5][]{riffe2017demographictime}. 
 \end{quote}
 
-Contrary to the above, in the present note we aim to show how uniformative dyads can reveal meaningful relationships in data. For better semantics and precision, we suggest calling these \emph{independent} dyads rather than uniformative dyads. We relate independent dyad diagrams to lifelines in two dimensions (2d). We relate 2d independent planes to the three-dimensional (3d) demographic time identity, showing how these are also cross-sections of the same 3d volume, but which follow a cubic rather than a tetrahedral structure. We show how data structured on independent time measures may still reveal meaningful patterns using historical data from Qu\'{e}bec. We speculate on a way to view and interpret data structured by the demographic time identity using arbitarily defined planes as cross-sections. We speculate on how data structured by independent time measures may be meaningful in general.
+Contrary to the above, in the present note we aim to show how uninformative dyads can reveal meaningful relationships in data. For better semantics and precision, we suggest calling these \emph{independent} dyads rather than uninformative dyads. We relate independent dyad diagrams to lifelines in two dimensions (2d). We relate 2d independent planes to the three-dimensional (3d) demographic time identity, showing how these are also cross-sections of the same 3d volume, but which follow a cubic rather than a tetrahedral structure. We show how data structured on independent time measures may still reveal meaningful patterns using historical data from Qu\'{e}bec. We speculate on a way to view and interpret data structured by the demographic time identity using arbitrarily defined planes as cross-sections. We speculate on how data structured by independent time measures may be meaningful in general.
 
-% \subsection{HRS} 
-% We select a single phenomenon to visualize based on information in the HRS. We
-% follow the data smoothing steps described by \citet{riffe2017hle} to prepare the
-% data, and summarize these here.
-% [write description of data prep here. HRS data likely familiar]
-
-\section{Geometric relationships}
-  The demographic time identity can be represented as a tetrahedral graph, with time measures mapped to the six edges of a tetrahedron. The four Lexis-like identities are found on the faces of the tetrahedron. The identity fills a 3d space because tetrahedra tesselate with octahedra in a 2:1 ratio. \citet{riffe2017demographictime} considered neither independent pairs of time measures nor the significance of octahedra in this geometric construct. Figure~\ref{fig:tet} shows the tetrahedral graph of the demographic time identity between age (A), period (P), cohort (C), time to death (T), death cohort (D), and length of life (L). Independent dyads are those that do not share any vertex in the graph, and these appear as perpendicular but disjoint in the present graph representation: CT, LP, and AD.
+\section*{Geometric relationships}
+  The demographic time identity can be represented as a tetrahedral graph, with time measures mapped to the six edges of a tetrahedron. The four Lexis-like identities are found on the faces of the tetrahedron. The identity fills a 3d space because tetrahedra tessellate with octahedra in a 2:1 ratio. \citet{riffe2017demographictime} considered neither independent pairs of time measures nor the significance of octahedra in this geometric construct. Figure~\ref{fig:tet} shows the tetrahedral graph of the demographic time identity among age (A), period (P), cohort (C), time to death (T), death cohort (D), and length of life (L). Independent dyads are those that do not share any vertex in the graph, and these appear as disjoint and perpendicular in the present 2d graph representation, though they are not perpendicular in 3d space: CT, LP, and AD.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=4in]{Figures/TetraHedronEdgesOnly.pdf}
+\includegraphics[width=4in]{TetraHedronEdgesOnly.pdf}
 \caption{Tetrahedral graph of demographic time hexad identity, with edges
 labelled by the six time indices. Reproduced from 
 \citet{riffe2017demographictime}.}
 \label{fig:tet}
 \end{figure}
 
-Independent dyads can be identified in fully expanded time graphs such as Fig.~\ref{fig:tet} as those pairs of edges that do not share a vertex. In a triad identity there are none, but in the demographic time identity there are three, each consisting in a dated event paired with a duration defined as the elapsed time between the other two dated events. In general, in a time identity defined on the basis of $n$ calendar-dated event types implies a graph with $n+1$ vertices, implying a total of $\binom{n+1}{2}$ graph edges. Each edge in the graph represents a time measure. Since $n$ of the edges are calendar-event measures, $\binom{n+1}{2} - n$ are duration measures. The $n$ calendar-dated measures are represented as graph edges sharing a single vertex. Triad identities are found wherever two edges share a vertex, for a total of three vertices, which means there must be $\binom{n+1}{3}$ of them within an identity. Independent dyads are pairs of edges that do not share a vertex, meaning that they use four vertices. Since there are $\binom{n+1}{2}$ ways to select one edge, there are $\binom{n-1}{2}$ ways to do so after having removed the two vertices of the first edge, or $\frac{1}{2}\binom{n+1}{2}\binom{n-1}{2}$ unique ways to select two unconnected edges, which simplifies to $3\binom{n+1}{4}$ independent dyads. For a more complicated example, a multistate model of period, birth, marriage, divorce, and death ($n=5$) would therefore imply 45 independent dyads, and a total of 20 triad identities. As $n$ increases, the fraction of possible temporal dyads that are independent approaches 1. To illustrate this point think of the universe of all dates and the potential durations between them: Pick two out of this massive urn and they will almost certainly be independent in this sense.
+Independent dyads can be identified in fully expanded time graphs such as Fig.~\ref{fig:tet} as those pairs of edges that do not share a vertex. In a triad identity there are none, but in the demographic time identity there are three independent dyads, each consisting in a dated event paired with a duration defined as the elapsed time between the other two dated events. In general, in a time identity defined on the basis of $n$ calendar-dated event types implies a graph with $n+1$ vertices, implying a total of $\binom{n+1}{2}$ graph edges. Each edge in the graph represents a time measure. Since $n$ of the edges are calendar-event measures, $\binom{n+1}{2} - n$ are duration measures. The $n$ calendar-dated measures are represented as graph edges sharing a single vertex. Triad identities are found wherever two edges share a vertex, for a total of three vertices, which means there must be $\binom{n+1}{3}$ of them within an identity. Independent dyads are pairs of edges that do not share a vertex, meaning that they use four vertices. Since there are $\binom{n+1}{2}$ ways to select one edge, there are $\binom{n-1}{2}$ ways to do so after having removed the two vertices of the first edge, or $\frac{1}{2}\binom{n+1}{2}\binom{n-1}{2}$ unique ways to select two unconnected edges, which simplifies to $3\binom{n+1}{4}$ independent dyads. For a more complicated example, a multistate model of period, birth, marriage, divorce, and death ($n=5$) would therefore imply 45 independent dyads, and a total of 20 triad identities. As $n$ increases, the fraction of possible temporal dyads that are independent approaches 1. To illustrate this point think of the universe of all dates and the potential durations between them: Pick two out of this massive urn and they will almost certainly be independent in this sense.
 
 Any pair of quantitative variables can define the axes of a standard Cartesian plane. When Cartesian axes are defined by two independent time measures and in equal time units, the resultant plane is an isometric projection. Let's call this an independent plane for short. There are two ways that an independent plane may be treated: either (i) accounting for a larger temporal identity or (ii) not. Here we limit comments to the 3d case of the demographic time identity. For the first kind (i) planes are cross-sections of the same 3d demographic timespace previously defined in Fig.~\ref{fig:tet}, and the independent dyads can also be conceived of as \emph{axes of view} on the demographic timespace. This idea is described further in Sec.~\ref{sec:viewaxes}. For the second kind (ii), independent planes are the same as any standard Cartesian plane used in data analyses: patterns revealed could be due to real structure or due to sample heterogeneity in other time measures. That is, the larger temporal identity within which these independent measures are nested is \emph{flattened}.
 
-\subsection{View axes}
+\subsection*{View axes}
 \label{sec:viewaxes}
 Imagine now the 3d projection of the graph from Fig.~\ref{fig:tet}, a regular tetrahedron. An angle of view directly at any of the four faces of the demographic time tetrahedron reveals the plane-perspective of a Lexis-like identitiy. In other words, the viewing axis is set as \emph{normal} to one of the faces of the tetrahedron. Interactive Fig.~\ref{fig:viewaxes} may help visualize the notion of viewing axes--- the view on a plane is orthogonal if an axis line is reduced to appear as a point in the centroid of the tetrahedron. The view axes of the four triad identities map to the four medians (axes of 3-fold symmetry) of the tetrahedron, depicted in
 Fig.~\ref{fig:depviewaxes} with cyan colored lines. Independent dyad planes are revealed when the viewing angle is such that the midpoints of opposite tetrahedral edges are aligned. There are three pairs of opposite edges (LP, TC, AD), and therefore three viewing angles of this kind, which map to the bimedians of the tetrahedron (axes of 2-fold symmetry), depicted in Figure~\ref{fig:indepviewaxes} with magenta lines.
+
 \begin{figure}
 \begin{subfigure}[t]{0.45\linewidth}
     \centering
-    \input{ASY/DepViewAxes.tex}
+    %\input{ASY/DepViewAxes.tex}
     \caption{The four view axes of the triad dependencies map to the medians of the tetrahedron. Rotate the tetrahedron so that a given cyan line is reduced to a point: The resulting view is then orthogonal to the outermost identity when flattened to 2d.}
     \label{fig:depviewaxes}
 \end{subfigure}
 ~~
 \begin{subfigure}[t]{0.45\linewidth}
-    \input{ASY/IndepViewAxes.tex}
+    %\input{ASY/IndepViewAxes.tex}
     \caption{The three view axes of the independent planes map to the bimedians of the tetrahedron. Rotate the tetrahedron so that a given magenta line is reduced to a point: The resulting view is then orthogonal to independent plane defined on the basis of the two perpendicular edges crossing in the middle of the figure.}
     \label{fig:indepviewaxes}       
 \end{subfigure}
@@ -174,23 +330,24 @@ Fig.~\ref{fig:depviewaxes} with cyan colored lines. Independent dyad planes are 
 
 Given a 3d volume of data structured by the demographic time identity, a cross-section orthogonal to a magenta line from Fig.~\ref{fig:indepviewaxes} is an independent plane. There is no reason not to do this for outcome measures, for example disease prevalence, in search of meaningful patterns. Further, when \emph{slicing} through such a complex timespace, we are agnostic about cut angles in general, but \emph{snapping} to axes defined on the basis of unit time measures leads to easier interpretation.
 
-\pagebreak
-\section{Data}
+UNDEVELOPED FROM HERE DOWN
+
+\section*{Data}
 We illustrate concepts using two data sources: the \emph{le registre de la population du Qu\'{e}bec ancien} (RPQA) \citep{desjardins1998}, and RAND version P of the United States Health and Retirement Study (HRS) \citep{HRS, RAND}. The RPQA data are used to illustrate perspectives on population structure, whereas the HRS data are used to illustrate how independent time perspectives
 can be used to take cross-sections of phenomena with multiple time dimensions.
 
-\subsection{RPQA}
+\subsection*{RPQA}
 [Provide a minimal description of RPQA data here, as it may be unfamiliar.]
 
-\subsection{HRS}
+\subsection*{HRS}
 Do we do this or not? If so, need to make game plan (see note at end). Maybe recycle prevalence from HLETTD, can cite WP?
 
-\section{Independent time surfaces of population structure}
+\section*{Independent time surfaces of population structure}
 As a first pass to demonstrate concepts, we cross-tabulate Qu\'{e}bec's historical population structure by the three sets of independent demographic time measures. Each cross-tabulation is represented as a demographic surface using filled contour heat maps to create Lexis-like surfaces. These surfaces are distinct from Lexis surfaces in a few important ways. Lexis surfaces are drawn with diagonal lines at a slope equal to the aspect ratio between time units in $y$ and time units in $x$, usually 45$^\circ$ (APC, LCD). Other triad time surfaces might be drawn with descending diagonals (TPD, TAL). Surfaces on independent planes might have features that run horizontally, vertically or in both 45$^\circ$ and -45$^\circ$ diagonals. Features in population structure may arise in any of these orientations, depending on the case. 
 
 As mentioned, the three independent dyads in the demographic time identity each consist in one date measure and one duration measure. Our convention for orienting the Cartesian plane is to use the date measure as abscissa ($x$-axis) and the duration measure as ordinate ($y$-axis). Since a duration measure is the difference between two dated events, this means that independent dyads in this particular identity only arise when three dated events are known, which identifies the full demographic time identity (PCD implies TAL). Tabulations by two independent time measures can only be done in practice if each of the six demographic time measures are either observed or derivable. 
 
-\subsection{LP: Lifespan and Period}
+\subsection*{LP: Lifespan and Period}
 Following this standard orientation, we draw an LP diagram with period in abscissa and lifespan in the ordinate axis. This is for the most part an ageless diagram. An individual with a lifespan of 80 years is represented as a horizontal line spanning from the time of birth until the time of death. That is, for each increment in P, L is identical within an individual. An individual lifespan, which determines $y$ position, is only known in retrospect. On a single lifeline, one can trace the progression of age (and the other time measures) from left to right. For aggregate data tabulated by L and P, any given combination of L and P is a mixture of ages. Heterogeneity of this kind is greater for longer lives than for shorter lives.
 
 [Insert LP diagram about here, with illustrative lifelines]
@@ -202,7 +359,7 @@ Following this standard orientation, we draw an LP diagram with period in abscis
 
 Fig.~\ref{fig:lpq} displays the Qu\'{e}bec population structure on an LP surface. Higher $y$ values correspond to longer and therefore more overlapped lives. The upper regions of the surface are thus smoother with respect to time than lower regions. Growth over time in to-be-long-lived individuals could occur due to population growth or mortality improvement. We know this pattern is not due to migration because this population was mostly closed in this time. For Qu\'{e}bec, increasing contours over time are primarily due to population growth. 
 
-Shorter lives are found lower in $y$, and these reveal the rhythms of mortality. Mortality shocks therefore add peculiar relief to the surface. High-mortality years are marked with vertical cliffs in population structure: Lives over a broad range of ages that are simultaneously extinguished are right-aligned on the LP surface. Excess deaths in this case are spread over a range of ages, tracing back to births from a range of years, producing the -45$\circ$ feature \includegraphics{Figures/LP_mort_tri.pdf}. Mortality shocks therefore produce raised triangle relief pattern in population structure. A single isolated year with an extremely high number of births could produce a raised left-edge, but fertility shocks of this kind are far less prominant than mortality shocks in this population. One example might be the 1919 Swedish birth cohort.
+Shorter lives are found lower in $y$, and these reveal the rhythms of mortality. Mortality shocks therefore add peculiar relief to the surface. High-mortality years are marked with vertical cliffs in population structure: Lives over a broad range of ages that are simultaneously extinguished are right-aligned on the LP surface. Excess deaths in this case are spread over a range of ages, tracing back to births from a range of years, producing the -45$\circ$ feature \includegraphics{LP_mort_tri.pdf}. Mortality shocks therefore produce raised triangle relief pattern in population structure. A single isolated year with an extremely high number of births could produce a raised left-edge, but fertility shocks of this kind are far less prominent than mortality shocks in this population. One example might be the 1919 Swedish birth cohort.
 
 %\begin{small}
 %Here for each P, we ask how many people are alive that will one day die at age
@@ -221,7 +378,7 @@ Shorter lives are found lower in $y$, and these reveal the rhythms of mortality.
 
 \begin{figure}
 \centering
-\includegraphics[scale=.9]{Figures/QuebecLP.pdf}
+\includegraphics[scale=.9]{QuebecLP.pdf}
 \caption{Population structure by length of life and year. Logged counts}
 \label{fig:lpq}
 \end{figure}
@@ -252,14 +409,14 @@ I used this as an example in another recent paper (link). I found this striking.
 The Qu\'{e}bec data has an incredible observation window, but no health except fertility (and extended family events). Lifeline surfaces like those produced for Qu\'{e}bec can be inferred from any Lexis surface of death counts.
 \end{small}
 
-\subsection{TC}
+\subsection*{TC}
 
 The thanatological age distribution of a birth cohort specifies that birth cohort's life table (distribution of T given C). Conversely, the distribution of birth cohorts of people of a given thanatological age reveals mortality history and inequalities in survival. If more of the people who will die in 5 years are from recent cohorts than from cohorts long ago, this population has high childhood mortality and low survival to old ages.
 
 A lifeline on the CT plane extends from 0 upward until the age of death. Ergo, someone born in 1700 dying at age 80 contributes 1 to the count in each thanatological age from 0 to 80, the entire countdown. T = 0 is maximally heterogenous with respect to A (or L or D or P), and lifeline overlap decreases in higher T (long-lived people while they're young, i.e. in years closer to C itself). Here's that tabulation of this same data (also logged):
 
 \begin{figure}
-\includegraphics[scale=.9]{Figures/QuebecTC.pdf}
+\includegraphics[scale=.9]{QuebecTC.pdf}
 \caption{Population structure by time to death and birth cohort.}
 \label{fig:tcq}
 \end{figure}
@@ -271,13 +428,13 @@ age at which the lifelines terminate, as a function of cohort) is rising with in
 
 I now detect the affects of the right-side block observation of deaths. Had burial records for younger ages been captured in this data, we would have increasing contours as we go down towards the x axis on the right side. Here we just get the tips of the oldest deaths, each having needed to pass through young ages first, so they trace down to age 0.
 
-\subsection{AD}
+\subsection*{AD}
 
 For a given age A, the distribution of the death cohort D of individuals gives the conditional life table, conditional on reaching the given age A, and hence gives, for example, the remaining life expectancy and the variability of remaining life, among other summaries of the
 conditional life table. Conversely, for a given death cohort D, the distribution of age A of individuals specifies the distribution of their birth cohorts and life lengths.
 
 \begin{figure}
-\includegraphics[scale=.9]{Figures/QuebecAD.pdf}
+\includegraphics[scale=.9]{QuebecAD.pdf}
 \caption{Population structure by age and year of death.}
 \label{fig:adq}
 \end{figure}
@@ -285,14 +442,116 @@ In the AD plane, we have the same sort of vertical overlap. Just as everyone exp
 
 We see here the same high density in death year 1705 that we detected in the LP plane, so maybe it is not a data artifact. Whether there are also high densities of deaths in the other years we identified in the LP plane is not so clear to me; perhaps yes. There appear to be little white rectangles between 1760 and 1800 at ages zero through perhaps 3 or 4. Every lifeline must extend to age zero, so something is wrong here, I think. Again we see the upper envelope increasing with the year of death and rising contour lines.
 
-\section{Independent time surfaces as cross-sections}
+\section*{Independent time surfaces as cross-sections}
 Here use example of HRS prevalence surfaces produced at novel \emph{cut} angles. I'm thinking maybe small multiples, since each would be a fly-through of cross sections in fixed intervals. There would be 3 independent fly-throughs, and 4 Lexis-like fly throughs. These would be  like Fig.~(7) of \citet{riffe2017demographictime}, which is a fly-though at the TAL viewing angle. So, maybe each fly-through is a column and each perspective is a row? Maybe 10-year jumps in columns to imply 3-4 columns? Total? For example, each TAL slice in that Fig 7 is held for a fixed C. It would have been possible to hold P or D fixed instead, but I guess the actually slices would be identical, just the labels would change. Just need to be clear about it when labelling said panel figure.
-\subsection{LP}
-\subsection{TC}
-\subsection{AD}
 
-% bibliography
-\bibliographystyle{chicago}
-\bibliography{references}  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                          %%
+%% Backmatter begins here                   %%
+%%                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{backmatter}
+
+\section*{Competing interests}
+  The authors declare that they have no competing interests.
+
+\section*{Author's contributions}
+    Text for this section \ldots
+
+\section*{Acknowledgements}
+  Text for this section \ldots
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                  The Bibliography                       %%
+%%                                                         %%
+%%  Bmc_mathpys.bst  will be used to                       %%
+%%  create a .BBL file for submission.                     %%
+%%  After submission of the .TEX file,                     %%
+%%  you will be prompted to submit your .BBL file.         %%
+%%                                                         %%
+%%                                                         %%
+%%  Note that the displayed Bibliography will not          %%
+%%  necessarily be rendered by Latex exactly as specified  %%
+%%  in the online Instructions for Authors.                %%
+%%                                                         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% if your bibliography is in bibtex format, use those commands:
+\bibliographystyle{bmc-mathphys} % Style BST file (bmc-mathphys, vancouver, spbasic).
+\bibliography{references}      % Bibliography file (usually '*.bib' )
+% for author-year bibliography (bmc-mathphys or spbasic)
+% a) write to bib file (bmc-mathphys only)
+% @settings{label, options="nameyear"}
+% b) uncomment next line
+%\nocite{label}
+
+% or include bibliography directly:
+% \begin{thebibliography}
+% \bibitem{b1}
+% \end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                               %%
+%% Figures                       %%
+%%                               %%
+%% NB: this is for captions and  %%
+%% Titles. All graphics must be  %%
+%% submitted separately and NOT  %%
+%% included in the Tex document  %%
+%%                               %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%
+%% Do not use \listoffigures as most will included as separate files
+
+%\section*{Figures}
+%  \begin{figure}[h!]
+%  \caption{\csentence{Sample figure title.}
+%      A short description of the figure content
+%      should go here.}
+%      \end{figure}
+
+%\begin{figure}[h!]
+%  \caption{\csentence{Sample figure title.}
+%      Figure legend text.}
+%      \end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                               %%
+%% Tables                        %%
+%%                               %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Use of \listoftables is discouraged.
+%%
+%\section*{Tables}
+%\begin{table}[h!]
+%\caption{Sample table title. This is where the description of the table should go.}
+%      \begin{tabular}{cccc}
+%        \hline
+%           & B1  &B2   & B3\\ \hline
+%        A1 & 0.1 & 0.2 & 0.3\\
+%        A2 & ... & ..  & .\\
+%        A3 & ..  & .   & .\\ \hline
+%      \end{tabular}
+%\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                               %%
+%% Additional Files              %%
+%%                               %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\section*{Additional Files}
+%  \subsection*{Additional file 1 --- Sample additional file title}
+%    Additional file descriptions text (including details of how to
+%    view the file, if it is in a non-standard format or the file extension).  This might
+%    refer to a multi-page table or a figure.
+
+%  \subsection*{Additional file 2 --- Sample additional file title}
+%    Additional file descriptions text.
+
+
+\end{backmatter}
 \end{document}
-

@@ -1,0 +1,41 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{Brouard}{Brouard}{2019}]{brouard2019backward}
+Brouard, N. (2019).
+\newblock Theory and applications of backward probabilities and prevalences in
+  cross-longitudinal surveys.
+\newblock In A.~Srinivasa~Rao and R.~C. R. (Eds.), {\em Handbook of
+  Statistics}, Volume~40, Chapter Backward Probabilities Estimated From
+  Cross-Longitudinal Surveys and How Age-Specific Backward Prevalences Could
+  Help Analyzing Trends in Aging Societies, pp.\  435--486. Elsevier.
+
+\bibitem[\protect\citeauthoryear{Desjardins}{Desjardins}{1999}]{desjardins1998}
+Desjardins, B. (1999).
+\newblock Le registre de la population du québec ancien.
+\newblock {\em Annales de Démographie Historique\/}~{\em 1998\/}(2), 215--226.
+
+\bibitem[\protect\citeauthoryear{HRS}{HRS}{2017}]{HRS}
+HRS (2017).
+\newblock Health and retirement study public use dataset.
+\newblock Produced and distributed by the University of Michigan with funding
+  from the National Institute on Aging (grant number NIA U01AG009740).
+
+\bibitem[\protect\citeauthoryear{Mazan}{Mazan}{2011}]{mazan2011}
+Mazan, R. (2011).
+\newblock {\em Analyzing Epidemics in New France: The Measles Epidemic of
+  1714-15}.
+\newblock Ph.\ D. thesis, University of Western Ontario.
+
+\bibitem[\protect\citeauthoryear{RAND}{RAND}{2018}]{RAND}
+RAND (2018).
+\newblock {RAND HRS Data, Version P}.
+\newblock Produced by the RAND Center for the Study of Aging, with funding from
+  the National Institute on Aging and the Social Security Administration.
+
+\bibitem[\protect\citeauthoryear{Riffe, Sch\"oley, and Villavicencio}{Riffe
+  et~al.}{2017}]{riffe2017demographictime}
+Riffe, T., J.~Sch\"oley, and F.~Villavicencio (2017).
+\newblock {A unified framework of demographic time}.
+\newblock {\em Genus\/}~{\em 73\/}(7).
+
+\end{thebibliography}

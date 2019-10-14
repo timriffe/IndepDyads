@@ -59,7 +59,7 @@
 % for ASY interactive 3d figure
 %\usepackage[inline]{asymptote}
 \usepackage{amssymb} % for approx greater than
-\usepackage{caption}
+%\usepackage{caption}
 \usepackage{placeins} % for \FloatBarrier
 \usepackage{graphicx}
 \usepackage{subcaption}
@@ -278,6 +278,7 @@ We show independent sets of time measures to be consistent with the temporal ide
 % <put your article body there>
 
 \section*{Background}
+TEST: this text entered in RStudio, committed, then pushed to github. Will it reflect in Overleaf?
 
 Dated events on a timeline form the foundation of numerous empirical approaches to detect, estimate, and describe patterns in processes and outcomes in the social sciences. Process patterns might be called transitions, and there are several varieties of these (continuous/discrete, conditional/unconditional, forward/backward \citep{brouard2019backward}, and more). Outcome patterns refer to either things such as prevalence, distribution properties (e.g. expectancies), sequences, episode statistics, and others. Outcome patterns can either be calculated from a process model or observed directly from data. Examples of process patterns include age-structured rates of fertility, mortality, and migration. Examples of outcome patterns include trends in length of life, healthy life expectancy, counts of births structured in some way, or employment trajectories. 
 
@@ -295,7 +296,7 @@ Contrary to the above, in the present note we aim to show how uninformative dyad
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=4in]{TetraHedronEdgesOnly.pdf}
+\includegraphics[width=4in]{Figures/TetraHedronEdgesOnly.pdf}
 \caption{Tetrahedral graph of demographic time hexad identity, with edges
 labelled by the six time indices. Reproduced from 
 \citet{riffe2017demographictime}.}
@@ -359,7 +360,7 @@ Following this standard orientation, we draw an LP diagram with period in abscis
 
 Fig.~\ref{fig:lpq} displays the Qu\'{e}bec population structure on an LP surface. Higher $y$ values correspond to longer and therefore more overlapped lives. The upper regions of the surface are thus smoother with respect to time than lower regions. Growth over time in to-be-long-lived individuals could occur due to population growth or mortality improvement. We know this pattern is not due to migration because this population was mostly closed in this time. For Qu\'{e}bec, increasing contours over time are primarily due to population growth. 
 
-Shorter lives are found lower in $y$, and these reveal the rhythms of mortality. Mortality shocks therefore add peculiar relief to the surface. High-mortality years are marked with vertical cliffs in population structure: Lives over a broad range of ages that are simultaneously extinguished are right-aligned on the LP surface. Excess deaths in this case are spread over a range of ages, tracing back to births from a range of years, producing the -45$\circ$ feature \includegraphics{LP_mort_tri.pdf}. Mortality shocks therefore produce raised triangle relief pattern in population structure. A single isolated year with an extremely high number of births could produce a raised left-edge, but fertility shocks of this kind are far less prominent than mortality shocks in this population. One example might be the 1919 Swedish birth cohort.
+Shorter lives are found lower in $y$, and these reveal the rhythms of mortality. Mortality shocks therefore add peculiar relief to the surface. High-mortality years are marked with vertical cliffs in population structure: Lives over a broad range of ages that are simultaneously extinguished are right-aligned on the LP surface. Excess deaths in this case are spread over a range of ages, tracing back to births from a range of years, producing the -45$\circ$ feature \includegraphics{Figures/LP_mort_tri.pdf}. Mortality shocks therefore produce raised triangle relief pattern in population structure. A single isolated year with an extremely high number of births could produce a raised left-edge, but fertility shocks of this kind are far less prominent than mortality shocks in this population. One example might be the 1919 Swedish birth cohort.
 
 %\begin{small}
 %Here for each P, we ask how many people are alive that will one day die at age
@@ -378,7 +379,7 @@ Shorter lives are found lower in $y$, and these reveal the rhythms of mortality.
 
 \begin{figure}
 \centering
-\includegraphics[scale=.9]{QuebecLP.pdf}
+\includegraphics[scale=.9]{Figures/QuebecLP.pdf}
 \caption{Population structure by length of life and year. Logged counts}
 \label{fig:lpq}
 \end{figure}
@@ -416,7 +417,7 @@ The thanatological age distribution of a birth cohort specifies that birth cohor
 A lifeline on the CT plane extends from 0 upward until the age of death. Ergo, someone born in 1700 dying at age 80 contributes 1 to the count in each thanatological age from 0 to 80, the entire countdown. T = 0 is maximally heterogenous with respect to A (or L or D or P), and lifeline overlap decreases in higher T (long-lived people while they're young, i.e. in years closer to C itself). Here's that tabulation of this same data (also logged):
 
 \begin{figure}
-\includegraphics[scale=.9]{QuebecTC.pdf}
+\includegraphics[scale=.9]{Figures/QuebecTC.pdf}
 \caption{Population structure by time to death and birth cohort.}
 \label{fig:tcq}
 \end{figure}
@@ -434,7 +435,7 @@ For a given age A, the distribution of the death cohort D of individuals gives t
 conditional life table. Conversely, for a given death cohort D, the distribution of age A of individuals specifies the distribution of their birth cohorts and life lengths.
 
 \begin{figure}
-\includegraphics[scale=.9]{QuebecAD.pdf}
+\includegraphics[scale=.9]{Figures/QuebecAD.pdf}
 \caption{Population structure by age and year of death.}
 \label{fig:adq}
 \end{figure}
@@ -443,7 +444,7 @@ In the AD plane, we have the same sort of vertical overlap. Just as everyone exp
 We see here the same high density in death year 1705 that we detected in the LP plane, so maybe it is not a data artifact. Whether there are also high densities of deaths in the other years we identified in the LP plane is not so clear to me; perhaps yes. There appear to be little white rectangles between 1760 and 1800 at ages zero through perhaps 3 or 4. Every lifeline must extend to age zero, so something is wrong here, I think. Again we see the upper envelope increasing with the year of death and rising contour lines.
 
 \section*{Independent time surfaces as cross-sections}
-Here use example of HRS prevalence surfaces produced at novel \emph{cut} angles. I'm thinking maybe small multiples, since each would be a fly-through of cross sections in fixed intervals. There would be 3 independent fly-throughs, and 4 Lexis-like fly throughs. These would be  like Fig.~(7) of \citet{riffe2017demographictime}, which is a fly-though at the TAL viewing angle. So, maybe each fly-through is a column and each perspective is a row? Maybe 10-year jumps in columns to imply 3-4 columns? Total? For example, each TAL slice in that Fig 7 is held for a fixed C. It would have been possible to hold P or D fixed instead, but I guess the actually slices would be identical, just the labels would change. Just need to be clear about it when labelling said panel figure.
+Here use example of HRS prevalence surfaces produced at novel \emph{cut} angles. I'm thinking maybe small multiples, since each would be a fly-through of cross sections in fixed intervals. There would be 3 independent fly-throughs, and 4 Lexis-like fly throughs. These would be  like Fig.~(7) of \cite{riffe2017demographictime}, which is a fly-though at the TAL viewing angle. So, maybe each fly-through is a column and each perspective is a row? Maybe 10-year jumps in columns to imply 3-4 columns? Total? For example, each TAL slice in that Fig 7 is held for a fixed C. It would have been possible to hold P or D fixed instead, but I guess the actually slices would be identical, just the labels would change. Just need to be clear about it when labelling said panel figure.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -482,7 +483,7 @@ Here use example of HRS prevalence surfaces produced at novel \emph{cut} angles.
 \bibliography{references}      % Bibliography file (usually '*.bib' )
 % for author-year bibliography (bmc-mathphys or spbasic)
 % a) write to bib file (bmc-mathphys only)
-% @settings{label, options="nameyear"}
+ @settings{label, options="nameyear"}
 % b) uncomment next line
 %\nocite{label}
 

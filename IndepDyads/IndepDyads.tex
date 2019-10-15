@@ -78,6 +78,7 @@
 \usepackage[normalem]{ulem}
 \usepackage{amsfonts}
 \usepackage{etoolbox}
+\usepackage{censor}
 \AtBeginEnvironment{quote}{\singlespace\small}
 \AtEndEnvironment{quote}{\endsinglespace}
 %\usepackage[applemac]{inputenc} %applemac support if unicode package fails
@@ -302,13 +303,13 @@ labelled by the six time indices. Reproduced from
 \label{fig:tet}
 \end{figure}
 
- In a triad identity there are no independent dyads, but in the demographic time identity there are three independent dyads, each consisting in an event paired with a duration defined as the interval between the other two dated events. In general, a time identity defined on the basis of $n$ calendar-dated event types implies a graph with $n+1$ vertices, implying a total of $\binom{n+1}{2}$ graph edges. Each edge in the graph represents a time measure. Since $n$ of the edges are calendar-event measures, $\binom{n+1}{2} - n$ are duration measures. The $n$ calendar-dated measures are represented as graph edges sharing a single vertex. Triad identities are found wherever two edges share a vertex, for a total of three vertices, which means there must be $\binom{n+1}{3}$ of them within an identity. Independent dyads are pairs of edges that do not share a vertex, meaning that they use four vertices. Since there are $\binom{n+1}{2}$ ways to select one edge, there are $\binom{n-1}{2}$ ways to do so after having removed the two vertices of the first edge, or $\frac{1}{2}\binom{n+1}{2}\binom{n-1}{2}$ unique ways to select two unconnected edges, which simplifies to $3\binom{n+1}{4}$ independent dyads. For a more complicated example, a multistate model of period, birth, marriage, divorce, and death ($n=5$) would therefore imply 45 independent dyads, and a total of 20 triad identities. As $n$ increases, the fraction of possible temporal dyads that are independent approaches 1. To illustrate this point think of the universe of all dates and the potential durations between them: Pick two out of this massive urn and they will almost certainly be independent in this sense.
+ In a triad identity there are no independent dyads, but in the demographic time identity there are three independent dyads, each consisting in an event paired with a duration defined as the interval between the other two dated events. In general, a time identity defined on the basis of $n$ events implies a graph with $n+1$ vertices, implying a total of $\binom{n+1}{2}$ graph edges. Each edge in the graph represents a time measure. Since $n$ of the edges are calendar-event measures, $\binom{n+1}{2} - n$ are duration measures. The $n$ calendar-dated measures are represented as graph edges sharing a single vertex. Triad identities are found wherever two edges share a vertex, for a total of three vertices, which means there must be $\binom{n+1}{3}$ of them within an identity. Independent dyads are pairs of edges that do not share a vertex, meaning that they use four vertices. Since there are $\binom{n+1}{2}$ ways to select one edge, there are $\binom{n-1}{2}$ ways to do so after having removed the two vertices of the first edge, or $\frac{1}{2}\binom{n+1}{2}\binom{n-1}{2}$ unique ways to select two unconnected edges, which simplifies to $3\binom{n+1}{4}$ independent dyads. For a more complicated example, a multistate model of period, birth, marriage, divorce, and death ($n=5$) would therefore imply 45 independent dyads, and a total of 20 triad identities. As $n$ increases, the fraction of possible temporal dyads that are independent approaches 1. To illustrate this point think of the universe of all dates and the potential durations between them: Pick two out of this massive urn and they will almost certainly be independent in this sense.
 
 Any pair of quantitative variables can define the axes of a standard Cartesian plane. When Cartesian axes are defined by two independent time measures and in equal time units, the resultant plane is an isometric projection. Let's call this an independent plane for short. There are two ways that an independent plane may be treated: either (i) accounting for a larger temporal identity or (ii) not. Here we limit comments to the 3d case of the demographic time identity. For the first kind (i) planes are cross-sections of the same 3d demographic timespace previously defined in Fig.~\ref{fig:tet}, and the independent dyads can also be conceived of as \emph{axes of view} on the demographic timespace. This idea is described further in Sec.~\ref{sec:viewaxes}. For the second kind (ii), independent planes are the same as any standard Cartesian plane used in data analyses: patterns revealed could be due to real structure or due to sample heterogeneity in other time measures. That is, the larger temporal identity within which these independent measures are nested is \emph{flattened}.
 
 \subsection*{View axes}
 \label{sec:viewaxes}
-Imagine now the 3d projection of the graph from Fig.~\ref{fig:tet}, a regular tetrahedron. An angle of view directly at any of the four faces of the demographic time tetrahedron reveals the plane-perspective of a Lexis-like identitiy. In other words, the viewing axis is set as \emph{normal} to one of the faces of the tetrahedron. Interactive Fig.~\ref{fig:viewaxes} may help visualize the notion of viewing axes--- the view on a plane is orthogonal if an axis line is reduced to appear as a point in the centroid of the tetrahedron. The view axes of the four triad identities map to the four medians (axes of 3-fold symmetry) of the tetrahedron, depicted in
+Imagine now the 3d projection of the graph from Fig.~\ref{fig:tet}, a regular tetrahedron. An angle of view directly at any of the four faces of the demographic time tetrahedron reveals the plane-perspective of a Lexis-like identity. In other words, the viewing axis is set as \emph{normal} to one of the faces of the tetrahedron. Interactive Fig.~\ref{fig:viewaxes} may help visualize the notion of viewing axes--- the view on a plane is orthogonal if an axis line is reduced to appear as a point in the centroid of the tetrahedron. The view axes of the four triad identities map to the four medians (axes of 3-fold symmetry) of the tetrahedron, depicted in
 Fig.~\ref{fig:depviewaxes} with cyan colored lines. Independent dyad planes are revealed when the viewing angle is such that the midpoints of opposite tetrahedral edges are aligned. There are three pairs of opposite edges (LP, TC, AD), and therefore three viewing angles of this kind, which map to the bimedians of the tetrahedron (axes of 2-fold symmetry), depicted in Figure~\ref{fig:indepviewaxes} with magenta lines.
 
 \begin{figure}
@@ -330,8 +331,6 @@ Fig.~\ref{fig:depviewaxes} with cyan colored lines. Independent dyad planes are 
 
 Given a 3d volume of data structured by the demographic time identity, a cross-section orthogonal to a magenta line from Fig.~\ref{fig:indepviewaxes} is an independent plane. There is no reason not to do this for outcome measures, for example disease prevalence, in search of meaningful patterns. Further, when \emph{slicing} through such a complex timespace, we are agnostic about cut angles in general, but \emph{snapping} to axes defined on the basis of unit time measures leads to easier interpretation.
 
-UNDEVELOPED FROM HERE DOWN
-
 \section*{Data}
 We illustrate concepts using two data sources: the \emph{le registre de la population du Qu\'{e}bec ancien} (RPQA) \citep{desjardins1998}, and RAND version P of the United States Health and Retirement Study (HRS) \citep{HRS, RAND}. The RPQA data are used to illustrate perspectives on population structure, whereas the HRS data are used to illustrate how independent time perspectives
 can be used to take cross-sections of phenomena with multiple time dimensions.
@@ -340,7 +339,12 @@ can be used to take cross-sections of phenomena with multiple time dimensions.
 [Provide a minimal description of RPQA data here, as it may be unfamiliar.]
 
 \subsection*{HRS}
-Do we do this or not? If so, need to make game plan (see note at end). Maybe recycle prevalence from HLETTD, can cite WP?
+We use US Health and Retirement Study data to estimate how the prevalence of X varies over age A, time-to-death T, and year of birth C. Prevalence is defined as the average value of the outcome in each combination of A, T, and C. We estimate it using logistic regression, where natural splines over A, T, and C are covariates. The procedure takes account of the sampling structure of the HRS, and further details can be found in \citet{riffe2017hle}. The the edges A, T, C in Fig.~\ref{fig:tet}. Since these edges are connected and touch all four vertices in the graph, our smoothed prevalence fills the 3d space defined by the demographic time identity, and we may display it by using cross-sections.
+
+\subsection*{Availability of data and materials}
+Both the RPQA and RAND HRS are available free of charge, and both require registration, and for this reason we cannot openly share them in a repository. However, we give detailed instructions for requesting the exact source data used in this paper are available in an OSF repository. We also include intermediate aggregate data objects. This repository also contains annotated R code to reproduce the intermediate data objects, and all figures and calculations from the manuscript.
+The following url lead to an anonymized version of the repository, to facilitate blind review:
+\url{https://url/to/anonymous/osf/repository/forthcoming}
 
 \section*{Independent time surfaces of population structure}
 As a first pass to demonstrate concepts, we cross-tabulate Qu\'{e}bec's historical population structure by the three sets of independent demographic time measures. Each cross-tabulation is represented as a demographic surface using filled contour heat maps to create Lexis-like surfaces. These surfaces are distinct from Lexis surfaces in a few important ways. Lexis surfaces are drawn with diagonal lines at a slope equal to the aspect ratio between time units in $y$ and time units in $x$, usually 45$^\circ$ (APC, LCD). Other triad time surfaces might be drawn with descending diagonals (TPD, TAL). Surfaces on independent planes might have features that run horizontally, vertically or in both 45$^\circ$ and -45$^\circ$ diagonals. Features in population structure may arise in any of these orientations, depending on the case. 
@@ -454,14 +458,17 @@ Here use example of HRS prevalence surfaces produced at novel \emph{cut} angles.
 
 \begin{backmatter}
 
+\section*{Funding}
+  \censor{TR} thanks the \censor{Max-Planck-Institute for Demographic Research} for supporting this work with a fair salary. 
+  
 \section*{Competing interests}
   The authors declare that they have no competing interests.
 
 \section*{Author's contributions}
-    Text for this section \ldots
+  Both authors conceived of this project, undertook formal analysis, validation, drafting, and reviewing of the manuscript. \censor{TR} did the data analysis, coding, visualization, and reproducibility repository curation.
 
 \section*{Acknowledgements}
-  Text for this section \ldots
+  We wish to thank N reviewers in advance for sharing their time and expertise in reviewing this manuscript. We are also thankful for comments and advice from \censor{Maarten Bijlsma}, \censor{Jonas Sch\"oley}, \censor{Alyson van Raalte}, and \censor{Francisco Villavicencio}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                  The Bibliography                       %%
 %%                                                         %%
@@ -479,10 +486,10 @@ Here use example of HRS prevalence surfaces produced at novel \emph{cut} angles.
 
 % if your bibliography is in bibtex format, use those commands:
 \bibliographystyle{bmc-mathphys} % Style BST file (bmc-mathphys, vancouver, spbasic).
-\bibliography{references}      % Bibliography file (usually '*.bib' )
+\bibliography{references.bib}      % Bibliography file (usually '*.bib' )
 % for author-year bibliography (bmc-mathphys or spbasic)
 % a) write to bib file (bmc-mathphys only)
- @settings{label, options="nameyear"}
+% @settings{label, options="nameyear"}
 % b) uncomment next line
 %\nocite{label}
 

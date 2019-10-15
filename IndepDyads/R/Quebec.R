@@ -125,7 +125,7 @@ cols <- rev(sequential_hcl(palette="Teal",n=length(brks)-1))
 pdf(here::here("IndepDyads","Figures","QuebecLP.pdf"),width=7,height=4)
 image(years,0:108,log(t(LP)),asp=1,breaks=brks,col=cols,
 		xlab = "Period", ylab = "Length of life", ylim=c(0,100), las = 1)
-#contour(years,0:108,log(t(LP)),add=TRUE,levels=brks2,lwd=.5,col = gray(.2))
+#contour(years,0:108,log(t(LP)),add=TRUE,levels=brks,lwd=.5,col = gray(.2))
 rect(epidemicl,0,epidemicr,-10,border="red",xpd=TRUE)
 dev.off()
 

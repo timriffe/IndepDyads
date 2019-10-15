@@ -17,7 +17,8 @@ pkgs <- c(
 	"lubridate",
 	"here",
 	"reshape2",
-	"colorspace"
+	"colorspace",
+	"scales"
 )
 
 

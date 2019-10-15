@@ -1,8 +1,8 @@
 # little helper icons for in-line references.
 # 
 # an LP mortality triangle
-library(here)
-fig.path <- here("IndepDyads","Figures","LP_mort_tri.pdf")
+
+fig.path <- here::here("IndepDyads","Figures","LP_mort_tri.pdf")
 pdf(fig.path, width=.15,height=.15)
 par(xaxs='i',yaxs='i',mai=c(.02,.02,.02,.02))
 plot(NULL, type = 'n', xlim=c(0,1),ylim=c(0,1),asp=1,axes=FALSE)
@@ -19,17 +19,12 @@ AssignColour <- function (x) {
 	recvec[x]
 }
 llcol <- gray(.3)
-library(scales)
+
 P <- seq(1700,2000,by=50)
-#pdf(file.path("Figures","APCrt.pdf"),height=5,width=8)
-dev.new(height=5,width=8)
+pdf(here::here("IndepDyads","Figures","LPdiagram.pdf"),height=5,width=8)
+#dev.new(height=5,width=8)
 par(mai=c(.5, .5, .5, .5), xaxs = "i", yaxs = "i")
 plot(NULL, xlim = c(1770,2090), ylim = c(0,100), axes = FALSE, ylab = "", xlab = "", asp = 1)
-# LexRefN(0:100, 1820:2060, 
-# 		col1 = muted(AssignColour("P"), l = 70, c = 50),
-# 		col2 = muted(AssignColour("L"), l = 70, c = 50),
-# 		col3 = NA, N = 20, 
-# 		xpd=TRUE,lty=1,lwd=.5)
 
 # add intermediate grids
 xat <- seq(1840,2060,by=20)
@@ -57,6 +52,7 @@ points(B+L,L,pch=13,col=llcol,xpd=TRUE,lwd=2)
 #rect(2000,0,2060,100,border=NA,col="#00000020")
 text(1950,-10,"Period",xpd=TRUE,pos=1)
 text(1805,80,"Completed Lifespan",xpd=TRUE,pos=2,srt=90)
+text(B[1:2]+5,L[1:2]+5,LETTERS[1:2], font = 2)
+dev.off()
 
-#dev.off()
 

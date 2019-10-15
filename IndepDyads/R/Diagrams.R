@@ -103,7 +103,38 @@ dev.off()
 # --------------------------------------------------------------------------- #
 # AD diagram
 # --------------------------------------------------------------------------- #
+# A range 0:100
+# D range 1620:1860
 
+AA <- seq(0,100,by=20)
+DD <- seq(1620,1860,by=20)
 
+pdf(here::here("IndepDyads","Figures","ADdiagram.pdf"),height=5,width=10)
+# dev.new(height=5,width=8)
+par(mai=c(.5, .5, .1, .2), xaxs = "i", yaxs = "i")
+plot(NULL, xlim = range(DD), ylim = range(AA), axes = FALSE, ylab = "", xlab = "", asp = 1)
 
+# add intermediate grids
+segments(min(DD),AA, max(DD),AA, col = muted(AssignColour("A"), l = 70, c = 50),
+		 lwd=.5,lty=1)
+segments(DD, min(AA), DD,max(AA), col = muted(AssignColour("D"), l = 70, c = 50),
+		 lwd=.5,lty=1)
 
+# axes
+text(min(DD),AA,AA,pos=2,xpd=TRUE)
+text(DD,min(AA),DD,pos=1,xpd=TRUE)
+segments(min(DD),min(AA),min(DD),max(AA),lwd=2, col = AssignColour("A"), xpd=TRUE)
+segments(min(DD),min(AA),max(DD),min(AA),lwd=2, col = AssignColour("D"), xpd=TRUE)
+
+set.seed(1)
+B <- runif(6,min(CC),max(CC))
+L <- runif(6,0,100)
+segments(B+L, 0, B+L, L, lwd = 2, col = llcol)
+# birth points
+points(B+L,rep(0,6),pch=19,col=llcol,xpd=TRUE)
+# death points
+points(B+L,L,pch=13,col=llcol,xpd=TRUE,lwd=1)
+text(mean(DD),-10,"Year of death",xpd=TRUE,pos=1)
+text(min(DD)-5,mean(TT),"Age",xpd=TRUE,pos=2,srt=90)
+text(B[c(5,1)]+L[c(5,1)],L[c(5,1)]+5,LETTERS[1:2], font = 2)
+dev.off()

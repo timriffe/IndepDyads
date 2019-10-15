@@ -23,8 +23,8 @@ llcol <- gray(.3)
 P <- seq(1700,2000,by=50)
 pdf(here::here("IndepDyads","Figures","LPdiagram.pdf"),height=5,width=8)
 #dev.new(height=5,width=8)
-par(mai=c(.5, .5, .5, .5), xaxs = "i", yaxs = "i")
-plot(NULL, xlim = c(1770,2090), ylim = c(0,100), axes = FALSE, ylab = "", xlab = "", asp = 1)
+par(mai=c(.2, .2, 0, 0), xaxs = "i", yaxs = "i")
+plot(NULL, xlim = c(1795,2080), ylim = c(0,100), axes = FALSE, ylab = "", xlab = "", asp = 1)
 
 # add intermediate grids
 xat <- seq(1840,2060,by=20)

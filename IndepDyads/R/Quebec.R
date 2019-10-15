@@ -145,7 +145,7 @@ cols <- rev(sequential_hcl(palette="Teal",n=length(brks)-1))
 #png("Figures/QuebecTC.png",width=700,height=400)
 pdf(here::here("IndepDyads","Figures","QuebecTC.pdf"),width=7,height=4)
 image(as.integer(colnames(TC)),as.integer(rownames(TC)),log(t(TC)),asp=1,breaks=brks,col=cols,
-		xlab = "Birth cohort", ylab = "Thanatological age", ylim=c(0,100),las=1)
+		xlab = "Birth cohort", ylab = "Time to death", ylim=c(0,100),las=1)
 dev.off()
 
 # AD

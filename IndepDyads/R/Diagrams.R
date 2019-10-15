@@ -67,7 +67,7 @@ tt <- 0:110
 CC <- seq(1580,1800,by=20)
 TT <- seq(0,100,by=20)
 
-pdf(here::here("IndepDyads","Figures","TCdiagram.pdf"),height=5,width=9)
+pdf(here::here("IndepDyads","Figures","TCdiagram.pdf"),height=5,width=10)
 # dev.new(height=5,width=8)
 par(mai=c(.2, .2, 0, 0), xaxs = "i", yaxs = "i")
 plot(NULL, xlim = range(CC), ylim = range(TT), axes = FALSE, ylab = "", xlab = "", asp = 1)

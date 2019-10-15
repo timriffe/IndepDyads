@@ -2,27 +2,23 @@
 ###############################################################################
 library(foreign)
 library(lubridate)
-setwd("/home/tim/git/IndepDyads/IndepDyads")
+library(here)
+library(reshape2)
 
 # this is the MPIDR version from 2012, currently checking to see if it has been updated.
-path      <- "/home/tim/Data/Quebec/FrenchCanadian.individuals.2012-01-27/RPQA.MarcKlemp.individus.2012-01-27.sav"
+# expect lengthy registration process by email.
+path      <- here::here("IndepDyads","Data","RPQA.MarcKlemp.individus.2012-01-27.sav")
 # TR: line to read file
 Q         <- read.spss(path)
 # TR: line to read file on MG's system
 # Hm <-   read.spss("U:/quebec/Quebec/Quebec/FrenchCanadian.individuals.2012-01-27/RPQA.MarcKlemp.individus.2012-01-27.sav")
 Q         <- as.data.frame(Q)
 
-# NB check for age heaping for Pancho.
-
-
-
-
 #Q$Lf2 <- Q$dateDecesAnnee - Q$dateNaissAnnee 
 #image(log(acast(Q, dateDecesAnnee~Lf2,length)))
 # ---------------------------------------#
 # begin data prep                        #
 # ---------------------------------------#
-
 
 
 # missing month random assignment? or should I use month dist of known? Can always swap out
@@ -95,7 +91,7 @@ Q$L[Q$L < 0] <- 0
 #barplot(AP[,"1800"],space = 0, border = NA)
 #abline(v=seq(0,100,by=10),col = "white")
 
-
+# -------------------------------------------------------------------
 # LP plane
 # loop over year and L
 range(Q$L,na.rm=TRUE) # 0-108
@@ -105,6 +101,7 @@ range(Q$L,na.rm=TRUE) # 0-108
 #range(Q$dateNaissAnnee, na.rm=TRUE)
 #range(Q$dateDecesAnnee, na.rm=TRUE)
 nrow(Q)
+# TR: think of data.table or dplyr way of doing this easier + faster
 Q <- Q[!is.na(Q$L), ]
 
 years <- 1572:1870
@@ -133,11 +130,8 @@ image(years,0:108,log(t(LP)),asp=1,breaks=brks,col=colramp(length(brks)-1),
 rect(epidemicl,0,epidemicr,-10,border="red",xpd=TRUE)
 dev.off()
 
-library(reshape2)
-
-
+# -------------------------------------------------------------------
 # CT
-library(reshape2)
 LC <- acast(Q,Lf~dateNaissAnnee)
 LC <- LC[-nrow(LC),]
 LC <- LC[,-ncol(LC)]

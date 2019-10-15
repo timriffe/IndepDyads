@@ -20,8 +20,6 @@ pkgs <- c(
 	"colorspace"
 )
 
-# A package to install from github:
-gphgs <- c("DistributionTTD")
 
 # install the missing packages from CRAN
 # only runs if at least one package is missing
@@ -31,8 +29,6 @@ if(!sum(!p_isinstalled(pkgs))==0){
 		character.only = TRUE
 	)
 }
-
-
 
 # load the packages
 p_load(pkgs, character.only = TRUE)

@@ -1,10 +1,7 @@
 # Author: tim
 ###############################################################################
-library(foreign)
-library(lubridate)
-library(here)
-library(reshape2)
-library(colorspace)
+
+source(here::here("IndepDyads","R","prepare_session.R"))
 
 # this is the MPIDR version from 2012, currently checking to see if it has been updated.
 # expect lengthy registration process by email.
@@ -125,7 +122,7 @@ epidemicr <- c(1733,1757,1759,1761,1772,1776,1703,1687,1715)
 brks <- seq(0,9,by=.5)
 cols <- rev(sequential_hcl(palette="Teal",n=length(brks)-1))
 #png("Figures/QuebecLP.png",width=700,height=400)
-pdf("Figures/QuebecLP.pdf",width=7,height=4)
+pdf(here::here("IndepDyads","Figures","QuebecLP.pdf"),width=7,height=4)
 image(years,0:108,log(t(LP)),asp=1,breaks=brks,col=cols,
 		xlab = "Period", ylab = "Length of life", ylim=c(0,100), las = 1)
 #contour(years,0:108,log(t(LP)),add=TRUE,levels=brks2,lwd=.5,col = gray(.2))
@@ -146,7 +143,7 @@ TC <- TC[nrow(TC):1, ]
 brks <- seq(0,9,by=.5)
 cols <- rev(sequential_hcl(palette="Teal",n=length(brks)-1))
 #png("Figures/QuebecTC.png",width=700,height=400)
-pdf("Figures/QuebecTC.pdf",width=7,height=4)
+pdf(here::here("IndepDyads","Figures","QuebecTC.pdf"),width=7,height=4)
 image(as.integer(colnames(TC)),as.integer(rownames(TC)),log(t(TC)),asp=1,breaks=brks,col=cols,
 		xlab = "Birth cohort", ylab = "Thanatological age", ylim=c(0,100),las=1)
 dev.off()
@@ -159,7 +156,7 @@ LD <- LD[nrow(LD):1, ]
 AD <- apply(LD,2,cumsum)
 AD <- AD[nrow(AD):1, ]
 #png("Figures/QuebecAD.png",width=700,height=400)
-pdf("Figures/QuebecAD.pdf",width=7,height=4)
+pdf(here::here("IndepDyads","Figures","QuebecAD.pdf"),width=7,height=4)
 image(as.integer(colnames(AD)),as.integer(rownames(AD)),log(t(AD)),asp=1,breaks=brks,col=cols,
 		xlab = "Year of death", ylab = "Age", ylim=c(0,100),las=1)
 dev.off()

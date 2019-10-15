@@ -47,7 +47,7 @@ segments(B, L, B+L, L, lwd = 2, col = llcol)
 # birth points
 points(B,L,pch=19,col=llcol,xpd=TRUE)
 # death points
-points(B+L,L,pch=13,col=llcol,xpd=TRUE,lwd=2)
+points(B+L,L,pch=13,col=llcol,xpd=TRUE,lwd=1)
 #rect(1820,0,1900,100,border=NA,col="#00000020")
 #rect(2000,0,2060,100,border=NA,col="#00000020")
 text(1950,-10,"Period",xpd=TRUE,pos=1)

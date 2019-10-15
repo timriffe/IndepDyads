@@ -354,7 +354,7 @@ Following this standard orientation, we draw an LP diagram with period in abscis
 
 \begin{figure}
 \centering
-\includegraphics[scale=.9]{Figures/LPdiagram.pdf}
+\includegraphics[scale=.7]{Figures/LPdiagram.pdf}
 \caption{LP diagram, with example lifelines. Lifeline \textbf{A} starts with a birth (solid circle) in 1836, and ends with a death (crossed circle) in 1849. Lifeline \textbf{B} starts with a birth in 1940, and ends with a death in 2023. The ordinate position L is equal to the length of each life.}
 \label{fig:lpd}
 \end{figure}
@@ -372,13 +372,19 @@ Shorter lives (lower L) reveal the rhythms of mortality, adding a peculiar relie
 
 The inverted step pattern on the right edge of this surface betrays some of the peculiarities of data collection for this source. Death information comes from burial records, which had some age constraints in data collection, depending on the period: For occurrence years 1800 to 1825 only deaths in ages 50 and greater were collected. For the years 1826 to 1850, only deaths in ages 75 and greater were collected. Exceptions to this block edge structure owe to the use of multiple potential sources for death dates. Since lifelines accrue to the LP surface only after deaths occur, the right-side region of Fig.~\ref{fig:lpq} is in a sense incomplete: further increments will happen as death data are added to the series. This kind of structural missingness is less the case for shorter lives, which accrue quickly to the surface due to their very shortness.
 
+\FloatBarrier
 \subsection*{TC: Time-to-death and Cohort}
 
-The time-to-death T distribution of a closed birth cohort C reveals its life table. Conversely, the distribution of birth cohorts of people of a given thanatological age reveals mortality history and inequalities in survival. 
+The time-to-death T distribution of a closed birth cohort C reveals its life table. Fig.~\ref{fig:tcd} shows an example TC diagram, where C is in abscissa and T is the ordinate variable. A lifeline on the CT plane is drawn as a vertical segment extending downward from birth until death on the bottom axis. For example, lifeline \texbf{A} represents an individual born in 1624 and dying at age 20 in 1644. In an aggregate of population exposure, this lifeline contributes 1 to the count in each time step descending from 20 to 0 --- the entire countdown timeline. Since each member of a birth cohort eventually comes to die, the coordinate $T = 0$ is maximally heterogeneous with respect to any of the other demographic time measures (A,L,P,D), and lifeline overlap decreases in higher T.
 
-[placeholder for CT diagram]
+\begin{figure}
+\centering
+\includegraphics[scale=.6]{Figures/TCdiagram.pdf}
+\caption{TC diagram, with example lifelines. Lifeline \textbf{A} is from the 1624 birth cohort, and starts with a birth (solid circle) with 20 remaining years of life, and ends with a death (crossed circle) on the bottom axis (year 1644). Lifeline \textbf{B} is from the 1638 birth cohort, starting with 94 remaining years of life at birth, and ending with death in 1732.}
+\label{fig:tcd}
+\end{figure}
 
-A lifeline on the CT plane extends from 0 upward until the age of death. Ergo, someone born in 1700 dying at age 80 contributes 1 to the count in each time step descending from 80 to 0, the entire countdown. T = 0 is maximally heterogenous with respect to A (or L or D or P), and lifeline overlap decreases in higher T (long-lived people while they're young, i.e. in years closer to C itself). Here's that tabulation of this same data (also logged):
+Fig.~\ref{fig:tcq} shows a TC tabulation of the Quebec population structure. A few features of this surface stand out to the eye. First, as a cohort ages, vertical strips are completed upwards. Ergo, the lower regions of the surface are essentially complete, and the slanted step structure on the right edge of the surface corresponds to the block-step pattern of the LP surface in Fig~\ref{fig:lpq}. Second, the relatively sparse earlier cohorts are visible as vertical strips. This pattern is due to left-censoring on the moment of migration. As the series progresses rightward the cohort experience becomes completely described in the closed population renewal, making the series smoother. In general, we see the population grow as birth year advances. If one were to normalize cohort size to something constant then the surface would closely resemble an AC Lexis surface of survivorship.
 
 \begin{figure}
 \includegraphics[scale=.9]{Figures/QuebecTC.pdf}
@@ -386,13 +392,7 @@ A lifeline on the CT plane extends from 0 upward until the age of death. Ergo, s
 \label{fig:tcq}
 \end{figure}
 
-The first thing to pop out at me are birth dearths for particular years, possibly the same years that were the right edges of mortality shocks in the LP surface. Also a wider boom or two, which might just be natural growth. Here each vertical strip monotonically decreases as we go up to higher thanatological ages. I agree these are the stationary populations belonging to each birth cohort, each with a radix equal to the actual birth cohort size, so this is a bit more straightforward to wrap one's mind around than LP.
-
-It seems that the upper envelope (that is, the thanatological
-age at which the lifelines terminate, as a function of cohort) is rising with increasing cohort, reflecting improvements in cohort life expectancy.  These improvements are visible also in contour lines that are lower than the upper envelope.  You suggested that growth happens in the contours mainly because the population was growing exponentially. If you wanted to remove the effect of population growth, you could plot a curve of births or a curve of population size or a curve of number of women in the population below the x axis with an inverted y axis and then normalize the counts by births or population size or number of women.  That might reveal additional patterns.  This kind of normalization by some measure of population size might also be applied to the next figure.
-
-I now detect the affects of the right-side block observation of deaths. Had burial records for younger ages been captured in this data, we would have increasing contours as we go down towards the x axis on the right side. Here we just get the tips of the oldest deaths, each having needed to pass through young ages first, so they trace down to age 0.
-
+\FloatBarrier
 \subsection*{AD}
 
 For a given age A, the distribution of the death cohort D of individuals gives the conditional life table, conditional on reaching the given age A, and hence gives, for example, the remaining life expectancy and the variability of remaining life, among other summaries of the
@@ -407,6 +407,7 @@ In the AD plane, we have the same sort of vertical overlap. Just as everyone exp
 
 We see here the same high density in death year 1705 that we detected in the LP plane, so maybe it is not a data artifact. Whether there are also high densities of deaths in the other years we identified in the LP plane is not so clear to me; perhaps yes. There appear to be little white rectangles between 1760 and 1800 at ages zero through perhaps 3 or 4. Every lifeline must extend to age zero, so something is wrong here, I think. Again we see the upper envelope increasing with the year of death and rising contour lines.
 
+\FloatBarrier
 \section*{Independent time surfaces as cross-sections}
 Here use example of HRS prevalence surfaces produced at novel \emph{cut} angles. I'm thinking maybe small multiples, since each would be a fly-through of cross sections in fixed intervals. There would be 3 independent fly-throughs, and 4 Lexis-like fly throughs. These would be  like Fig.~(7) of \cite{riffe2017demographictime}, which is a fly-though at the TAL viewing angle. So, maybe each fly-through is a column and each perspective is a row? Maybe 10-year jumps in columns to imply 3-4 columns? Total? For example, each TAL slice in that Fig 7 is held for a fixed C. It would have been possible to hold P or D fixed instead, but I guess the actually slices would be identical, just the labels would change. Just need to be clear about it when labelling said panel figure.
 

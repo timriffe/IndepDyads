@@ -395,23 +395,21 @@ Fig.~\ref{fig:tcq} shows a TC tabulation of the Quebec population structure. A f
 \FloatBarrier
 \subsection*{AD}
 
+Following our convention, we draw an AD diagram with year of death D in abscissa and age A in the ordinate axis. Lifelines in the AD diagram start at age 0 on the bottom axis, and rise vertically until the age at death, always within the same death cohort D. The AD diagram is therefore the reverse of the TC diagram: Fig.~ref{fig:add} uses the same lifelines as Fig.~\ref{fig:tcd}. Observe that the lifeline \textbf{A} starts at age 0 and rises until death at age 20 in 1644 (D). D is constant for an individual in this diagram. In the TC diagram the same line was drawn 20 years earlier in the year of birth, and life descends rather than rises. 
 \begin{figure}
 \centering
 \includegraphics[scale=.6]{Figures/ADdiagram.pdf}
 \caption{AD diagram, with example lifelines (same as in previous diagrams). Lifeline \textbf{A} is destined to die in 1644, starting with a birth (solid circle) at age 0, and ending with a death (crossed circle) on at age 20. Lifeline \textbf{B} is destine to die in 1732, starting at age 0 and rising to a death at age 94 in 1732.}
-\label{fig:tcd}
+\label{fig:add}
 \end{figure}
-For a given age A, the distribution of the death cohort D of individuals gives the conditional life table, conditional on reaching the given age A, and hence gives, for example, the remaining life expectancy and the variability of remaining life, among other summaries of the
-conditional life table. Conversely, for a given death cohort D, the distribution of age A of individuals specifies the distribution of their birth cohorts and life lengths.
+
+In a population aggregate, exposure accrues as in the other diagram settings: lifelines contribute 1 year to exposure in each year over the lifecourse. There is no direct way to back a lifetable out of an AD population structure unless the population happens to be in stationary renewal \citep{villavicencio2016symmetries}, and in this strict case the TC surface would appear identical to the AD surface. Fig.~\ref{fig:adq} shows an AD tabulation of the same Qu\'{e}bec data. Whereas vertical striation in the TC tabulation of Fig.~\ref{fig:tcq} was primarily due to birth cohort size, in Fig.~\ref{fig:adq} it owes to mortality shocks. Dark vertical lines in this surface correspond to the right edge of the \emph{mortality triangles} of the LP surface. Light vertical strips might be due to stochasticity and sparseness in early years, due to under-coverage or under-registration of deaths in particular years, or they could be due to selection following a large mortality shocks \citep{guillot2008tempo}. The surface has a hard right edge because the source data collection ceases around 1850, but recall from the LP surface that different age ranges were collected until different final years. Since deaths for the years 1826 to 1850 were only collected for ages 75+, the AD surface is flat in ages 0 to 74 for these same years. Likewise the preceding quarter century will be flat for age 0 to 49. The AD surface of Fig.~\ref{fig:adq} is therefore incomplete in the area corresponding to the white space below the stepped right edge of Fig.~\ref{fig:lpq}.
 
 \begin{figure}
 \includegraphics[scale=.9]{Figures/QuebecAD.pdf}
 \caption{Population structure by age and year of death.}
 \label{fig:adq}
 \end{figure}
-In the AD plane, we have the same sort of vertical overlap. Just as everyone experiences T = 0, everyone is also included in A = 0 here. If this were a stationary population then a vertical strip here would be equal to one from the CT plane, but we have lots of non-stationary things happening. Vertical striation here is due to mortality shocks in particular years, and these are strictly positive. Anything dearthy-looking is either due to a 'harvest' or data collection oddities. At least I've never heard of a survival shock. So, to repeat, an individual born in 1700 destined to die at age 80 is located at 1780 in the x axes, and ages from the bottom up. Ergo, the bottom of the surface is young people, as we're used to, but they come from different birth cohorts. As with CT, the population is maximally mixed with respect to C (or L or P or T) at A = 0. An 80 year old and an infant dying in 1780 both contribute to the count at age 0 in 1780.
-
-We see here the same high density in death year 1705 that we detected in the LP plane, so maybe it is not a data artifact. Whether there are also high densities of deaths in the other years we identified in the LP plane is not so clear to me; perhaps yes. There appear to be little white rectangles between 1760 and 1800 at ages zero through perhaps 3 or 4. Every lifeline must extend to age zero, so something is wrong here, I think. Again we see the upper envelope increasing with the year of death and rising contour lines.
 
 \FloatBarrier
 \section*{Independent time surfaces as cross-sections}

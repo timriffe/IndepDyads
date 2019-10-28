@@ -7,7 +7,7 @@
 # containing 3d arrays for 78 variables. (age,ttd,single-year cohorts), sexes separate.
 # the object created at the end is called boot.results.list, saving out to ResultsP.Rdata.
 # ------------------
-
+library(parallel)
 # ------------------------
 # 1) set parameters
 nboot        <- 999    # ? how many should we do? 999?
@@ -17,31 +17,13 @@ make.figs    <- TRUE     # shall we make the summary historgrams?
 # 2) set working directory: you'll need to modify the working dir. Possibly by generalizing the below
 # code or else commenting it out altogether and setting manually. Up to you
 
-# for TR computers...otherwise you need to set wd yourself
-
-# ------------------------
-if (system("hostname",intern=TRUE) %in% c("triffe-N80Vm","tim-ThinkPad-L440")){
-	# if I'm on the laptop
-	setwd("/home/tim/git/HLETTD")
-	Cores <- 1 # laptop overheats...
-	if (system("hostname",intern=TRUE) %in% c("tim-ThinkPad-L440")){
-		Cores <- 4 # not used
-	}
-} else {
-	if (system("hostname",intern=TRUE) == "PC-403478"){
-		# on MPIDR PC
-		setwd("U://git//HLETTD")
-		Cores <- detectCores() # not used
-	} 
-}
-
-Cores <- 32 # (you can also set this manually, override the above)
+Cores <- detectCores()-1 # (you can also set this manually, override the above)
 
 # 3) last thing to check:
 # load in data, either change this path (commenting this one out so I keep it)
 # or else make sure Data_long.Rdata is in a folder called Data inside the working directory...
 #Dat        <- local(get(load("Data/Data_long.Rdata")))
-Dat        <- local(get(load("Data/Data_longP.Rdata")))
+Dat        <- readRDS(here::here("IndepDyads","Data","RAND_2016v1_long.rds"))
 
 # the rest should work fine without further ado. Two figures will also be created 
 # in the working directory. These can be examined or thrown out.
@@ -72,7 +54,7 @@ library(lattice)
 # avoid having to source and set another path.
 
 # ------------------------
-source("R/2a_apct.boot.R")
+source(here::here("IndepDyads","R","HRS","2a_apct.boot.R"))
 
 # no ages under 65
 #oops age is in months!
@@ -94,7 +76,7 @@ Dat        <- Dat[Dat$ta >= 0,]
 # even tho most neg are very close to zero
 
 # TR: I think this list is already solidified, but just in case.
-varnames <- local(get(load("Data/varnames_fit.Rdata"))) 
+varnames <- readRDS(here::here("IndepDyads","Data","varnames_fit.rds"))
 
 # -----------------------
 # this is the slow part!
@@ -124,7 +106,7 @@ if (do.this){
 }
 
 # Maarten: change path if necessary
-save(boot.results.list, file = "Data/resultsP.rdata")
+saveRDS(boot.results.list, file = here::here("IndepDyads","Data","RAND_2016v1_APCTresults.rds"))
 
 
 

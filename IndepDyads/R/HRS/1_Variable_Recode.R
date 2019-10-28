@@ -580,7 +580,7 @@ Dat$tafloor3 <- Dat$tafloor - Dat$tafloor %% 3
 
 #----------------------------------------------
 # save out, so this doesn't need to be re-run every time
-saveRDS(Dat,file = here::here("IndepDyads","Data","Data_longP.Rdata"))
+saveRDS(Dat,file = here::here("IndepDyads","Data","RAND_2016v1_long.rds"))
 
 #graphics.off()
 
@@ -591,8 +591,8 @@ saveRDS(Dat,file = here::here("IndepDyads","Data","Data_longP.Rdata"))
 #lapply(Dat[varnames_check],unique)
 # how many NAs per variable?
 #varnames_check[!varnames_check%in%colnames(Dat)]
-#NAs <- lapply(Dat[varnames_check],function(x){
-#			sum(is.na(x))
-#		})
+# NAs <- lapply(Dat[varnames],function(x){
+# 			sum(is.na(x))
+# 		})
 #sort(unlist(NAs) / nrow(Dat))
 # end

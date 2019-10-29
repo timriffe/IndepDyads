@@ -84,6 +84,19 @@ varnames <- readRDS(here::here("IndepDyads","Data","varnames_fit.rds"))
 # TR: this is toggled at the head of the script.
 # just to make sure resources not too tied up
 if (do.this){
+	
+	meltSEX <- function(SEX){
+		A         <- melt(SEX$Surf, varnames = c("T","A","C"), value.name = "pi")
+		A$Sex     <- SEX$sex
+		A$varname <- SEX$varname
+		A
+	}
+	
+	meltVAR <- function(X){
+		rbind(meltSEX(X$Male),
+			  meltSEX(X$Female))
+	}
+	
 	boot.results.list <- mclapply(varnames, function(varname, Dat, nboot){
 				fem 	<- apct.boot.wrapper(
 							Dat[Dat$sex == "f", ], 
@@ -103,10 +116,15 @@ if (do.this){
 			}, Dat = Dat,  
 			   nboot = nboot,    # nboot is set at the head of the script.
 			   mc.cores = Cores)   # ncores is set just above here
+	names(boot.results.list) <- varnames
+	
+	boot.results.long <- do.call("rbind", lapply(boot.results.list, meltVAR))
+	boot.results.long <- subset(boot.results.long,!is.na(pi))
+	
+	# Maarten: change path if necessary
+	saveRDS(boot.results.long, file = here::here("IndepDyads","Data","RAND_2016v1_APCTresults.rds"))
+	
 }
 
-# Maarten: change path if necessary
-saveRDS(boot.results.list, file = here::here("IndepDyads","Data","RAND_2016v1_APCTresults.rds"))
 
-
-
+dim(boot.results.long)

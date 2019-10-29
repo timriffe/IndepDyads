@@ -595,4 +595,7 @@ saveRDS(Dat,file = here::here("IndepDyads","Data","RAND_2016v1_long.rds"))
 # 			sum(is.na(x))
 # 		})
 #sort(unlist(NAs) / nrow(Dat))
+
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() 
 # end

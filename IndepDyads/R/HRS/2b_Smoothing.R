@@ -126,5 +126,6 @@ if (do.this){
 	
 }
 
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() 
 
-dim(boot.results.long)

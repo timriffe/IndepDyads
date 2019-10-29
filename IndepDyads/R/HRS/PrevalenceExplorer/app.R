@@ -20,8 +20,8 @@ Dat <- Dat %>%
 # choices
 varnames <- readRDS(here::here("IndepDyads","Data","varnames_fit.rds"))
 names(varnames) <- varnames
-sexes    <- c("f","m")
-names(sexes) <- c("Women", "Men")
+sexes           <- c("f","m")
+names(sexes)    <- c("Women", "Men")
 
 
 # this function does both data filter and plot.

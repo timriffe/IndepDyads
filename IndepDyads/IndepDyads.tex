@@ -218,10 +218,9 @@
 \parttitle{Background} 
 The demographic time identity consists in a linear relationship between all pairs of six fundamental time measures: age, period, cohort, time to death, length of life, and time of death. Certain subsets of time measures in this and other higher order identities consist in time measures that are independent of one another.
 \parttitle{Objective} 
-We aim to describe the relationship between
-independent time measures and the identities within which they are nested, with special attention to the demographic time identity and its three independent time dyads. We also aim to determine whether data structured on such time dyads might be useful in demographic research.
+We aim to describe the relationship between independent time measures and the identities within which they are nested, with special attention to the demographic time identity and its three independent time dyads. We also aim to determine whether data structured on such time dyads might be useful in demographic research.
 \parttitle{Data and Methods} 
-We illustrate concepts visually based on data from the Colonial Qu\'{e}bec Population Register and from the US Health and Retirement study.
+We illustrate concepts visually based on data from the BALSAC register of vital events in Quebec and from the US Health and Retirement study.
 \parttitle{Results} 
 We show that a Cartesian mapping of independent time dyads forms a redundant mapping of the same demographic timespace. These add three apparently novel demographic perspectives to four previously described Lexis-like perspectives, for a total of seven proposed standard perspectives. 
 \parttitle{Conclusions} 
@@ -331,17 +330,17 @@ Imagine now the 3d projection of the graph from Fig.~\ref{fig:tet}, a regular te
 Given a 3d volume of data structured by the demographic time identity, a cross-section orthogonal to a magenta line from Fig.~\ref{fig:indepviewaxes} is an independent plane. There is no reason not to do this for outcome measures, for example disease prevalence, in search of meaningful patterns. Further, when \emph{slicing} through such a complex timespace, we are agnostic about cut angles in general, but \emph{snapping} to axes defined on the basis of unit time measures leads to easier interpretation.
 
 \section*{Data}
-We illustrate concepts using two data sources: the \emph{le registre de la population du Qu\'{e}bec ancien} (RPQA) \citep{desjardins1998}, and RAND version P of the United States Health and Retirement Study (HRS) \citep{HRS, RAND}. The RPQA data are used to illustrate independent time surfaces of population structure, whereas the HRS data are used to illustrate how independent time perspectives can be used to take cross-sections of phenomena with multiple time dimensions.
+We illustrate concepts using two data sources: the \emph{le registre de la population du Qu\'{e}bec ancien} (BALSAC) \citep{desjardins1998}, and RAND version 2016v1 of the United States Health and Retirement Study (HRS) \citep{HRS, RAND}. The RPQA data are used to illustrate independent time surfaces of population structure, whereas the HRS data are used to illustrate how independent time perspectives can be used to take cross-sections of phenomena with multiple time dimensions.
 
-\subsection*{RPQA}
-[Provide a minimal description of RPQA data here.]
+\subsection*{BALSAC}
+[Provide a minimal description of BALSAC data here.]
 
 \subsection*{HRS}
-We use US Health and Retirement Study data to estimate how the prevalence of X varies over age A, time-to-death T, and year of birth C. Prevalence is defined as the average value of the outcome in each combination of A, T, and C. We estimate it using logistic regression, where natural splines over A, T, and C are covariates. The procedure takes account of the sampling structure of the HRS, and further details can be found in \citet{riffe2017hle}. Since the edges A, T, C in Fig.~\ref{fig:tet} are both connected and touch all four vertices in the graph, our smoothed prevalence fills the 3d space defined by the demographic time identity. This lets us explore the space in a structured way using cross-sections.
+We use US Health and Retirement Study data to estimate how the prevalence of X varies over age A, time-to-death T, and year of birth C. Prevalence is defined as the average value of the outcome in each combination of A, T, and C. We estimate it using logistic regression, where natural splines over A, T, and C are covariates. The procedure takes account of the sampling structure of the HRS, and further details can be found in \citet{riffe2017hle}. Since the edges A, T, C in Fig.~\ref{fig:tet} are both connected and touch all four vertices in the graph, our smoothed prevalence fills the 3d space defined by the demographic time identity. Prevalence estimates are for exact time points, such that we can define the remaining demographic time variables directly as follows: $P = C + A$; $D = P + T$; $L = A + T$. This lets us explore the space in a structured way using cross-sections.
 
 \subsection*{Availability of data and materials}
-Both the RPQA and RAND HRS are available free of charge, and both require registration, and for this reason we cannot openly share them in a repository. However, we give detailed instructions for requesting the exact source data used in this paper are available in an OSF repository. We also include intermediate aggregate data objects. This repository also contains annotated R code to reproduce the intermediate data objects, and all figures and calculations from the manuscript.
-The following url lead to an anonymized version of the repository, to facilitate blind review:
+Both the BALSAC and RAND HRS are available free of charge, and both require registration. For this reason we cannot openly share them in a repository. However, we give detailed instructions for requesting the exact source data used in this paper are available in an OSF repository. We also include intermediate aggregate data objects. This repository also contains annotated R code to reproduce the intermediate data objects, and all figures and calculations from the manuscript.
+The following url leads to an anonymized version of the repository, to facilitate blind review:
 \url{https://url/to/anonymous/osf/repository/forthcoming}
 
 \section*{Independent time surfaces of population structure}
@@ -375,7 +374,7 @@ The inverted step pattern on the right edge of this surface betrays some of the 
 \FloatBarrier
 \subsection*{TC: Time-to-death and Cohort}
 
-The time-to-death T distribution of an extinct and closed birth cohort C (defined as a birth cohort all members of which have died) reveals its life table. Fig.~\ref{fig:tcd} shows an example of a TC diagram, where C is in abscissa and T is the ordinate variable. A lifeline on the CT plane is drawn as a vertical segment extending downward from birth until death on the bottom axis. For example, lifeline \texbf{A} represents an individual born in 1624 and dying at age 20 in 1644. In an aggregate of population exposure, this lifeline contributes 1 to the count in each time step descending from 20 to 0 --- the entire countdown timeline. Since each member of a birth cohort eventually comes to die, the coordinate $T = 0$ is maximally heterogeneous with respect to any of the other demographic time measures (A,L,P,D), and lifeline overlap decreases in higher T.
+The time-to-death T distribution of an extinct and closed birth cohort C (defined as a birth cohort all members of which have died) reveals its life table. Fig.~\ref{fig:tcd} shows an example of a TC diagram, where C is in abscissa and T is the ordinate variable. A lifeline on the CT plane is drawn as a vertical segment extending downward from birth until death on the bottom axis. For example, lifeline \textbf{A} represents an individual born in 1624 and dying at age 20 in 1644. In an aggregate of population exposure, this lifeline contributes 1 to the count in each time step descending from 20 to 0 --- the entire countdown timeline. Since each member of a birth cohort eventually comes to die, the coordinate $T = 0$ is maximally heterogeneous with respect to any of the other demographic time measures (A,L,P,D), and lifeline overlap decreases in higher T.
 
 \begin{figure}
 \centering
@@ -393,7 +392,7 @@ Fig.~\ref{fig:tcq} shows a TC tabulation of the Quebec population structure. A f
 \end{figure}
 
 \FloatBarrier
-\subsection*{AD}
+\subsection*{AD: Age and year of death}
 
 Following our convention, we draw an AD diagram with year of death D in abscissa and age A in the ordinate axis. Lifelines in the AD diagram start at age 0 on the bottom axis, and rise vertically until the age at death, always within the same death cohort D. The AD diagram is therefore the reverse of the TC diagram: Fig.~ref{fig:add} uses the same lifelines as Fig.~\ref{fig:tcd}. Observe that the lifeline \textbf{A} starts at age 0 and rises until death at age 20 in 1644 (D). D is constant for an individual in this diagram. In the TC diagram the same line was drawn 20 years earlier in the year of birth, and life descends rather than rises. 
 \begin{figure}

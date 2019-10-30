@@ -24,26 +24,6 @@ sexes           <- c("f","m")
 names(sexes)    <- c("Women", "Men")
 
 
-# this function does both data filter and plot.
-# Should these be separate
-sliceAPCTDL <- function(data, 
-                        .varname = "adl3", 
-                        .Sex = "m",
-                        abcissae = C,
-                        ordinate = TT,
-                        slider = P,
-                        slider_value = 1995){
-    data %>% 
-        filter({{slider}} == slider_value,
-               varname == .varname,
-               Sex == .Sex) %>% 
-        ggplot(mapping = aes(x = {{abcissae}}, y = {{ordinate}}, fill = pi, z = pi)) +
-        geom_tile() +
-        coord_equal() +
-        scale_fill_continuous_sequential(
-            palette = "Blues") + 
-        geom_contour()
-}
 # Define UI for application that draws a histogram
 ui <- fluidPage(
 
@@ -123,7 +103,7 @@ ui <- fluidPage(
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
-
+ 
     output$surf <- renderPlot({
         # generate bins based on input$bins from ui.R
         

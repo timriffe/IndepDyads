@@ -133,6 +133,7 @@ sliceAPCTDL(Dat,
 			ordinate = L,
 			slider = A,
 			slider_value = 80)
+# identical to TPD with A = 80	
 
 # slide on C
 sliceAPCTDL(Dat,
@@ -254,8 +255,38 @@ sliceAPCTDL(Dat,
 			slider_value = 1925) 
 
 # ----------------- #
-# TPD               #
+# APC               #
 # ----------------- # 
+
+# slide on D
+sliceAPCTDL(Dat,
+			.varname = "adl3",
+			.Sex = "m",
+			abcissae = P,
+			ordinate = A,
+			slider = D,
+			slider_value = 2000) 
+
+# slide on TT
+sliceAPCTDL(Dat,
+			.varname = "adl3",
+			.Sex = "m",
+			abcissae = P,
+			ordinate = A,
+			slider = TT,
+			slider_value = 0) 
+
+# slide on L
+sliceAPCTDL(Dat,
+			.varname = "adl3",
+			.Sex = "m",
+			abcissae = P,
+			ordinate = A,
+			slider = L,
+			slider_value = 80) 
+# TPD with A = 80 is a rotation of APC with L = 80
+
+
 
 # OHHHHHHHHH #
 # for indpendent plane, need a single control point...

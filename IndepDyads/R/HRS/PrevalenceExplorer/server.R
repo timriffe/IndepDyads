@@ -6,17 +6,19 @@ shinyServer(function(input, output, session){
 	# 1) set ordinate
 	observe({
 		x <- input$x
-		
+		y <- input$y
 		# Can use character(0) to remove all choices
 		if (is.null(x)){
 			x <- "0"
 		}
 		
+		if (is.null(y) | y == "0" | x == y){
 		# Can also set the label and select items
 		updateSelectInput(session, "y",
 						  label = "Select ordinate",
 						  choices = ids[ids != x]
 		)
+		}
 	},
 	priority = 6)
 	
@@ -40,7 +42,6 @@ shinyServer(function(input, output, session){
 	priority = 5)
 	
 	# set control value
-
 	# change slider range
 	observe({
 		control <- input$control
@@ -55,7 +56,13 @@ shinyServer(function(input, output, session){
 			range()
 		# Can also set the label and select items
 		
+		# if previous control value out of range
+		# due to changing the measure, then place it in
+		# the middle.
 		val <- input$control_val
+		if (val < MM[1] | val > MM[2]){
+			val <- floor(mean(MM))
+		}
 		# Control the value, min, max, and step.
 		# Step size is 2 when input value is even; 1 when value is odd.
 		updateSliderInput(session, 
@@ -81,6 +88,10 @@ shinyServer(function(input, output, session){
 					slider = input$control, # needs to not have quotes!
 					slider_value = input$control_val)
 		
-	})
+	}, width=800, height=800, res = 180)
+	
+	# get title
+	output$plot_title <- renderText(
+		paste0(input$varname, " ",input$sex,": ", input$control," = ",input$control_val))
 })
 

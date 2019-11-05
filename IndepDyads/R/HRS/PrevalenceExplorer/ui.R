@@ -1,9 +1,13 @@
-source("./aux_scripts/prepare_session.R")
-source("./aux_scripts/prepare_data.R")
 
+source(here::here("IndepDyads","R","HRS","PrevalenceExplorer","aux_scripts/prepare_session.R"))
+source(here::here("IndepDyads","R","HRS","PrevalenceExplorer","aux_scripts/prepare_data.R"))
+#options(warn = 0)
 shinyUI(
 	fluidPage(
-		
+		tags$style(type="text/css",
+				   ".shiny-output-error { visibility: hidden; }",
+				   ".shiny-output-error:before { visibility: hidden; }"
+		),
 		# Application title
 		titlePanel("HRS Prevalence Explorer"),
 		
@@ -20,12 +24,7 @@ shinyUI(
 				# 3)
 				# pick abscissa
 				selectInput("x", "abscissa:",
-							c(A = "A",
-							  P = "P",
-							  C = "C",
-							  TT = "TT",
-							  D = "D",
-							  L = "L"),
+							ids,
 							  selected = "P"),
 				
 				# 4)
@@ -35,12 +34,7 @@ shinyUI(
 				# or one [independent dyad], which means that all dyads are valid
 				# TR: should be taken care of in server
 				selectInput("y", "ordinate:",
-							c(A = "A",
-							  P = "P",
-							  C = "C",
-							  TT = "TT",
-							  D = "D",
-							  L = "L")),
+							ids),
 				
 				# 5)
 				# pick control measure (ala slice, slider)
@@ -49,12 +43,7 @@ shinyUI(
 				# getControlChoices(x,y)
 				# TR: should be dealt with already
 				selectInput("control", "control for:",
-							c(A = "A",
-							  P = "P",
-							  C = "C",
-							  TT = "TT",
-							  D = "D",
-							  L = "L")),
+							ids),
 				
 				# 6) value of the previous (slider)
 				# NOTE: min, max, and value should depend on control measure:
@@ -74,7 +63,9 @@ shinyUI(
 	
 			# Show a plot of the surface
 			mainPanel(
+				h2(textOutput("plot_title"), align = "center"),
 				plotOutput("surf")
+			
 			)
 		)
 	)

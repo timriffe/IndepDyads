@@ -4,10 +4,11 @@ library(here)
 library(tidyverse)
 library(rlang)
 library(colorspace)
-
+library(directlabels)
 # Functions needed:
 getControlChoices <- function(x,y){
 	ids <- c(A="A",P="P",C="C",TT="TT",D="D",L="L")
+	
 	if (x == "0"){
 		return(ids)
 	}
@@ -34,7 +35,7 @@ getControlChoices <- function(x,y){
 
 # this function does both data filter and plot.
 # 1) one function that does it all
-sliceAPCTDL <- function(data, 
+sliceAPCTDL <- suppressWarnings(function(data, 
 						.varname = "adl3", 
 						.Sex = "m",
 						abcissae = "C",
@@ -45,22 +46,37 @@ sliceAPCTDL <- function(data,
 	if (! slider_value >= rg[1] & slider_value <= rg[2]){
 		slider_value = floor(mean(rg))
 	}
+	
+	xrg <- data %>% pull(abcissae) %>% range()
+	yrg <- data %>% pull(ordinate) %>% range()
+	
+	
 	data %>% 
 		filter(!!sym(slider) == slider_value,
 			   varname == .varname,
 			   Sex == .Sex) %>% 
-		ggplot(mapping = aes_string(x = abcissae, 
-									y = ordinate, 
-									fill = "pi", 
-									z = "pi")) +
+		mutate(x = !!sym(abcissae)+.5,
+			   y = !!sym(ordinate)+.5) %>% 
+		ggplot(mapping = aes(x = x, 
+									y = y, 
+									fill = pi, 
+									z = pi)) +
+		#scale_x_continuous(limits = c(xrg[1],xrg[1]+35)) + 
 		geom_tile() +
+		xlim(xrg[1],xrg[1]+30) + 
+		ylim(yrg[1],yrg[1]+30) + 
 		coord_equal() +
 		scale_fill_continuous_sequential(
 			palette = "Blues"#,
 			#limits = c(0,1)
 			) + 
-		geom_contour()
-}
+		geom_contour() + 
+		geom_dl(aes(label=..level..), method="bottom.pieces", 
+				stat="contour")+
+		theme(text = element_text(size=20),
+			  legend.position = "none",
+			  panel.spacing = margin(0,0,0,0))
+})
 
 # # 2:
 # # or separate the filter operation
@@ -110,3 +126,5 @@ sliceAPCTDL <- function(data,
 # 
 # 
 # 
+
+

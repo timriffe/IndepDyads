@@ -1,4 +1,3 @@
-
 # Author: tim
 ###############################################################################
 # Instructions to download RAND HRS data.
@@ -21,16 +20,26 @@ library(foreign)
 library(stringr)
 library(here)
 library(readr)
+library(tidyverse)
 
+# substrRight <- function(x, n){
+# 	substr(x, nchar(x)-n+1, nchar(x))
+# }
+#colsRAND$HRSold[sapply(colsRAND$HRSold,substrRight, 1) == "x"]
 # read in full HRS rand data
 data.path           <- here::here("IndepDyads","Data","randhrs1992_2016v1.dta")
 temp                <- read.dta(data.path)
+# colnames(temp)[grepl(colnames(temp),pattern="imrc")]
+# head(temp[,grepl(colnames(temp),pattern="hap")])
 # column names manually grabbed by MG for PHC's script
-colsRAND            <- read_csv(here("IndepDyads","Data","namechangesHRS.csv"))
+colsRAND            <- read_csv(here::here("IndepDyads","Data","namechangesHRS.csv"))
+
+# a <- colnames(temp)
+# grep(a, pattern = "imrc", value = TRUE)
+"imrc" # CHECK
 
 vary_want           <- c("inw", colsRAND$HRSold)
-# rm bwc86
-vary_want           <- vary_want[vary_want != "bwc86"]
+
 # how many waves in present RAND version?
 
 waves               <- 1:13
@@ -95,9 +104,12 @@ rearrange_varying <- function(x){
 # get all names
 x                <- colnames(temp)
 # first let's rename inwn to rninw ... to be consistent w string processing...
+
+# TR: need to double check ordering every time
 inws             <- x[grepl(x,pattern="inw")]
 inw_new          <- paste0("r",waves,"inw")
 colnames(temp)[grepl(x,pattern="inw")] <- inw_new
+
 # get all names again...
 x                <- colnames(temp)
 
@@ -137,12 +149,16 @@ rm(temp);gc()
 # -------------------------------- #
 # let's take care of colnumn names containing other numbers. Examples include 20,40,75,86.
 # replace w names...
+# grep(colnames(wide),pattern="75\\.",value=TRUE)
 colnames(wide)   <- gsub(colnames(wide),pattern="20\\.",replacement="twenty\\.")
-colnames(wide)   <- gsub(colnames(wide),pattern="40\\.",replacement="fourty\\.")
+# colnames(wide)   <- gsub(colnames(wide),pattern="40\\.",replacement="fourty\\.")
 colnames(wide)   <- gsub(colnames(wide),pattern="75\\.",replacement="sevfiv\\.")
-colnames(wide)   <- gsub(colnames(wide),pattern="10\\.",replacement="ten\\.")
+colnames(wide)   <- gsub(colnames(wide),pattern="7\\.",replacement="sev\\.")
+# colnames(wide)   <- gsub(colnames(wide),pattern="10\\.",replacement="ten\\.")
 # now get back to business
 z                <- colnames(wide)
+
+
 varying          <- sapply(colnames(wide),varies)
 # unique root names
 roots_all        <- unique(unlist(lapply(strsplit(z[varying],split="\\."),"[[",1)))
@@ -167,7 +183,7 @@ wide_varying     <- wide_varying[,sort(colnames(wide_varying))]
 wide             <- cbind(wide_inv, wide_varying)
 # now remove those pesky 0s that were necessary for alphabetizing...
 colnames(wide)   <- gsub(colnames(wide),pattern="\\.0",replacement="\\.")
-
+# grep(colnames(wide),pattern="\\.0",value=TRUE)
 
 # -------------------------------- #
 # reshape to long                  #
@@ -194,13 +210,13 @@ long <- long[!is.na(long$wtresp), ]
 # -------------------------------- #
 # dput(colnames(long)[!colnames(long) %in% colsRAND[,2]])
 # dput(colsRAND[,2][!colsRAND[,2] %in% colnames(long) ])
-have <- c("time", "adlrten", "aimrten", "atrtwenty", "bwctwenty", "dlrctwenty", 
-		"hdlrtwenty", "himrtwenty", "htrfourty", "imrctwenty", "livsevfiv", 
-		"trfourty", "trtwenty")
-need <- c("wave", "adlr10", "aimr10", "atr20", "bwc20", "dlrc20", 
-		"hdlr20", "himr20", "htr40", "imrc20", "liv75", 
-		"tr40", "tr20")
-colnames(long)[colnames(long) %in% have] <- need
+
+long <- rename(long, 
+			   wave = time, 
+			   bwc20 = bwctwenty,
+			   tr20 = trtwenty,
+			   ser7 = sersev)
+
 
 # ----------------------------------------------------- #
 # now rename once more to legacy (ThanoEmpirical) names #
@@ -211,9 +227,10 @@ x                   <- colnames(long)
 # to values, for named selection
 xnew                <- x
 names(xnew)         <- x
-# a recode vector, based on MG's table
+# a recode vector, based on nameschangesHRS table
 recvec              <- colsRAND$HRSnew
 names(recvec)       <- colsRAND$HRSold
+
 recvec              <- recvec[names(recvec) %in% x]
 # now change names, maintaining order
 xnew[names(recvec)] <- recvec
@@ -223,5 +240,7 @@ xnew[names(recvec)] <- recvec
 colnames(long)      <- xnew
 
 # save out:
-saveRDS(long,file=here("IndepDyads","Data","RAND_2016v1_long.rds"))
-head(long)
+saveRDS(long,file=here::here("IndepDyads","Data","RAND_2016v1_long.rds"))
+
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() 

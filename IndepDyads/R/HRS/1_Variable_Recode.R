@@ -1,5 +1,5 @@
 # --------------------------------------
-# TR
+rm(list=ls(all.names = TRUE))
 # This script recodes most variables, makes some new ones.
 # This is the step after extracting from the RAND version 2016v1
 # file in H0_RAND_reshape.R
@@ -9,6 +9,7 @@
 library(here)
 library(lubridate)
 library(data.table)
+library(tidyverse)
 
 #---------------------------------------------------------
 # start utility function preamble
@@ -129,19 +130,18 @@ imputeWeights <- function(wt,intv_dt){
 #----------------------------------------------------------
 # load in long files from PHC
 Dat         <- readRDS(here::here("IndepDyads","Data","RAND_2016v1_long.rds"))
-varnames    <- readRDS(here::here("IndepDyads","Data","varnamesP.rds"))
+varnames    <- readRDS( here::here("IndepDyads","Data","varnames.rds"))
+
+# varnames[!varnames %in% colnames(Dat)]
 # remove missed interviews
 Dat         <- Dat[!is.na(Dat$intv_dt), ]
-#Dat[Dat$intv == "1.resp,alive",]
-# TR: factors not present in later revisions.
-# change all factors to character (to be later recoded in some instances)
-## Dat[sapply(Dat, is.factor)] <- lapply(Dat[sapply(Dat, is.factor)], as.character)
 
-# convert factors to character:
-factor.columns       <- unlist(lapply(Dat, is.factor))
+# change all factors to character (to be later recoded in some instances)
+factor.columns       <- sapply(Dat, is.factor)
 Dat[,factor.columns] <- apply(Dat[,factor.columns], 2, as.character)
 
 # make sex column easier to use:
+
 Dat$sex     <- ifelse(Dat$sex == "1.male","m","f")
 
 # reduce to deceased-only
@@ -165,6 +165,9 @@ Dat         <- convertDates(Dat)
 # soooo annoying ppl in institutions don't have     #
 # comparable weights.                               #
 # --------------------------------------------------#
+# TR: update: since for the bootstrap method we resample
+# using weights on first appearance, this is innocuous
+# (no one starts HRS in nursing home)
 Dat$nh_wt[is.na(Dat$nh_wt)] <- 0
 Dat$p_wt 	<- Dat$p_wt + Dat$nh_wt
 
@@ -186,6 +189,7 @@ Dat 		<- Dat[!is.na(Dat$p_wt2),]
 Dat$ta 		<- getThanoAge(Dat$intv_dt, Dat$d_dt)
 Dat$ca 		<- getChronoAge(Dat$intv_dt, Dat$b_dt)
 Dat$la_int 	<- floor(Dat$ta + Dat$ca)
+# hist(Dat$ca - (Dat$age /12) )
 # there is one individual with an NA b_dt, and NA age,
 # but thano age is known
 # --------------------------------------------------#
@@ -210,109 +214,42 @@ CIcols <- apply(Dat, 2, function(x){
 Dat         <- data.frame(Dat)
 Dat[YNcols] <- lapply(Dat[YNcols], convertYN)
 Dat[CIcols] <- lapply(Dat[CIcols], convertCI)
-#head(Dat)
 
 
 
-
-# mprob  = "pastmem" 
-# iwr, twr, dwr all created below.
-#grep("dwr",colnames(Dat))
-#--------------------------------------------------------
-# remove lt, vig, ulc, too inconsistent
-Dat$lt        <- NULL
-Dat$vig       <- NULL
-Dat$ulc       <- NULL
-Dat$lt_freq   <- NULL
-Dat$mod_freq  <- NULL
-Dat$vig_freq  <- NULL
-Dat$c86b      <- NULL # only in a couple waves
-Dat$dem       <- NULL
-Dat$alz       <- NULL
-Dat$iadl_calc <- NULL
-Dat$prob75yo  <- NULL
-Dat$nh_mo     <- NULL
-Dat$nh_yr     <- NULL
-Dat$nh_days   <- NULL
-Dat$cesd_happy   <- NULL # too few non-NA cases
-Dat$iadl_tel  <- NULL    # too few non-NA cases
-### med expenditure needs to be removed, even though it has a very clear thano pattern
-## mprobev / mprob need to go : too inconsistent
-Dat$mprob 		<- NULL
-Dat$mprobev 	<- NULL
-Dat$med_explog 	<- NULL
-Dat$med_exp 	<- NULL
-# recode medical expenditure to mid-range values:
-# --------------------------------------------------#
-# save off final names                              #
-# --------------------------------------------------#
-# varnames_check <- local(get(load("Data/varnames.Rdata")))
-# all(varnames_check %in% colnames(Dat))
-# varnames_check[!varnames_check %in% colnames(Dat)]
-# 
-# 
-# names(varnames_check)      <- varnames_check
-# varnames_check[ "adl3_"]   <- "adl3"
-# varnames_check[ "adl5_"]   <- "adl5"
-# varnames_check[ "iadl3_"]  <- "iadl3"
-# varnames_check[ "iadl5_"]  <- "iadl5"
-# varnames_check <- varnames_check[varnames_check %in% colnames(Dat)]
-# save(varnames_check, file = "Data/varnamesP.Rdata")
-
-#pdf("Figures/histograms.pdf")
-#lapply(varnames_check,function(vname,Dat){
-#			x <- Dat[[vname]]
-#			if (length(unique(x))>3){
-#				hist(x,breaks=unique(as.integer(pretty(x,n=25))),main=vname)	
-#			}
-#			},Dat=Dat)
-#dev.off()
-
-
-
-binaries <- unlist(lapply(Dat[varnames],function(x){
-			all(x[!is.na(x)] %in% c(0,1))
-		}))
-# int <- unlist(lapply(Dat[varnames],function(x){
-# 					x <- x[!is.na(x)]
-# 					all(x == as.integer(x))
-# 				}))
-is.integer(Dat$srm)
-is.integer(c(5L,NA))
-#range(Dat$hosp_nights-floor(Dat$hosp_nights),na.rm=TRUE)
-#write.csv(data.frame(Morbidity=varnames_check,
-#				binary=binaries,
-#				count = int & !binaries, 
-#				other = !int & !binaries),
-#		file = "Data/variabletypesP_untransformed.csv",row.names=FALSE)
-#save(Dat,file="Data/Praw.Rdata")
-
-# recode self reported health to binary:
-# excellent to good = 0, fair, poor = 1.
-# TR: some changes here
-Dat$srh             <- as.character(Dat$srh)
-srhrec1             <- c(0,0,0,1,1,NA)
-names(srhrec1)      <- sort(unique(Dat$srh))
-Dat$srhfairpoor  	<- srhrec1[Dat$srh]
-# poor only  = 1
-srhrec2             <- srhrec1
-srhrec2[4]          <- 0
-Dat$srhpoor  	    <- srhrec2[Dat$srh]
-
-
-Dat$srm             <- as.character(Dat$srm)
-names(srhrec1)      <- sort(unique(Dat$srm))
-Dat$srmfairpoor     <- srhrec1[Dat$srm] 
-srhrec2             <- srhrec1
-srhrec2[4]          <- 0
-Dat$srmpoor  	    <- srhrec2[Dat$srm]
-# now move to binary
-
-# same, worse, better recode:  0 betterm 0 same 1 worse
-Dat$pastmem         <- as.character(Dat$pastmem)
-pastmem             <- c(0,0,1,NA)
-names(pastmem)      <- sort(unique(Dat$pastmem))
-Dat$pastmem         <- pastmem[Dat$pastmem] 
+Dat <- Dat %>% mutate(
+	srhfairpoor = case_when(srh == "1.excellent" ~ 0L,
+							srh == "2.very good" ~ 0L,
+							srh == "3.good" ~ 0L,
+							srh == "4.fair" ~ 1L,
+							srh == "5.poor" ~ 1L,
+							is.na(srh) ~ as.integer(NA)),
+	
+	srhpoor = case_when(    srh == "1.excellent" ~ 0L,
+			   			    srh == "2.very good" ~ 0L,
+			   			    srh == "3.good" ~ 0L,
+			   				srh == "4.fair" ~ 0L,
+			   				srh == "5.poor" ~ 1L,
+			   				is.na(srh) ~ as.integer(NA)),
+	
+	srmfairpoor = case_when(srm == "1.excellent" ~ 0L,
+							srm == "2.very good" ~ 0L,
+							srm == "3.good" ~ 0L,
+							srm == "4.fair" ~ 1L,
+							srm == "5.poor" ~ 1L,
+							is.na(srm) ~ as.integer(NA)),
+	
+	srmpoor = case_when(    srm == "1.excellent" ~ 0L,
+							srm == "2.very good" ~ 0L,
+							srm == "3.good" ~ 0L,
+							srm == "4.fair" ~ 0L,
+							srm == "5.poor" ~ 1L,
+						    is.na(srm) ~ as.integer(NA)),
+	
+	pastmem = case_when(    pastmem == "3.worse" ~ 1L,
+							pastmem == "2.same" ~ 0L,
+							pastmem == "1.better" ~ 0L,
+							is.na(pastmem) ~ as.integer(NA)))
 
 # do cesd questions (1 bad, 0 good)
 cesdquestions       <- colnames(Dat)[grepl("cesd", colnames(Dat))]
@@ -320,187 +257,75 @@ cesdquestions       <- cesdquestions[cesdquestions != "cesd"]
 Dat[cesdquestions]  <- lapply(Dat[cesdquestions],convertCESD)
 
 # cesd_enjoy is flipped yet again, because 1 is 'yes I enjoyed life',
-# and we want high = bad.
-Dat$cesd_enjoy      <- 1 - Dat$cesd_enjoy
-Dat$cesd_happy      <- 1 - Dat$cesd_happy
+
 
 # ---------------------------------------------------------------
-# create a single Total Word Recall variables, twr
-#"tr20w"(waves(2-10),"tr40w" (waves1-2)
-# i.e. 1 is the worst recall, and 0 is the best recall. This
-# will operate the same as a binary var, but I don't want to make
-# it binary because I wouldn't know where to set the breakpoint.
-# plus I doubt it would affect the aggregate pattern conclusions anyway.
-# same story for vocab, total memory, delayed word recall, 
-# immediate word recall. A quasibinom will work here
-# ---------------------------------------------------------------
-Dat$tr20w                   <- 1 - Dat$tr20w / 20
-Dat$tr40w                   <- 1 - Dat$tr40w / 40
-NAind                       <- is.na(Dat$tr20w) & is.na(Dat$tr40w)
-BothInd                     <- !is.na(Dat$tr20w) & !is.na(Dat$tr40w)
-Dat$tr20w[is.na(Dat$tr20w)] <- 0
-Dat$tr40w[is.na(Dat$tr40w)] <- 0
-sum(BothInd) == 0 # (otherwise we'd need to divide these by two after adding)
-Dat$twr                     <- Dat$tr20w + Dat$tr40w
-Dat$twr[NAind]              <- NA
-#hist(Dat$twr)
+# various recodings in a mutate call
+Dat <- Dat %>% mutate(# cesd_enjoy and cesd_happy flip so that high is bad
+	                  cesd_enjoy = 1 - cesd_enjoy,
+	                  cesd_happy = 1 - cesd_happy,
+	                  # total word recall (max 20)
+	                  twr = 1 - twr / 20,
+					  # vocab: 1 worst 0 best
+					  vocab = 1 - vocab / 10,
+					  # total mental: 1 worst, 0 best  (max 15)
+					  tm = 1 - tm /15,
+					  # delayed word recall  (max 10)
+					  dwr = 1 - dwr / 10,
+					  # immediate word recall (max 10)
+					  iwr = 1 - iwr / 10,
+					  # mobility index, break at 1
+					  mob = ifelse(mob > 1, 1, 0),
+					  # large muscle difficulty index,
+					  lg_mus = ifelse(lg_mus > 1, 1, 0),
+					  # Gross motor difficulty index
+					  gross_mot = ifelse(gross_mot > 1, 1, 0),
+					  # Fine motor difficulty index
+					  fine_mot = ifelse(fine_mot > 0, 1, 0),
+					  # serial 7s hist(Dat$serial7s) # < 4
+					  serial7s = ifelse(serial7s < 4, 1, 0),
+					  # Number of chronic conditions > 2 table(Dat$cc)
+					  cc = ifelse(cc > 2, 1, 0),
+                      # Drinking days/week
+					  alc_days = ifelse(alc_days > 1, 1, 0),
+					  # alc_drinks > 0
+					  alc_drinks = ifelse(alc_drinks > 0, 1, 0),
+					  # adl 3 > 0
+					  adl3 = ifelse(adl3 > 0, 1, 0),
+					  # adl 5 cut points
+					  adl5_1 = ifelse(adl5 > 0, 1, 0),
+					  adl5_2 = ifelse(adl5 > 1, 1, 0),
+					  adl5_3 = ifelse(adl5 > 2, 1, 0),
+					  # iadl3 (any)
+					  iadl3 = ifelse(iadl3 > 0, 1, 0),
+					  # iadl 5 cut points
+					  iadl5_1 = ifelse(iadl5 > 0, 1, 0),
+					  iadl5_2 = ifelse(iadl5 > 1, 1, 0),
+					  iadl5_3 = ifelse(iadl5 > 2, 1, 0),
+					  # Depression score 2+
+					  cesd = ifelse(cesd > 1, 1, 0),
+					  # define underweight, obese, normalweight
+					  underweight =  ifelse(bmi < 18.5, 1, 0),
+					  obese =  ifelse(bmi > 30, 1, 0),
+					  normalweight = as.integer((underweight + bmi) == 0),
+					  # nursing home yes or no?
+					  nh_nights = ifelse(nh_nights > 0, 1, 0),
+					  nh_stays = ifelse(nh_stays > 0, 1, 0),
+					  # hospital night yes or no?
+					  hosp_nights = ifelse(hosp_nights > 0, 1, 0),
+					  hosp_stays = ifelse(hosp_stays > 0, 1, 0),
+					  # doc visits standardize ref period, need helper column
+					  wave3p = ifelse(wave > 2, 2, 1),
+					  doc_visits = floor(doc_visits / wave3p),
+					  doc_visits = ifelse(doc_visits > 8, 1, 0),
+					  wave3p = NULL
+)
 
-# vocab: 1 worst 0 best
-Dat$vocab <- 1 - Dat$vocab / 10
+# -----
+# TR: need refactor of varnames_fit choices
+# START HERE NEXT SITTING
+# -----
 
-# total mental: 1 worst, 0 best
-Dat$tm    <- 1 - Dat$tm / 15
-
-# delayed word recall
-Dat$dr20w                   <- 1 - Dat$dr20w / 20
-Dat$dr10w                   <- 1 - Dat$dr10w / 10
-
-NAind                       <- is.na(Dat$dr20w) & is.na(Dat$dr10w)
-BothInd                     <- !is.na(Dat$dr20w) & !is.na(Dat$dr10w)
-Dat$dr20w[is.na(Dat$dr20w)] <- 0
-Dat$dr10w[is.na(Dat$dr10w)] <- 0
-sum(BothInd) == 0 # (otherwise we'd need to divide these by two after adding)
-Dat$dwr                     <- Dat$dr20w + Dat$dr10w
-Dat$dwr[NAind]              <- NA
-
-# immediate word recall
-hist(Dat$ir10w[Dat$wave>8] )
-Dat$ir20w                   <- 1 - Dat$ir20w / 20
-Dat$ir10w                   <- 1 - Dat$ir10w / 10
-
-NAind                       <- is.na(Dat$ir20w) & is.na(Dat$ir10w)
-BothInd                     <- !is.na(Dat$ir20w) & !is.na(Dat$ir10w)
-Dat$ir20w[is.na(Dat$ir20w)] <- 0
-Dat$ir10w[is.na(Dat$ir10w)] <- 0
-sum(BothInd) == 0 # (otherwise we'd need to divide these by two after adding)
-Dat$iwr                     <- Dat$ir20w + Dat$ir10w
-Dat$iwr[NAind]              <- NA
-
-# memory problem:
-#[1] ""                                "0. no"                          
-#[3] "1. yes"                          "NA"                             
-#[5] "4. disp prev record and no cond"
-#mprob <- c(NA,0,1,0,NA)
-#colnames(Dat)
-#names(mprob) <- sort(unique(Dat$mprob))
-#Dat$mprob <- mprob[Dat$mprob]
-# vocab
-
-# ------------------------------------------------------
-# TR: now change to binary coding, using ad hoc breaks
-# scale to fit btwn 0 and 1
-#rescale <- function(var,Dat,complement = FALSE){
-#  Dat[[var]] <- Dat[[var]] / max(Dat[[var]], na.rm = TRUE)
-#  if (compelment){
-#    Dat[[var]] <- 1 - Dat[[var]]
-#  }
-#  Dat
-#}
-# ------------------------------------------------------
-
-# TR: mob through cesd all change to binary, with ad hoc breaks
-# -------------------
-# mob 
-# Dat     <- rescale("mob", Dat, FALSE)
-hist(Dat$mob) # break at > 1
-Dat$mob <- ifelse(is.na(Dat$mob), NA, ifelse(Dat$mob > 1, 1, 0) )
-
-# -------------------
-# lg_mus
-#Dat     <- rescale("lg_mus", Dat, FALSE) 
-hist(Dat$lg_mus) # break at > 1
-Dat$lg_mus <- ifelse(is.na(Dat$lg_mus), NA, ifelse(Dat$lg_mus > 1, 1, 0) )
-
-# -------------------
-# gross_mot
-#Dat     <- rescale("gross_mot", Dat, FALSE)
-hist(Dat$gross_mot) # > 1
-Dat$gross_mot <- ifelse(is.na(Dat$gross_mot), NA, ifelse(Dat$gross_mot > 1, 1, 0) )
-
-# -------------------
-# gross_mot
-#Dat     <- rescale("fine_mot", Dat, FALSE)
-hist(Dat$fine_mot) # > 0
-Dat$fine_mot <- ifelse(is.na(Dat$fine_mot), NA, ifelse(Dat$fine_mot > 0, 1, 0) )
-
-# -------------------
-# ss
-#Dat     <- rescale("ss", Dat, TRUE) # complement because more was better in original
-hist(Dat$ss) # < 4
-Dat$ss <- ifelse(is.na(Dat$ss), NA, ifelse(Dat$ss < 4, 1, 0) )
-
-# -------------------
-# cc nr chronic cond
-#Dat     <- rescale("cc", Dat, FALSE)
-hist(Dat$cc) # > 2?
-Dat$cc <- ifelse(is.na(Dat$cc), NA, ifelse(Dat$cc > 2, 1, 0) )
-
-# -------------------
-# alc_days (any)
-#Dat     <- rescale("alc_days", Dat, FALSE)
-hist(Dat$alc_days) # > 1
-Dat$alc_days <- ifelse(is.na(Dat$alc_days), NA, ifelse(Dat$alc_days > 1, 1, 0) )
-
-# -------------------
-# adl3 (any)
-#Dat     <- rescale("adl3_", Dat, FALSE)
-hist(Dat$adl3) # > 0
-Dat$adl3 <- ifelse(is.na(Dat$adl3), NA, ifelse(Dat$adl3 > 0, 1, 0) )
-
-# -------------------
-# adl5 (any)
-#Dat     <- rescale("adl5_", Dat, FALSE)
-hist(Dat$adl5) # > 0
-# TR: changed 22 Aug, 2017: 3 cut points
-Dat$adl5_1 <- ifelse(is.na(Dat$adl5), NA, ifelse(Dat$adl5 > 0, 1, 0) )
-Dat$adl5_2 <- ifelse(is.na(Dat$adl5), NA, ifelse(Dat$adl5 > 1, 1, 0) )
-Dat$adl5_3 <- ifelse(is.na(Dat$adl5), NA, ifelse(Dat$adl5 > 2, 1, 0) )
-
-# -------------------
-# iadl3 (any)
-# Dat     <- rescale("iadl3_", Dat, FALSE)
-hist(Dat$iadl3) # > 0
-Dat$iadl3 <- ifelse(is.na(Dat$iadl3), NA, ifelse(Dat$iadl3 > 0, 1, 0) )
-
-# -------------------
-# iadl5 (any)
-#Dat     <- rescale("iadl5_", Dat, FALSE)
-hist(Dat$iadl5) # > 0
-Dat$iadl5_1 <- ifelse(is.na(Dat$iadl5), NA, ifelse(Dat$iadl5 > 0, 1, 0) )
-Dat$iadl5_2 <- ifelse(is.na(Dat$iadl5), NA, ifelse(Dat$iadl5 > 1, 1, 0) )
-Dat$iadl5_3 <- ifelse(is.na(Dat$iadl5), NA, ifelse(Dat$iadl5 > 2, 1, 0) )
-# -------------------
-# cesd
-#Dat     <- rescale("cesd", Dat, FALSE)
-# TR: changed from 2 to 1, 22 Aug, 2017
-table(Dat$cesd) # > 1
-Dat$cesd <- ifelse(is.na(Dat$cesd), NA, ifelse(Dat$cesd > 1, 1, 0) )
-
-# TR: new Aug 23, 2017. var recaps
-# --- 3 dummies for bmi
-Dat$underweight   <- ifelse(is.na(Dat$bmi), NA, ifelse(Dat$bmi < 18.5, 1, 0) )
-Dat$obese         <- ifelse(is.na(Dat$bmi), NA, ifelse(Dat$bmi > 30, 1, 0) )
-Dat$normalweight  <- as.integer(!Dat$underweight & !Dat$obese)
-
-# --- nursing home yes or no?
-Dat$nh_nights     <- ifelse(Dat$nh_nights > 0, 1, 0)
-Dat$nh_stays      <- ifelse(Dat$nh_stays > 0, 1, 0)
-# found this out: should be integer...
-#Dat$hosp_nights <- floor(Dat$hosp_nights)
-# TR: 22-08-2017 change to cutoff 1 or more
-#hist(Dat$hosp_nights[Dat$hosp_nights < 20])
-Dat$hosp_nights   <- ifelse(Dat$hosp_nights > 0, 1, 0)
-Dat$hosp_stays    <- ifelse(Dat$hosp_stays > 0, 1, 0)
-
-# --- alc_drinks > 0
-Dat$alc_drinks    <- ifelse(Dat$alc_drinks > 0, 1, 0)
-
-# reference period for doc_visits switched from 12 to 24 months starting
-# w wave 3. Set to same period:
-Dat$doc_visits[Dat$wave > 2] <- Dat$doc_visits[Dat$wave > 2] / 2
-Dat$doc_visits    <- floor(Dat$doc_visits)
-# visual examination of distribution to find subjective cutpoint of 8 visits / year
-Dat$doc_visits    <- ifelse(Dat$doc_visits > 8, 1, 0)
 
 varnames_fit <- varnames
 varnames_fit <- varnames_fit[!varnames_fit %in% c("srh","srm","tr20w","tr40w","adl5","iadl5","bmi")]
@@ -599,3 +424,28 @@ saveRDS(Dat,file = here::here("IndepDyads","Data","RAND_2016v1_long.rds"))
 rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() 
 # end
+
+# -------------------------------------------------------------------------
+# Last checked 7-Nov-2019
+# varnames <- c(adl3_ = "adl3", adl5_ = "adl5", iadl3_ = "iadl3", iadl5_ = "iadl5", 
+#   cesd = "cesd", lim_work = "lim_work", srh = "srh", bmi = "bmi", 
+#   back = "back", hosp = "hosp", hosp_stays = "hosp_stays", hosp_nights = "hosp_nights", 
+#   nh = "nh", nh_stays = "nh_stays", nh_nights = "nh_nights", nh_now = "nh_now", 
+#   doc = "doc", doc_visits = "doc_visits", hhc = "hhc", meds = "meds", 
+#   surg = "surg", dent = "dent", shf = "shf", adl_walk = "adl_walk", 
+#   adl_dress = "adl_dress", adl_bath = "adl_bath", adl_eat = "adl_eat", 
+#   adl_bed = "adl_bed", adl_toilet = "adl_toilet", iadl_map = "iadl_map", 
+#   iadl_money = "iadl_money", iadl_meds = "iadl_meds", iadl_shop = "iadl_shop", 
+#   iadl_meals = "iadl_meals", mob = "mob", lg_mus = "lg_mus", gross_mot = "gross_mot", 
+#   fine_mot = "fine_mot", bp = "bp", diab = "diab", cancer = "cancer", 
+#   lung = "lung", heart = "heart", stroke = "stroke", psych = "psych", 
+#   arth = "arth", cc = "cc", alc_ev = "alc_ev", alc_days = "alc_days", 
+#   alc_drinks = "alc_drinks", smoke_ev = "smoke_ev", smoke_cur = "smoke_cur", 
+#   cesd_depr = "cesd_depr", cesd_eff = "cesd_eff", cesd_sleep = "cesd_sleep", 
+#   cesd_lone = "cesd_lone", cesd_sad = "cesd_sad", cesd_going = "cesd_going", 
+#   cesd_enjoy = "cesd_enjoy", srm = "srm", pastmem = "pastmem", 
+#   serial7s = "serial7s", serial7s = "bwc20", name_mo = "name_mo", name_dmo = "name_dmo", 
+#   name_yr = "name_yr", name_dwk = "name_dwk", name_sci = "name_sci", 
+#   name_cac = "name_cac", name_pres = "name_pres", name_vp = "name_vp", 
+#   vocab = "vocab", tm = "tm")
+# saveRDS(varnames, file = here::here("IndepDyads","Data","varnames.rds"))

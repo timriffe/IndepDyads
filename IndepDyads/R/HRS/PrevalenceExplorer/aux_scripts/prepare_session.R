@@ -55,6 +55,8 @@ sliceAPCTDL <- suppressWarnings(function(data,
 		filter(!!sym(slider) == slider_value,
 			   varname == .varname,
 			   Sex == .Sex) %>% 
+		# TR: this then gets the axis names as just x and y ...
+		# need to override below or else just modify this line
 		mutate(x = !!sym(abcissae)+.5,
 			   y = !!sym(ordinate)+.5) %>% 
 		ggplot(mapping = aes(x = x, 

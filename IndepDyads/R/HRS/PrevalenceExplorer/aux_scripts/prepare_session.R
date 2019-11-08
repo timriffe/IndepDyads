@@ -77,7 +77,8 @@ sliceAPCTDL <- suppressWarnings(function(data,
 				stat="contour")+
 		theme(text = element_text(size=20),
 			  legend.position = "none",
-			  panel.spacing = margin(0,0,0,0))
+			  panel.spacing = margin(0,0,0,0)) +
+		labs(x = abcissae, y = ordinate)
 })
 
 # # 2:

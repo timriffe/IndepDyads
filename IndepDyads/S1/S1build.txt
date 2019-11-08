@@ -1,0 +1,3 @@
+pdflatex S1
+asy S1-*.asy
+pdflatex S1

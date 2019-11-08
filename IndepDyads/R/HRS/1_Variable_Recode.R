@@ -1,3 +1,4 @@
+
 # --------------------------------------
 rm(list=ls(all.names = TRUE))
 # This script recodes most variables, makes some new ones.
@@ -307,7 +308,6 @@ Dat <- Dat %>% mutate(# cesd_enjoy and cesd_happy flip so that high is bad
 					  # define underweight, obese, normalweight
 					  underweight =  ifelse(bmi < 18.5, 1, 0),
 					  obese =  ifelse(bmi > 30, 1, 0),
-					  normalweight = as.integer((underweight + bmi) == 0),
 					  # nursing home yes or no?
 					  nh_nights = ifelse(nh_nights > 0, 1, 0),
 					  nh_stays = ifelse(nh_stays > 0, 1, 0),
@@ -321,26 +321,15 @@ Dat <- Dat %>% mutate(# cesd_enjoy and cesd_happy flip so that high is bad
 					  wave3p = NULL
 )
 
-# -----
-# TR: need refactor of varnames_fit choices
-# START HERE NEXT SITTING
-# -----
+# Everything else we estimate prevalence
+not_fit <- c("id", "cohort", "sex", "hisp", "race", "b_mo", "b_yr", "b_dt", 
+			 "d_mo", "d_yr", "d_dt", "edu_yrs", "m_edu", "f_edu", "b_pl", 
+			 "s_wt", "wave", "adl5", "age", "alz", "bmi", "iadl_calc", "div", 
+			 "reg", "dem", "iadl5", "intv", "intv_dt", "mar", "srh", "srm", 
+			 "nh_wt", "p_wt", "dead", "p_wt2", "ta", "ca", "la_int","normalweight")
 
+varnames_fit <- colnames(Dat)[!colnames(Dat)%in%not_fit]
 
-varnames_fit <- varnames
-varnames_fit <- varnames_fit[!varnames_fit %in% c("srh","srm","tr20w","tr40w","adl5","iadl5","bmi")]
-varnames_fit <- c(varnames_fit, 
-		          "srhfairpoor",
-				  "srhpoor",
-				  "srmfairpoor",
-				  "srmpoor",
-				  "twr",
-				  "adl5_1", "adl5_2", "adl5_3",
-				  "iadl5_1", "iadl5_2", "iadl5_3",
-				  "underweight",
-				  "obese",
-				  "normalweight")
-		  
 # let's just make sure this will work:
 stopifnot(all(varnames_fit %in% colnames(Dat)))	  
 # make sure all will work as prevalence:

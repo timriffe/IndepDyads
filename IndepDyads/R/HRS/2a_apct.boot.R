@@ -23,10 +23,10 @@ cutla <- function(newdata, year1 = 1992, year2 = 2011, maxl = 100){
 
 apct.boot <- function(
   data,
-  varname = "adl3_",
+  varname = "adl3",
   nboot = 250,
-  t.age = 0:12,     
-  c.age = 70:100,
+  t.age = 0:13,     
+  c.age = 70:102,
   b_yr_range = min(data$b_yr):max(data$b_yr),
   YearsFromEdge = 0,          # for optional edge diagnostics
   MagFactor = 1) {
@@ -38,12 +38,6 @@ apct.boot <- function(
   
   # the most recent wave year
   year2 <- max(as.integer(format(as.Date(data$intv_dt, format="%d/%m/%Y"),"%Y")))
-  
-  
-  # data is the HRS object, selected for dead people
-  # and whatever other data prep was required, e.g. to
-  # make vars binary if wished
-  # varname is 
   
   # this line super important 
   data            <- data[order(data$id), ]
@@ -78,10 +72,10 @@ apct.boot <- function(
   
   # reduce size of object to just required columns
   col.index.outc 	<- grep(paste0('^', varname, '$'), colnames(data))
-  col.index.id 	<- grep(paste0('^', 'id', '$'), colnames(data))
+  col.index.id 	  <- grep(paste0('^', 'id', '$'), colnames(data))
   col.index.b_yr 	<- grep(paste0('^', 'b_yr', '$'), colnames(data))
-  col.index.ta 	<- grep(paste0('^', 'ta', '$'), colnames(data))
-  col.index.ca 	<- grep(paste0('^', 'ca', '$'), colnames(data))
+  col.index.ta 	  <- grep(paste0('^', 'ta', '$'), colnames(data))
+  col.index.ca  	<- grep(paste0('^', 'ca', '$'), colnames(data))
   col.index.rscw 	<- grep(paste0('^', 'rescaleweight', '$'), colnames(data))
   colselect       <- c(col.index.outc, col.index.id, col.index.rscw, col.index.b_yr, 
                        col.index.ta, col.index.ca, col.index.rscw)
@@ -97,7 +91,7 @@ apct.boot <- function(
   dataid     <- dataid[,c("id","drawweight")]
   
   
-  # data for prediction, grid
+  # data for prediction, grid. In midpoints! Meaning
   newdata    <- expand.grid(ta = t.age+.5, 
                             ca = c.age+.5, 
                             b_yr = b_yr_range)
@@ -130,7 +124,7 @@ apct.boot <- function(
       # followed by the respective corresponding test
 	
       fit        <- glm(data.boot[, col.index] ~ 
-                          ns(b_yr, knots = seq(1902.5, 1925.5, by = 5)) +
+                          ns(b_yr, knots = seq(1902.5, 1927.5, by = 5)) +
                           ns(ta, knots = c(.5, 1, 2, 4, 7.5, 10)) +  
                           ns(ca, knots = seq(72.5, 97.5, by = 5)), 
                         data = data.boot,
@@ -195,7 +189,7 @@ apct.boot.wrapper <- function(
   Dat,
   varname = "adl3",
   sex = "f",
-  t.age = 0:12,     
+  t.age = 0:13,     
   c.age = 70:100,
   b_yr_range = min(Dat$b_yr):max(Dat$b_yr),
   nboot = 250){

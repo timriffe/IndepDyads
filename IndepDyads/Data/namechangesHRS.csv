@@ -85,22 +85,20 @@ N,HRSold,HRSnew,long
 84,going,cesd_going,Could not get going
 85,enlife,cesd_enjoy,Enjoyed life
 86,wtr_nh,nh_wt,Nursing home analysis weight
-87,alzhe,alz,Alzheimer
-88,demen,dem,Dementia
-89,slfmem,srm,Self reported memory
-90,pstmem,pastmem,Past memory
-91,imrc,iwr,Immediate word recall
-92,dlrc,dwr,Delayed word recall
-93,ser7,serial7s,Serial sevens
-94,bwc20,bwc20,Count backwards from 20
-95,mo,name_mo,Name month
-96,dy,name_dmo,Name day of month
-97,yr,name_yr,Name year
-98,dw,name_dwk,Name weekday
-99,scis,name_sci,Name scissors
-100,cact,name_cac,Name cactus
-101,pres,name_pres,Name president
-102,vp,name_vp,Name vice president
-103,vocab,vocab,Vocabulary summary score
-104,tr20,twr,Total word recall summary score
-105,mstot,tm,Mental status summary score
+87,slfmem,srm,Self reported memory
+88,pstmem,pastmem,Past memory
+89,imrc,iwr,Immediate word recall
+90,dlrc,dwr,Delayed word recall
+91,ser7,serial7s,Serial sevens
+92,bwc20,bwc20,Count backwards from 20
+93,mo,name_mo,Name month
+94,dy,name_dmo,Name day of month
+95,yr,name_yr,Name year
+96,dw,name_dwk,Name weekday
+97,scis,name_sci,Name scissors
+98,cact,name_cac,Name cactus
+99,pres,name_pres,Name president
+100,vp,name_vp,Name vice president
+101,vocab,vocab,Vocabulary summary score
+102,tr20,twr,Total word recall summary score
+103,mstot,tm,Mental status summary score

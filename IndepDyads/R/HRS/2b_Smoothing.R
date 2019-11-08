@@ -3,11 +3,20 @@
 ###############################################################################
 # Instructions: 
 # tend to steps 1-3 as appropriate, explained in situ.
-# the script will produce a single list data object
-# containing 3d arrays for 78 variables. (age,ttd,single-year cohorts), sexes separate.
-# the object created at the end is called boot.results.list, saving out to ResultsP.Rdata.
+# could take a min or two
+source(here::here("IndepDyads","R","HRS","0_RAND_reshape.R"))
+source(here::here("IndepDyads","R","HRS","1_Variable_Recode.R"))
+
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() 
+source(here::here("IndepDyads","R","HRS","2a_apct.boot.R"))
+
 # ------------------
 library(parallel)
+library(splines)
+library(data.table)
+library(reshape2)
+library(lattice)
 # ------------------------
 # 1) set parameters
 nboot        <- 999    # ? how many should we do? 999?
@@ -19,42 +28,15 @@ make.figs    <- TRUE     # shall we make the summary historgrams?
 
 Cores <- detectCores()-1 # (you can also set this manually, override the above)
 
-# 3) last thing to check:
-# load in data, either change this path (commenting this one out so I keep it)
-# or else make sure Data_long.Rdata is in a folder called Data inside the working directory...
-#Dat        <- local(get(load("Data/Data_long.Rdata")))
-Dat        <- readRDS(here::here("IndepDyads","Data","RAND_2016v1_long.rds"))
-
-# the rest should work fine without further ado. Two figures will also be created 
-# in the working directory. These can be examined or thrown out.
-
-# ------------------------
-# get packages loaded
-# ------------------------
-# gives mclapply()-like functionality in Windows. 
-# I usually would use parallel package, but that won't cut it on Windows
-if (.Platform$OS.type == "windows"){
-	# does Hydra have devools? I hope so.
-	if (!"parallelsugar" %in% rownames(installed.packages())){
-		library(devtools)
-		install_github('nathanvan/parallelsugar')
-	}
-	library(parallelsugar)
-} else {
-	# this is for all else (Tim)
-	library(parallel)
-}
-
-library(splines)
-library(data.table)
-library(reshape2)
-library(lattice)
 # ------------------------
 # the following functions are defined here to 
 # avoid having to source and set another path.
 
-# ------------------------
-source(here::here("IndepDyads","R","HRS","2a_apct.boot.R"))
+
+# read in the data
+Dat        <- readRDS(here::here("IndepDyads","Data","RAND_2016v1_long.rds"))
+varnames   <- readRDS(here::here("IndepDyads","Data","varnames_fit.rds"))
+
 
 # no ages under 65
 #oops age is in months!
@@ -75,8 +57,6 @@ Dat$la_int <- floor(Dat$ta + Dat$ca)
 Dat        <- Dat[Dat$ta >= 0,]
 # even tho most neg are very close to zero
 
-# TR: I think this list is already solidified, but just in case.
-varnames <- readRDS(here::here("IndepDyads","Data","varnames_fit.rds"))
 
 # -----------------------
 # this is the slow part!
@@ -86,7 +66,7 @@ varnames <- readRDS(here::here("IndepDyads","Data","varnames_fit.rds"))
 if (do.this){
 	
 	meltSEX <- function(SEX){
-		A         <- melt(SEX$Surf, varnames = c("T","A","C"), value.name = "pi")
+		A         <- reshape2::melt(SEX$Surf, varnames = c("T","A","C"), value.name = "pi")
 		A$Sex     <- SEX$sex
 		A$varname <- SEX$varname
 		A
@@ -108,7 +88,8 @@ if (do.this){
 							varname = varname, 
 							sex = "m", 
 							nboot = nboot)
-				
+				# to track progress
+				cat(varname,"\n")
 			
                 out 	<- list(Female=fem, Male = mal)
 				out$var <- varname

@@ -29,31 +29,20 @@ shinyUI(
 				
 				# 4)
 				# pick ordinate
-				# NOTE: remove abscicca from choice set
-				# NOTE: each choice of abscissa can be part of (2 triad identities)
-				# or one [independent dyad], which means that all dyads are valid
-				# TR: should be taken care of in server
+				# choices determined in:
+				# getControlChoices(x,y)
 				selectInput("y", "ordinate:",
 							ids),
 				
 				# 5)
-				# pick control measure (ala slice, slider)
-				# NOTE: choice set should depend on abscissa and ordinate
-				# helper function defined above needs previous two inputs!
+				# pick control measure (aka slice, slider)
 				# getControlChoices(x,y)
 				# TR: should be dealt with already
 				selectInput("control", "control for:",
 							ids),
 				
 				# 6) value of the previous (slider)
-				# NOTE: min, max, and value should depend on control measure:
-				# ideally these ranges would be detected from the subset Dat
-				# A: 70,110,80
-				# P: 1993,2015,2000
-				# C: 1900,1935,1920
-				# T: 0,12,5
-				# D: 1993,2015,2000
-				# L: 70,110,80
+				# These ranges are detected from the subset Dat
 				sliderInput("control_val",
 							"control value:",
 							min = 0,

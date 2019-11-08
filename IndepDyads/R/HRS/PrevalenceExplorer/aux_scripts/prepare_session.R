@@ -6,6 +6,12 @@ library(rlang)
 library(colorspace)
 library(directlabels)
 # Functions needed:
+# NOTE: this function gives valid results, but the independent plane
+# controls ARE NOT the orthogonal controls, which still need to be
+# formalized. The ID controls should be parallel to the bimedian of
+# the tetrahedral representation. Just need to get the arithmetic down,
+# but it's sure to be a linear combination of +1 and -1 coefs on two 
+# or four of the remaining measures. Or something like that.
 getControlChoices <- function(x,y){
 	ids <- c(A="A",P="P",C="C",`T`="T",D="D",L="L")
 	

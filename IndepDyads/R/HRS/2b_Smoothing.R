@@ -19,7 +19,7 @@ library(reshape2)
 library(lattice)
 # ------------------------
 # 1) set parameters
-nboot        <- 999    # ? how many should we do? 999?
+nboot        <- 10    # ? how many should we do? 999?
 do.this      <- TRUE    # change this to TRUE
 make.figs    <- TRUE     # shall we make the summary historgrams?
 

@@ -7,7 +7,7 @@ library(colorspace)
 library(directlabels)
 # Functions needed:
 getControlChoices <- function(x,y){
-	ids <- c(A="A",P="P",C="C",TT="TT",D="D",L="L")
+	ids <- c(A="A",P="P",C="C",`T`="T",D="D",L="L")
 	
 	if (x == "0"){
 		return(ids)
@@ -16,12 +16,12 @@ getControlChoices <- function(x,y){
 		return(ids[!ids == x])
 	}
 	
-	TM <- matrix(c(NA,"C","P","L","I","TT",
-				   "C",NA,"A","D","TT","I",
+	TM <- matrix(c(NA,"C","P","L","I","T",
+				   "C",NA,"A","D","T","I",
 				   "P","A",NA,"I","L","D",
 				   "L","D","I",NA,"P","A",
-				   "I","TT","L","P",NA,"C",
-				   "TT","I","D","A","C",NA),6,
+				   "I","T","L","P",NA,"C",
+				   "T","I","D","A","C",NA),6,
 				 dimnames = list(Ab = ids,
 				 				Or = ids))
 	
@@ -39,7 +39,7 @@ sliceAPCTDL <- suppressWarnings(function(data,
 						.varname = "adl3", 
 						.Sex = "m",
 						abcissae = "C",
-						ordinate = "TT",
+						ordinate = "T",
 						slider = "P",
 						slider_value = 1995){
 	rg <- data %>% pull(slider) %>% range()
@@ -49,7 +49,8 @@ sliceAPCTDL <- suppressWarnings(function(data,
 	
 	xrg <- data %>% pull(abcissae) %>% range()
 	yrg <- data %>% pull(ordinate) %>% range()
-	
+    zrg <- data %>% filter(varname == .varname) %>% pull(pi) %>% range()
+	binwidth <- diff(pretty(zrg, n = 12))[1]
 	
 	data %>% 
 		filter(!!sym(slider) == slider_value,
@@ -60,9 +61,9 @@ sliceAPCTDL <- suppressWarnings(function(data,
 		mutate(x = !!sym(abcissae)+.5,
 			   y = !!sym(ordinate)+.5) %>% 
 		ggplot(mapping = aes(x = x, 
-									y = y, 
-									fill = pi, 
-									z = pi)) +
+							 y = y, 
+							 fill = pi, 
+							 z = pi)) +
 		#scale_x_continuous(limits = c(xrg[1],xrg[1]+35)) + 
 		geom_tile() +
 		xlim(xrg[1],xrg[1]+30) + 
@@ -72,9 +73,10 @@ sliceAPCTDL <- suppressWarnings(function(data,
 			palette = "Blues"#,
 			#limits = c(0,1)
 			) + 
-		geom_contour() + 
+		geom_contour(binwidth = binwidth) + 
 		geom_dl(aes(label=..level..), method="bottom.pieces", 
-				stat="contour")+
+				stat="contour",
+				binwidth = binwidth)+
 		theme(text = element_text(size=20),
 			  legend.position = "none",
 			  panel.spacing = margin(0,0,0,0)) +

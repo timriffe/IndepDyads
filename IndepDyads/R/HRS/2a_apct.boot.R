@@ -124,8 +124,8 @@ apct.boot <- function(
       # followed by the respective corresponding test
 	
       fit        <- glm(data.boot[, col.index] ~ 
-                          ns(b_yr, knots = seq(1902.5, 1927.5, by = 5)) +
-                          ns(ta, knots = c(.5, 1, 2, 4, 7.5, 10)) +  
+                          ns(b_yr, knots = seq(1904, 1929, by = 5)) +
+                          ns(ta, knots = c(1, 2, 4, 8)) +  # c(.5, 1, 2, 4, 8)
                           ns(ca, knots = seq(72.5, 97.5, by = 5)), 
                         data = data.boot,
                         weights = rescaleweight,

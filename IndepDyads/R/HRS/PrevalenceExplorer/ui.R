@@ -25,7 +25,7 @@ shinyUI(
 				# pick abscissa
 				selectInput("x", "abscissa:",
 							ids,
-							  selected = "P"),
+							  selected = "A"),
 				
 				# 4)
 				# pick ordinate

@@ -23,22 +23,22 @@ shinyUI(
 							varnames),
 				# 3)
 				# pick abscissa
-				selectInput("x", "abscissa:",
+				selectInput("x", "Abscissa:",
 							ids,
-							  selected = "A"),
+							  selected = "Age"),
 				
 				# 4)
 				# pick ordinate
 				# choices determined in:
 				# getControlChoices(x,y)
-				selectInput("y", "ordinate:",
+				selectInput("y", "Ordinate:",
 							ids),
 				
 				# 5)
 				# pick control measure (aka slice, slider)
 				# getControlChoices(x,y)
 				# TR: should be dealt with already
-				selectInput("control", "control for:",
+				selectInput("control", "Control for:",
 							ids),
 				
 				# 6) value of the previous (slider)

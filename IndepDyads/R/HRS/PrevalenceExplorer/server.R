@@ -15,7 +15,7 @@ shinyServer(function(input, output, session){
 		if (is.null(y) | y == "0" | x == y){
 		# Can also set the label and select items
 		updateSelectInput(session, "y",
-						  label = "Select ordinate",
+						  label = "Select ordinate:",
 						  choices = ids[ids != x]
 		)
 		}
@@ -35,7 +35,7 @@ shinyServer(function(input, output, session){
 		}
 		# Can also set the label and select items
 		updateSelectInput(session, "control",
-						  label = "Select control measure",
+						  label = "Select control measure:",
 						  choices = getControlChoices(x,y)
 		)
 	},
@@ -90,8 +90,9 @@ shinyServer(function(input, output, session){
 		
 	}, width=800, height=800, res = 180)
 	
+	# TR: edit this to pick out proper names
 	# get title
 	output$plot_title <- renderText(
-		paste0(input$varname, " ",input$sex,": ", input$control," = ",input$control_val))
+		paste0(input$varname, " ",sexesinv[input$sex],": ", idsinv[input$control]," = ",input$control_val))
 })
 

@@ -13,7 +13,7 @@ library(directlabels)
 # but it's sure to be a linear combination of +1 and -1 coefs on two 
 # or four of the remaining measures. Or something like that.
 getControlChoices <- function(x,y){
-	ids <- c(A="A",P="P",C="C",`T`="T",D="D",L="L")
+	ids <- c(Age="A",Period="P",`Birth year`="C",`Time to death`="T",`Death year`="D",Lifespan="L")
 	
 	if (x == "0"){
 		return(ids)
@@ -48,6 +48,9 @@ sliceAPCTDL <- suppressWarnings(function(data,
 						ordinate = "T",
 						slider = "P",
 						slider_value = 1995){
+	ids             <- c(A = "Age", P = "Period", C = "Birth year", `T` = "Time to death", 
+						 D = "Death year", L = "Lifespan")
+
 	rg <- data %>% pull(slider) %>% range()
 	if (! slider_value >= rg[1] & slider_value <= rg[2]){
 		slider_value = floor(mean(rg))
@@ -86,7 +89,7 @@ sliceAPCTDL <- suppressWarnings(function(data,
 		theme(text = element_text(size=20),
 			  legend.position = "none",
 			  panel.spacing = margin(0,0,0,0)) +
-		labs(x = abcissae, y = ordinate)
+		labs(x = ids[abcissae], y = ids[ordinate])
 })
 
 # # 2:

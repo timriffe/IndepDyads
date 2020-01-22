@@ -1,4 +1,5 @@
 # prepare session
+library(readr)
 library(shiny)
 library(here)
 library(tidyverse)
@@ -59,7 +60,7 @@ sliceAPCTDL <- suppressWarnings(function(data,
 	xrg <- data %>% pull(abcissae) %>% range()
 	yrg <- data %>% pull(ordinate) %>% range()
     zrg <- data %>% filter(varname == .varname) %>% pull(pi) %>% range()
-	binwidth <- diff(pretty(zrg, n = 12))[1]
+	binwidth <- signif(diff(pretty(zrg, n = 12))[1],3)
 	
 	data %>% 
 		filter(!!sym(slider) == slider_value,

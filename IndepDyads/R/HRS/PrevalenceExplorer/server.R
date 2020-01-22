@@ -93,6 +93,6 @@ shinyServer(function(input, output, session){
 	# TR: edit this to pick out proper names
 	# get title
 	output$plot_title <- renderText(
-		paste0(input$varname, " ",sexesinv[input$sex],": ", idsinv[input$control]," = ",input$control_val))
+		paste0(varlabs[input$varname], " ",sexesinv[input$sex],": ", idsinv[input$control]," = ",input$control_val))
 })
 

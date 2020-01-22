@@ -1,6 +1,6 @@
 
-source(here::here("IndepDyads","R","HRS","PrevalenceExplorer","aux_scripts/prepare_session.R"))
-source(here::here("IndepDyads","R","HRS","PrevalenceExplorer","aux_scripts/prepare_data.R"))
+# source(here::here("IndepDyads","R","HRS","PrevalenceExplorer","aux_scripts/prepare_session.R"))
+# source(here::here("IndepDyads","R","HRS","PrevalenceExplorer","aux_scripts/prepare_data.R"))
 #options(warn = 0)
 shinyUI(
 	fluidPage(
@@ -20,12 +20,12 @@ shinyUI(
 							sexes),
 				# 2)
 				selectInput("varname", "Variable:",
-							varnames),
+							varList),
 				# 3)
 				# pick abscissa
 				selectInput("x", "Abscissa:",
 							ids,
-							  selected = "Age"),
+							selected = "Age"),
 				
 				# 4)
 				# pick ordinate

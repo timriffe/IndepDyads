@@ -13,13 +13,58 @@ Dat <- Dat %>%
 
 # choices
 # varnames        <- readRDS(here::here("IndepDyads","R","HRS","PrevalenceExplorer","data","varnames_fit.rds"))
-varnames        <- readRDS(here::here("IndepDyads","Data","varnames_fit.rds"))
+# varnames        <- readRDS(here::here("IndepDyads","Data","varnames_fit.rds"))
+# names(varnames) <- varnames
 
-names(varnames) <- varnames
-sexes           <- c("f","m")
-names(sexes)    <- c("Women", "Men")
-sexesinv        <- c(f = 'Women', m = 'Men ')
-ids             <- c(Age="A",Period="P",`Birth year`="C",`Time to death`="T",`Death year`="D",Lifespan="L")
+VN <- read_csv(here::here("IndepDyads","R","HRS","PrevalenceExplorer","data",
+						  "varnames.csv"))
+
+VN <- 
+	VN %>% 
+	mutate(groupnr = case_when(
+		group == "Activities of Daily Living (ADL)" ~ 1,
+		group == "Instr. Activities of Daily Living (IADL)" ~ 2,
+		group == "Functional limitations" ~ 3,
+		group == "Chronic conditions" ~ 4,
+		group == "Cognitive function"  ~ 5,
+		group == "Psychological well-being" ~ 6,
+		group == "Health behaviors" ~ 7,
+		TRUE ~ 8)
+	) %>% 
+	arrange(groupnr, varname)
+
+varList <-list()
+for (i in 1:8){
+	vn              <- VN %>% filter(groupnr == i)
+	nm              <- vn %>% pull(group) %>% unique()
+	varnames        <- vn$varname
+	names(varnames) <- vn$varlabel
+	varList[[nm]]     <- varnames
+}
+
+varList2 <- lapply(split(VN, VN$group), function(vn){
+	varnames        <- vn$varname
+	names(varnames) <- vn$varlabel
+	varnames
+})
+
+varlabs          <- VN$varlabel
+names(varlabs)   <- VN$varname
+
+varnames         <- VN$varname
+names(varnames)  <- VN$varlabel
+
+
+sexes            <- c("f","m")
+names(sexes)     <- c("Women", "Men")
+sexesinv         <- c(f = 'Women', 
+					  m = 'Men ')
+ids              <- c(Age = "A",
+				      Period = "P",
+					  `Birth year` = "C",
+					  `Time to death` = "T",
+					  `Death year` = "D",
+					  Lifespan = "L")
 idsinv          <- names(ids)
 names(idsinv)   <- ids
 # colsRAND        <- read_csv(here::here("IndepDyads","Data","namechangesHRS.csv"))

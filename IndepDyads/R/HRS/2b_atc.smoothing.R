@@ -9,7 +9,7 @@ source(here::here("IndepDyads","R","HRS","1_Variable_Recode.R"))
 
 rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() 
-source(here::here("IndepDyads","R","HRS","2a_apct.boot.R"))
+source(here::here("IndepDyads","R","HRS","2a_atc.boot.R"))
 
 # ------------------
 library(parallel)
@@ -66,7 +66,9 @@ Dat        <- Dat[Dat$ta >= 0,]
 if (do.this){
 	
 	meltSEX <- function(SEX){
-		A         <- reshape2::melt(SEX$Surf, varnames = c("T","A","C"), value.name = "pi")
+		A         <- reshape2::melt(SEX$Surf, 
+									varnames = c("T","A","C"), 
+									value.name = "pi")
 		A$Sex     <- SEX$sex
 		A$varname <- SEX$varname
 		A

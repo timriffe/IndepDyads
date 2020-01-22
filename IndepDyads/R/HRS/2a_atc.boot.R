@@ -21,7 +21,7 @@ cutla <- function(newdata, year1 = 1992, year2 = 2011, maxl = 100){
 # takes care of some data management too. Edge oversampling is by default turned
 # off, but can be controlled with YearsFromEdge and MagFactor
 
-apct.boot <- function(
+atc.boot <- function(
   data,
   varname = "adl3",
   nboot = 250,
@@ -176,16 +176,16 @@ get.booty <- function(boot.list){
   dims
 }
 # turn any of the above columns into a TTD by age matrix for a selected cohort
-get.mat <- function(goods, column = "median", cohort = 1915){
+get.atc.mat <- function(goods, column = "median", cohort = 1915){
   acast(goods[goods$b_yr == cohort,], ta ~ ca, value.var = column)
 }
 # order of call = apct.boot, get.booty, get.array??
-get.array <- function(goods, column = "median"){
+get.atc.array <- function(goods, column = "median"){
   acast(goods, ta ~ ca ~ b_yr, value.var = column)
 }
 
 
-apct.boot.wrapper <- function(
+atc.boot.wrapper <- function(
   Dat,
   varname = "adl3",
   sex = "f",
@@ -194,7 +194,7 @@ apct.boot.wrapper <- function(
   b_yr_range = min(Dat$b_yr):max(Dat$b_yr),
   nboot = 250){
   
-  step1 <- apct.boot(data = Dat[sex == sex,],
+  step1 <- atc.boot(data = Dat[sex == sex,],
                      varname = varname,
                      t.age = t.age,     
                      c.age = c.age,
@@ -205,7 +205,7 @@ apct.boot.wrapper <- function(
   # creates an array of the median estimate.
   # we throw away all the rest. Could adapt
   # this to create an array for a set of quantiles..
-  Surf <- get.array(get.booty(step1))		
+  Surf <- get.atc.array(get.booty(step1))		
   
   list(Surf = Surf, sex = sex, varname = varname)
 }

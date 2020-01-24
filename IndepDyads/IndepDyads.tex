@@ -216,7 +216,7 @@
 
 \begin{abstract} % abstract
 \parttitle{Background} 
-The demographic time identity consists in a linear relationship between all pairs of six fundamental time measures: age, period, cohort, time to death, length of life, and time of death. Certain subsets of time measures in this and other higher order identities consist in time measures that are independent of one another.
+The demographic time identity consists in a linear relationship between all pairs of six fundamental time measures: age, period, cohort, time to death, length of life, and time of death. Certain subsets of time measures in this and other higher order identities consist in measures that are independent of one another.
 \parttitle{Objective} 
 We aim to describe the relationship between independent time measures and the identities within which they are nested, with special attention to the demographic time identity and its three independent time dyads. We also aim to determine whether data structured on such time dyads might be useful in demographic research.
 \parttitle{Data and Methods} 
@@ -308,12 +308,13 @@ Any pair of quantitative variables can define the axes of a standard Cartesian p
 
 \subsection*{View axes}
 \label{sec:viewaxes}
-Imagine now the 3d projection of the graph from Fig.~\ref{fig:tet}, a regular tetrahedron. An angle of view directly at any of the four faces of the demographic time tetrahedron reveals the plane-perspective of a Lexis-like identity. In other words, the viewing axis is set as \emph{normal} to one of the faces of the tetrahedron. Interactive Fig.~\ref{fig:viewaxes} may help visualize the notion of viewing axes--- the view on a plane is orthogonal if an axis line is reduced to appear as a point in the centroid of the tetrahedron. The view axes of the four triad identities map to the four medians (axes of 3-fold symmetry) of the tetrahedron, depicted in Fig.~\ref{fig:depviewaxes} with cyan colored lines. Independent dyad planes are revealed when the viewing angle is such that the midpoints of opposite tetrahedral edges are aligned. There are three pairs of opposite edges (LP, TC, AD), and therefore three viewing angles of this kind, which map to the bimedians of the tetrahedron (axes of 2-fold symmetry), depicted in Figure~\ref{fig:indepviewaxes} with magenta lines.
+Imagine now the 3d projection of the graph from Fig.~\ref{fig:tet}, a regular tetrahedron. An angle of view directly at any of the four faces of the demographic time tetrahedron reveals the plane-perspective of a Lexis-like identity. In other words, the viewing axis is set as \emph{normal} to one of the faces of the tetrahedron. Interactive Fig.~\ref{fig:viewaxes} may help visualize the notion of viewing axes--- the view on a plane is orthogonal if an axis line is reduced to appear as a point in the centroid of the tetrahedron. The view axes of the four triad identities map to the four medians (axes of 3-fold symmetry) of the tetrahedron, depicted in Fig.~\ref{fig:depviewaxes} with cyan colored lines. Independent dyad planes are revealed when the viewing angle is such that the midpoints of opposite tetrahedral edges are aligned. There are three pairs of opposite edges (LP, TC, AD), and therefore three viewing angles of this kind, which map to the bimedians of the tetrahedron (axes of 2-fold symmetry), depicted in Fig.~\ref{fig:indepviewaxes} with magenta lines.
 
 \begin{figure}
 \begin{subfigure}[t]{0.45\linewidth}
     \centering
     %\input{ASY/DepViewAxes.tex}
+    \input{ASY/TikzDiagram.tex}
     \caption{The four view axes of the triad dependencies map to the medians of the tetrahedron. Rotate the tetrahedron so that a given cyan line is reduced to a point: The resulting view is then orthogonal to the outermost identity when flattened to 2d.}
     \label{fig:depviewaxes}
 \end{subfigure}
@@ -329,7 +330,8 @@ Imagine now the 3d projection of the graph from Fig.~\ref{fig:tet}, a regular te
 
 Given a 3d volume of data structured by the demographic time identity, a cross-section orthogonal to a magenta line from Fig.~\ref{fig:indepviewaxes} is an independent plane. There is no reason not to do this for outcome measures, for example disease prevalence, in search of meaningful patterns. Further, when \emph{slicing} through such a complex timespace, we are agnostic about cut angles in general, but \emph{snapping} to axes defined on the basis of unit time measures leads to easier interpretation.
 
-\subsection*{Cross-section variants}
+\subsection*{Cross-section equivalencies}
+
 This is a temporary note. I've noticed some equivalencies when taking cross-sections of the hexad timespace using the HRS data. We have four triad identities and three independent dyads. For each of these, when taking a cross-section of the 3d space, one needs to specify a control variable. For example, for APC, one could control for T, L or D. Certain combinations of abscissa, ordinate and control measure yield identical images (albeit with different axis labels due to different time measures). For example, APC, LCD, AD, and LP are all identical when controlled for T. TPD, LCD, LP, and TC are all identical when controlled for A. And in general for each of the six possible controls, there are four ways to specify a plane that will yield identically filled surfaces. By extension, we conclude that there are six *fundamental* cross sections. I deposit this text here temporarily, but this is in need of further verification, as my data filtering may need some refinement for the case of independent dyads. Specifically, for a given independent dyad we may not wish to hold one of the other four measures constant. And of course this could all be my mistake.
 
 

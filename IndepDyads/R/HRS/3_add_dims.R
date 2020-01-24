@@ -12,11 +12,6 @@ Dat <- Dat %>%
 		   D = P + TT,
 		   L = A + TT
 		   )
-
-# orthoganal controls:
-
-
-
 sliceAPCTDL <- function(data, 
 						.varname = "adl3", 
 						.Sex = "m",
@@ -37,6 +32,7 @@ sliceAPCTDL <- function(data,
 		theme(legend.position = "none")
 }
 
+# orthoganal controls:
 # testing bimedian slices, so far hmm.
 # equivalent:
 # LP bimedian line (D - C) / 2 - P = L / 2 - P
@@ -62,16 +58,16 @@ sliceAPCTDL(Dat,
 sliceAPCTDL(Dat,
 			.varname = "adl3",
 			.Sex = "m",
-			abcissae =L,
-			ordinate = P,
+			abcissae =P,
+			ordinate = L,
 			slider = ADnorm,
 			slider_value = -45)
 # AD
 sliceAPCTDL(Dat,
 			.varname = "adl3",
 			.Sex = "m",
-			abcissae =A,
-			ordinate = D,
+			abcissae =D,
+			ordinate = A,
 			slider = ADnorm,
 			slider_value = -45)
 

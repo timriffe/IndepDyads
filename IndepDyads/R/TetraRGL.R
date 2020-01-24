@@ -5,6 +5,25 @@ library(here)
 library(rgl)
 
 #source("R/Functions.R")
+angle2rad <- function(angle){
+	angle * pi/180
+}
+
+yaw <- function(alpha){
+	alpha <- angle2rad(alpha)
+	matrix(c(1,0,0,0,cos(alpha),sin(alpha),0,-sin(alpha),cos(alpha)),3,3)
+}
+
+pitch <- function(beta){
+	beta <- angle2rad(beta)
+	matrix(c(cos(beta),0,-sin(beta),0,1,0,sin(beta),0,cos(beta)),3,3)
+}
+
+roll <- function(gamma){
+	gamma <- angle2rad(gamma)
+	matrix(c(cos(gamma),sin(gamma),0,-sin(gamma),cos(gamma),0,0,0,1),3,3)
+}
+
 
 xyz2ternxyz <- function(xyz){
 	ternxyz   <- xyz
@@ -22,12 +41,19 @@ tetverts <- function(){
 	verts
 }
 
-tetverts_unit <- function(rad = 1){
+tetverts_unit <- function(rad = 1, alpha = 0, beta = 0, gamma = 0){
+	# 3d rotation matrix
+	R <- yaw(alpha) %*% pitch(beta) %*% roll(gamma) 
+	xyz <- c("x","y","z")
 	verts <- matrix(c(c( sqrt(8/9), 0 , -1/3 ),
     c( -sqrt(2/9), sqrt(2/3), -1/3 ),
     c( -sqrt(2/9), -sqrt(2/3), -1/3 ),
-    c( 0 , 0 , 1 )),ncol = 3,byrow=TRUE,dimnames=list(1:4,c("x","y","z"))) * rad
-	verts <- as.data.frame(verts)
+    c( 0 , 0 , 1 )), ncol = 3, byrow = TRUE, dimnames = list(LETTERS[1:4], xyz)) * rad
+	# now rotate
+	verts <- R %*% t(verts)
+	
+	verts <- as.data.frame(t(verts))
+	colnames(vers) <- xyz
 	verts
 }
 
@@ -243,3 +269,12 @@ for (i in 1:3){
 
 writeASY(title = "IndepViewAxes",outtype="pdflatex",width=3,height=3,defaultFontsize = 14)
 getwd()
+
+
+
+
+
+
+
+
+

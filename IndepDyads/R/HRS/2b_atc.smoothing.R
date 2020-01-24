@@ -80,12 +80,12 @@ if (do.this){
 	}
 	
 	boot.results.list <- mclapply(varnames, function(varname, Dat, nboot){
-				fem 	<- apct.boot.wrapper(
+				fem 	<- atc.boot.wrapper(
 							Dat[Dat$sex == "f", ], 
 							varname = varname, 
 							sex = "f", 
 							nboot = nboot)
-				mal 	<- apct.boot.wrapper(
+				mal 	<- atc.boot.wrapper(
 							Dat[Dat$sex == "m", ], 
 							varname = varname, 
 							sex = "m", 

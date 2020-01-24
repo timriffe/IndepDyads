@@ -1,7 +1,7 @@
 
 # construct a tetrahedral octahedral honecomb w cubic dual.
+library(here)
 
-setwd("/home/tim/git/IndepDyads/IndepDyads/")
 library(rgl)
 
 #source("R/Functions.R")

@@ -91,7 +91,7 @@ atc.boot <- function(
   dataid     <- dataid[,c("id","drawweight")]
   
   
-  # data for prediction, grid. In midpoints! Meaning
+  # data for prediction, grid. In midpoints!
   newdata    <- expand.grid(ta = t.age+.5, 
                             ca = c.age+.5, 
                             b_yr = b_yr_range)

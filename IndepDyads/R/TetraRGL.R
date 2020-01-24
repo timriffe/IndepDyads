@@ -89,12 +89,10 @@ tetrahedron_a <- function(unit=TRUE,rad=1){
 	edges
 }
 
-edge.mids <- function(unit=TRUE,rad=1,frac=.5){
-	if (unit){
-		verts <- tetverts_unit(rad=rad)
-	} else {
-		verts <- tetverts()
-	}
+edge.mids <- function(rad=1,frac=.5,alpha=0,beta=0,gamma=0){
+	
+	verts <- tetverts_unit(rad=rad,apha=alpha,beta=beta,gamma=gamma)
+	
 	
 	vx    <- verts$x
 	vy    <- verts$y
@@ -271,8 +269,57 @@ writeASY(title = "IndepViewAxes",outtype="pdflatex",width=3,height=3,defaultFont
 getwd()
 
 
+# work on turning this into gsubbable text
+"
+
+\begin{tikzpicture}[line join = round, line cap = round]
+
+\coordinate (A) at (Ax,Ay,Az);
+\coordinate (B) at (Bx,By,Bz);
+\coordinate (C) at (Cx,Cy,Cz);
+\coordinate (D) at (Dx,Dy,Dz);
 
 
+% median lines: pick one
+% \draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (A) -- (3*-3.142697e-01, 0,  3*0.111111); % $TAL$ median
+% \draw[->,color={rgb:red,1;green,1;blue,1},  densely dotted, line width = {0.2pt}] (B) -- (3*1.571348e-01,3*-2.721655e-01,3*0.1111111); % CDL median
+% \draw[->,color={rgb:red,1;green,1;blue,1},  densely dotted, line width = {0.2pt}] (C) -- (3*1.571348e-01,3*2.721655e-01,3*0.1111111); % TPD median;
+\draw[->,color={rgb:red,1;green,1;blue,1},  densely dotted, line width = {0.2pt}] (D) -- (0,0,5*-0.3333333); % APC median;
+% \foreach \i in {A,B,C,D}
+%     \draw[dashed] (0,0)--(\i);
+
+% light shaded faces
+\draw[-, fill={rgb:red,1;green,1;blue,1}, opacity=.05] (A)--(D)--(B)--cycle; % TDP
+\draw[-, fill={rgb:red,1;green,1;blue,1}, opacity=.05] (A)--(D)--(C)--cycle; % CDL
+\draw[-, fill={rgb:red,1;green,1;blue,1}, opacity=.05] (B)--(D)--(C)--cycle; % TAL
+\draw[-, fill={rgb:red,1;green,1;blue,1}, opacity=.05] (A)--(B)--(C)--cycle; % APC
+
+% color edges
+\draw[-, color ={rgb:red,136;green,31;blue,147}, line width = {0.3pt}] (A)--(D); % D
+\draw[-, color ={rgb:red,197;green,117;blue,43}, line width = {0.3pt}] (D)--(C); % L
+\draw[-, color ={rgb:red,78;green,201;blue,59}, line width = {0.3pt}] (D)--(B); % T
+% front face
+\draw[-, color ={rgb:red,210;green,55;blue,55}, line width = {0.3pt}] (B)--(C); % A
+\draw[-, color ={rgb:red,49;green,145;blue,201}, line width = {0.3pt}] (A)--(B); % P
+\draw[-, color ={rgb:red,210;green,188;blue,45}, line width = {0.3pt}] (A)--(C); % C
+
+% edge labels
+\node[above, color={rgb:red,49;green,145;blue,201}] at (0.2357023,  0.4082483, -0.3333333) {\tiny $p$};
+\node[below, color={rgb:red,210;green,188;blue,45}] at (0.2357023, -0.4082483, -0.3333333) {\tiny$c$};
+\node[above, color={rgb:red,136;green,31;blue,147}] at (0.4714045,  0.0000000,  0.3333333) {\tiny$d$};
+\node[left, color={rgb:red,78;green,201;blue,59}] at (-0.2357023,  0.4082483,  0.3333333) {\tiny$t$};
+\node[left, color={rgb:red,197;green,117;blue,43}] at (-0.2357023, -0.4082483,  0.3333333) {\tiny$l$};
+\node[right, color={rgb:red,210;green,55;blue,55}] at (-0.4714045,  0.0000000, -0.3333333) {\tiny$a$};
+
+% node helper labels
+%\node at (A) {\small A};
+% \node at (B) {\small B};
+% \node at (C) {\small C};
+% \node at (D) {\small D};
+
+\end{tikzpicture}
+
+"
 
 
 

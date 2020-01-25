@@ -429,5 +429,5 @@ get_tikz_coords(1,
 				file = here("IndepDyads",
 							"S1",
 							"fig2_bimedians.tex"))
-
+	
 

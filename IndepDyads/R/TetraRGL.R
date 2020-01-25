@@ -53,7 +53,7 @@ tetverts_unit <- function(rad = 1, alpha = 0, beta = 0, gamma = 0){
 	verts <- R %*% t(verts)
 	
 	verts <- as.data.frame(t(verts))
-	colnames(vers) <- xyz
+	colnames(verts) <- xyz
 	verts
 }
 
@@ -91,7 +91,7 @@ tetrahedron_a <- function(unit=TRUE,rad=1){
 
 edge.mids <- function(rad=1,frac=.5,alpha=0,beta=0,gamma=0){
 	
-	verts <- tetverts_unit(rad=rad,apha=alpha,beta=beta,gamma=gamma)
+	verts <- tetverts_unit(rad=rad,alpha=alpha,beta=beta,gamma=gamma)
 	
 	
 	vx    <- verts$x
@@ -112,13 +112,11 @@ edge.mids <- function(rad=1,frac=.5,alpha=0,beta=0,gamma=0){
 
 
 
-medians <- function(unit=TRUE,rad=1){
-	if (unit){
-		verts <- tetverts_unit(rad=rad)
-	} else {
-		verts <- tetverts()
-	}
-	edges <- tetrahedron_a(unit=unit,rad=rad)
+medians <- function(rad=1, alpha=0, beta=0, gamma=0){
+	
+	verts <- tetverts_unit(rad=rad,alpha=alpha,beta=beta,gamma=gamma)
+
+	#edges <- tetrahedron_a(unit=unit,rad=rad)
 	meds  <- data.frame(x1 = verts$x, y1 = verts$y, z1 = verts$z)
 	# need opposite centroids.
 	
@@ -269,59 +267,167 @@ writeASY(title = "IndepViewAxes",outtype="pdflatex",width=3,height=3,defaultFont
 getwd()
 
 
+
+
+apcmedx;apcmedy;apcmedz
+tpdmedx;tpdmedy;tpdmedz
+talmedx;talmedy;talmedz
+cdlmedx;cdlmedy;cdlmedz
+
+get_tikz_coords <- function(rad = 1, 
+						   alpha = 0, 
+						   beta = 0, 
+						   gamma = 0,
+						   .median = TRUE,
+						   .bimedian = FALSE,
+							...){
+	
 # work on turning this into gsubbable text
-"
+blob <- "
 
-\begin{tikzpicture}[line join = round, line cap = round]
+\\begin{tikzpicture}[line join = round, line cap = round]
 
-\coordinate (A) at (Ax,Ay,Az);
-\coordinate (B) at (Bx,By,Bz);
-\coordinate (C) at (Cx,Cy,Cz);
-\coordinate (D) at (Dx,Dy,Dz);
+\\coordinate (A) at (Ax,Ay,Az); % incident to DPC (event node)
+\\coordinate (B) at (Bx,By,Bz); % incident to TPA (step clocks!)
+\\coordinate (C) at (Cx,Cy,Cz); % incident to LAC (origin anchor)
+\\coordinate (D) at (Dx,Dy,Dz); % incident to TLD (destination anchor)
 
 
 % median lines: pick one
-% \draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (A) -- (3*-3.142697e-01, 0,  3*0.111111); % $TAL$ median
-% \draw[->,color={rgb:red,1;green,1;blue,1},  densely dotted, line width = {0.2pt}] (B) -- (3*1.571348e-01,3*-2.721655e-01,3*0.1111111); % CDL median
-% \draw[->,color={rgb:red,1;green,1;blue,1},  densely dotted, line width = {0.2pt}] (C) -- (3*1.571348e-01,3*2.721655e-01,3*0.1111111); % TPD median;
-\draw[->,color={rgb:red,1;green,1;blue,1},  densely dotted, line width = {0.2pt}] (D) -- (0,0,5*-0.3333333); % APC median;
-% \foreach \i in {A,B,C,D}
-%     \draw[dashed] (0,0)--(\i);
+% \\draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (A) -- (3*talmedx, 3*talmedy, 3*talmedz); % $TAL$ median
+% \\draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (B) -- (3*cdlmedx, 3*cdlmedy, 3*cdlmedz); % CDL median
+% \\draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (C) -- (3*tpdmedx, 3*tpdmedy, 3*tpdmedz); % TPD median;
+\\draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (D) -- (3*apcmedx, 3*apcmedy, 3*apcmedz); % APC median;
+
+% bimedian lines: pick one
+% \\draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (1.1*cdx,1.1*cdy,1.1*cdz) -- (1.1*abx,1.1*aby,1.1*abz); % $LP$ bimedian
+% \\draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (1.1*bcx,1.1*bcy,1.1*bcz) -- (1.1*adx,1.1*ady,1.1*adz); % $AD$ bimedian
+% \\draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (1.1*bdx,1.1*bdy,1.1*bdz) -- (1.1*acx,1.1*acy,1.1*acz); % $TC$ bimedian
 
 % light shaded faces
-\draw[-, fill={rgb:red,1;green,1;blue,1}, opacity=.05] (A)--(D)--(B)--cycle; % TDP
-\draw[-, fill={rgb:red,1;green,1;blue,1}, opacity=.05] (A)--(D)--(C)--cycle; % CDL
-\draw[-, fill={rgb:red,1;green,1;blue,1}, opacity=.05] (B)--(D)--(C)--cycle; % TAL
-\draw[-, fill={rgb:red,1;green,1;blue,1}, opacity=.05] (A)--(B)--(C)--cycle; % APC
+\\draw[-, fill={rgb:red,1;green,1;blue,1}, opacity=.05] (A)--(D)--(B)--cycle; % TDP
+\\draw[-, fill={rgb:red,1;green,1;blue,1}, opacity=.05] (A)--(D)--(C)--cycle; % CDL
+\\draw[-, fill={rgb:red,1;green,1;blue,1}, opacity=.05] (B)--(D)--(C)--cycle; % TAL
+\\draw[-, fill={rgb:red,1;green,1;blue,1}, opacity=.05] (A)--(B)--(C)--cycle; % APC
 
 % color edges
-\draw[-, color ={rgb:red,136;green,31;blue,147}, line width = {0.3pt}] (A)--(D); % D
-\draw[-, color ={rgb:red,197;green,117;blue,43}, line width = {0.3pt}] (D)--(C); % L
-\draw[-, color ={rgb:red,78;green,201;blue,59}, line width = {0.3pt}] (D)--(B); % T
-% front face
-\draw[-, color ={rgb:red,210;green,55;blue,55}, line width = {0.3pt}] (B)--(C); % A
-\draw[-, color ={rgb:red,49;green,145;blue,201}, line width = {0.3pt}] (A)--(B); % P
-\draw[-, color ={rgb:red,210;green,188;blue,45}, line width = {0.3pt}] (A)--(C); % C
+\\draw[-, color ={rgb:red,136;green,31;blue,147}, line width = {0.3pt}] (A)--(D); % D
+\\draw[-, color ={rgb:red,197;green,117;blue,43}, line width = {0.3pt}] (D)--(C); % L
+\\draw[-, color ={rgb:red,78;green,201;blue,59}, line width = {0.3pt}] (D)--(B); % T
+\\draw[-, color ={rgb:red,210;green,55;blue,55}, line width = {0.3pt}] (B)--(C); % A
+\\draw[-, color ={rgb:red,49;green,145;blue,201}, line width = {0.3pt}] (A)--(B); % P
+\\draw[-, color ={rgb:red,210;green,188;blue,45}, line width = {0.3pt}] (A)--(C); % C
 
 % edge labels
-\node[above, color={rgb:red,49;green,145;blue,201}] at (0.2357023,  0.4082483, -0.3333333) {\tiny $p$};
-\node[below, color={rgb:red,210;green,188;blue,45}] at (0.2357023, -0.4082483, -0.3333333) {\tiny$c$};
-\node[above, color={rgb:red,136;green,31;blue,147}] at (0.4714045,  0.0000000,  0.3333333) {\tiny$d$};
-\node[left, color={rgb:red,78;green,201;blue,59}] at (-0.2357023,  0.4082483,  0.3333333) {\tiny$t$};
-\node[left, color={rgb:red,197;green,117;blue,43}] at (-0.2357023, -0.4082483,  0.3333333) {\tiny$l$};
-\node[right, color={rgb:red,210;green,55;blue,55}] at (-0.4714045,  0.0000000, -0.3333333) {\tiny$a$};
+\\node[above, color={rgb:red,49;green,145;blue,201}] at (abx,aby,abz) {\\tiny $p$}; % AB mean
+\\node[below, color={rgb:red,210;green,188;blue,45}] at (acx,acy,acz) {\\tiny$c$};  % AC mean
+\\node[above, color={rgb:red,136;green,31;blue,147}] at (adx,ady,adz) {\\tiny$d$};  % AD mean
+\\node[left, color={rgb:red,78;green,201;blue,59}] at (bdx,bdy,bdz) {\\tiny$t$};   % BD mean
+\\node[left, color={rgb:red,197;green,117;blue,43}] at (cdx,cdy,cdz) {\\tiny$l$};  % CD mean
+\\node[right, color={rgb:red,210;green,55;blue,55}] at (bcx,bcy,bcz) {\\tiny$a$};  % BC mean
 
 % node helper labels
-%\node at (A) {\small A};
-% \node at (B) {\small B};
-% \node at (C) {\small C};
-% \node at (D) {\small D};
+%\\node at (A) {\\small A};
+% \\node at (B) {\\small B};
+% \\node at (C) {\\small C};
+% \\node at (D) {\\small D};
 
-\end{tikzpicture}
+\\end{tikzpicture}
 
 "
+	
+	verts <- tetverts_unit(rad = rad,
+						   alpha = alpha,
+						   beta = beta,
+						   gamma = gamma)
+	meds  <- medians(rad = rad, 
+				 	 alpha = alpha, 
+					 beta = beta, 
+					 gamma = gamma)
+	verts <- zapsmall(as.matrix(verts))
+	meds  <- zapsmall(as.matrix(meds))
+	# median parameters to gsub in:
+	library(magrittr)
+	blob <- 
+		blob %>% 
+		# sub in edge coords as well as bimedians (commented out)
+		gsub(pattern="abx",replacement = (verts["A","x"]+ verts["B","x"])/2, .) %>% 
+		gsub(pattern="aby",replacement = (verts["A","y"]+ verts["B","y"])/2, .) %>% 
+		gsub(pattern="abz",replacement = (verts["A","z"]+ verts["B","z"])/2, .) %>%
+		
+		gsub(pattern="acx",replacement = (verts["A","x"]+ verts["C","x"])/2, .) %>% 
+		gsub(pattern="acy",replacement = (verts["A","y"]+ verts["C","y"])/2, .) %>% 
+		gsub(pattern="acz",replacement = (verts["A","z"]+ verts["C","z"])/2, .) %>%
+		
+		gsub(pattern="adx",replacement = (verts["A","x"]+ verts["D","x"])/2, .) %>% 
+		gsub(pattern="ady",replacement = (verts["A","y"]+ verts["D","y"])/2, .) %>% 
+		gsub(pattern="adz",replacement = (verts["A","z"]+ verts["D","z"])/2, .) %>%
+		
+		gsub(pattern="bdx",replacement = (verts["B","x"]+ verts["D","x"])/2, .) %>% 
+		gsub(pattern="bdy",replacement = (verts["B","y"]+ verts["D","y"])/2, .) %>% 
+		gsub(pattern="bdz",replacement = (verts["B","z"]+ verts["D","z"])/2, .) %>%
+		
+		gsub(pattern="cdx",replacement = (verts["C","x"]+ verts["D","x"])/2, .) %>% 
+		gsub(pattern="cdy",replacement = (verts["C","y"]+ verts["D","y"])/2, .) %>% 
+		gsub(pattern="cdz",replacement = (verts["C","z"]+ verts["D","z"])/2, .) %>%
+		
+		gsub(pattern="bcx",replacement = (verts["B","x"]+ verts["C","x"])/2, .) %>% 
+		gsub(pattern="bcy",replacement = (verts["B","y"]+ verts["C","y"])/2, .) %>% 
+		gsub(pattern="bcz",replacement = (verts["B","z"]+ verts["C","z"])/2, .) 
+	# sub in vertex coords
+	blob <- blob %>% 
+		gsub(pattern="Ax",replacement =  verts["A","x"], .) %>% 
+		gsub(pattern="Ay",replacement =  verts["A","y"], .) %>% 
+		gsub(pattern="Az",replacement =  verts["A","z"], .) %>%
+		gsub(pattern="Bx",replacement =  verts["B","x"], .) %>% 
+		gsub(pattern="By",replacement =  verts["B","y"], .) %>% 
+		gsub(pattern="Bz",replacement =  verts["B","z"], .) %>%
+		gsub(pattern="Cx",replacement =  verts["C","x"], .) %>% 
+		gsub(pattern="Cy",replacement =  verts["C","y"], .) %>% 
+		gsub(pattern="Cz",replacement =  verts["C","z"], .) %>%
+		gsub(pattern="Dx",replacement =  verts["D","x"], .) %>% 
+		gsub(pattern="Dy",replacement =  verts["D","y"], .) %>% 
+		gsub(pattern="Dz",replacement =  verts["D","z"], .) 
+
+	    # medians
+		blob <- 
+			blob %>% 
+			# sub in vertex coords
+			gsub(pattern="talmedx",replacement =  meds["TAL","x2"], .) %>% 
+			gsub(pattern="talmedy",replacement =  meds["TAL","y2"], .) %>% 
+			gsub(pattern="talmedz",replacement =  meds["TAL","z2"], .) %>%
+			gsub(pattern="cdlmedx",replacement =  meds["CDL","x2"], .) %>% 
+			gsub(pattern="cdlmedy",replacement =  meds["CDL","y2"], .) %>% 
+			gsub(pattern="cdlmedz",replacement =  meds["CDL","z2"], .) %>%
+			gsub(pattern="tpdmedx",replacement =  meds["TPD","x2"], .) %>% 
+			gsub(pattern="tpdmedy",replacement =  meds["TPD","y2"], .) %>% 
+			gsub(pattern="tpdmedz",replacement =  meds["TPD","z2"], .) %>%
+			gsub(pattern="apcmedx",replacement =  meds["APC","x2"], .) %>% 
+			gsub(pattern="apcmedy",replacement =  meds["APC","y2"], .) %>% 
+			gsub(pattern="apcmedz",replacement =  meds["APC","z2"], .) 
+	
+
+	cat(blob, ...)
+}
 
 
+get_tikz_coords(1,
+				alpha = 20,
+				beta = -30,
+				gamma = 30,
+				.median = TRUE, 
+				file = here("IndepDyads",
+                            "S1",
+                            "fig2_medians.tex"))
 
+get_tikz_coords(1,
+				alpha = 20,
+				beta = -30,
+				gamma = 30,
+				.median = FALSE,
+				.bimedian = TRUE,
+				file = here("IndepDyads",
+							"S1",
+							"fig2_bimedians.tex"))
 
 

@@ -12,12 +12,18 @@
 % \draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (A) -- (3*-0.2912578, 3*-0.1340263, 3*-0.0911973); % $TAL$ median
 % \draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (B) -- (3*0.1801467, 3*-0.2271124, 3*0.1645547); % CDL median
 % \draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (C) -- (3*-0.0555556, 3*0.262406, 3*0.1979085); % TPD median;
-%\draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (D) -- (3*0.1666667, 3*0.0987327, 3*-0.2712659); % APC median;
+\draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (D) -- (3*0.1666667, 3*0.0987327, 3*-0.2712659); % APC median;
 
 % bimedian lines: pick one
  \draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (1.1*-0.16666665,1.1*-0.54170805,1.1*0.11003605) -- (1.1*0.16666665,1.1*0.54170805,1.1*-0.11003605); % $LP$ bimedian
 % \draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (1.1*-0.1868867,1.1*-0.0529404,1.1*-0.5436948) -- (1.1*0.1868867,1.1*0.0529404,1.1*0.5436948); % $AD$ bimedian
 % \draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (1.1*-0.52022005,1.1*0.19256955,1.1*0.16006685) -- (1.1*0.52022005,1.1*-0.19256955,1.1*-0.16006685); % $TC$ bimedian
+
+% redish transparent independent plane passing through midpoint 
+% (match to bimedian line)
+\draw[-, fill={rgb:red,1;green,0;blue,0}, opacity=.08] (0.624264068711929,-0.231083439955206,-0.192080234000527)--(0.224264068711929,0.0635284733749145,0.652433721197352)--(-0.624264068711929,0.231083439955206,0.192080234000527)--(-0.224264068711929,-0.0635284733749145,-0.652433721197352)--cycle; % bimed plane
+
+\draw[-, color={rgb:red,1;green,1;blue,1}, opacity=.5] (0.52022005725994,-0.192569533296005,-0.160066861667106)--(0.186886723926607,0.0529403944790955,0.54369476766446)--(-0.52022005725994,0.192569533296005,0.160066861667106)--(-0.186886723926607,-0.0529403944790954,-0.54369476766446); % bimed plane
 
 % light shaded faces
 \draw[-, fill={rgb:red,1;green,1;blue,1}, opacity=.05] (A)--(D)--(B)--cycle; % TDP

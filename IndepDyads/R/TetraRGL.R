@@ -137,6 +137,37 @@ medians <- function(rad=1, alpha=0, beta=0, gamma=0){
 	meds
 }
 
+
+bimedians <- function(rad=1, alpha=0,beta=0,gamma=0){
+	mids   <- edge.mids(rad=rad,alpha=alpha,beta=beta,gamma=gamma)
+	mids   <- as.matrix(mids[,-1])
+	bimeds <- matrix(ncol=6,nrow=3, dimnames=list(c("LP","AD","TC"),c("x1","y1","z1","x2","y2","z2")))
+	
+	bimeds["LP", ] <- c(mids["L",],mids["P",])
+	bimeds["AD", ] <- c(mids["A",],mids["D",])
+	bimeds["TC", ] <- c(mids["T",],mids["C",])
+	
+	bimeds
+}
+
+bimedian_plane_sq <- function(
+	dyad = "LP", 
+	rad = 1.2, 
+	alpha = 0, 
+	beta= 0, 
+	gamma = 0){
+	stopifnot(dyad %in% c("LP", "AD", "TC"))
+	edgeorder <- c("P","C","D","L","T","A")
+	mids   <- edge.mids(rad = rad, 
+						alpha = alpha, 
+						beta = beta, 
+						gamma = gamma)[edgeorder,-1]
+	mids   <- mids[-agrep(rownames(mids), pattern = dyad),]
+    colnames(mids) <- c("x","y","z")
+    mids
+}
+
+
 AssignColour <- function (x) {
 	if (x == "A") result <- "#D23737"
 	if (x == "P") result <- "#3191C9"
@@ -280,6 +311,8 @@ get_tikz_coords <- function(rad = 1,
 						   gamma = 0,
 						   .median = TRUE,
 						   .bimedian = FALSE,
+							dyad="LP",
+							rad2=1.2,
 							...){
 	
 # work on turning this into gsubbable text
@@ -303,6 +336,12 @@ blob <- "
 % \\draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (1.1*cdx,1.1*cdy,1.1*cdz) -- (1.1*abx,1.1*aby,1.1*abz); % $LP$ bimedian
 % \\draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (1.1*bcx,1.1*bcy,1.1*bcz) -- (1.1*adx,1.1*ady,1.1*adz); % $AD$ bimedian
 % \\draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (1.1*bdx,1.1*bdy,1.1*bdz) -- (1.1*acx,1.1*acy,1.1*acz); % $TC$ bimedian
+
+% redish transparent independent plane passing through midpoint 
+% (match to bimedian line)
+%\\draw[-, fill={rgb:red,1;green,0;blue,0}, opacity=.08] (bmx1,bmy1,bmz1)--(bmx2,bmy2,bmz2)--(bmx3,bmy3,bmz3)--(bmx4,bmy4,bmz4)--cycle; % bimed plane
+
+%\\draw[-, color={rgb:red,1;green,1;blue,1}, opacity=.5] (bmintx1,bminty1,bmintz1)--(bmintx2,bminty2,bmintz2)--(bmintx3,bminty3,bmintz3)--(bmintx4,bminty4,bmintz4); % bimed plane
 
 % light shaded faces
 \\draw[-, fill={rgb:red,1;green,1;blue,1}, opacity=.05] (A)--(D)--(B)--cycle; % TDP
@@ -344,6 +383,19 @@ blob <- "
 				 	 alpha = alpha, 
 					 beta = beta, 
 					 gamma = gamma)
+	# intersection line for bimedian plane (mid)
+	bmint <- bimedian_plane_sq(dyad = dyad,
+							   rad = rad,
+							   alpha = alpha, 
+							   beta = beta, 
+							   gamma = gamma)
+	# shaded plane
+	bm    <- bimedian_plane_sq(dyad = dyad,
+		                       rad=rad2,
+							   alpha = alpha, 
+							   beta = beta, 
+							   gamma = gamma)
+	
 	verts <- zapsmall(as.matrix(verts))
 	meds  <- zapsmall(as.matrix(meds))
 	# median parameters to gsub in:
@@ -405,7 +457,39 @@ blob <- "
 			gsub(pattern="apcmedx",replacement =  meds["APC","x2"], .) %>% 
 			gsub(pattern="apcmedy",replacement =  meds["APC","y2"], .) %>% 
 			gsub(pattern="apcmedz",replacement =  meds["APC","z2"], .) 
-	
+	    # bimedian plane:
+		blob <- 
+			blob %>% 
+			gsub(pattern="bmx1",replacement =  bm[1,"x"], .) %>%
+			gsub(pattern="bmx2",replacement =  bm[2,"x"], .) %>%
+			gsub(pattern="bmx3",replacement =  bm[3,"x"], .) %>%
+			gsub(pattern="bmx4",replacement =  bm[4,"x"], .) %>%
+			
+			gsub(pattern="bmy1",replacement =  bm[1,"y"], .) %>%
+			gsub(pattern="bmy2",replacement =  bm[2,"y"], .) %>%
+			gsub(pattern="bmy3",replacement =  bm[3,"y"], .) %>%
+			gsub(pattern="bmy4",replacement =  bm[4,"y"], .) %>%
+			
+			gsub(pattern="bmz1",replacement =  bm[1,"z"], .) %>%
+			gsub(pattern="bmz2",replacement =  bm[2,"z"], .) %>%
+			gsub(pattern="bmz3",replacement =  bm[3,"z"], .) %>%
+			gsub(pattern="bmz4",replacement =  bm[4,"z"], .) %>%
+			
+			gsub(pattern="bmintx1",replacement =  bmint[1,"x"], .) %>%
+			gsub(pattern="bmintx2",replacement =  bmint[2,"x"], .) %>%
+			gsub(pattern="bmintx3",replacement =  bmint[3,"x"], .) %>%
+			gsub(pattern="bmintx4",replacement =  bmint[4,"x"], .) %>%
+			
+			gsub(pattern="bminty1",replacement =  bmint[1,"y"], .) %>%
+			gsub(pattern="bminty2",replacement =  bmint[2,"y"], .) %>%
+			gsub(pattern="bminty3",replacement =  bmint[3,"y"], .) %>%
+			gsub(pattern="bminty4",replacement =  bmint[4,"y"], .) %>%
+			
+			gsub(pattern="bmintz1",replacement =  bmint[1,"z"], .) %>%
+			gsub(pattern="bmintz2",replacement =  bmint[2,"z"], .) %>%
+			gsub(pattern="bmintz3",replacement =  bmint[3,"z"], .) %>%
+			gsub(pattern="bmintz4",replacement =  bmint[4,"z"], .) 
+			
 
 	cat(blob, ...)
 }

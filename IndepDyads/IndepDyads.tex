@@ -309,7 +309,7 @@ Any pair of quantitative variables can define the axes of a standard Cartesian p
 
 \subsection*{View axes}
 \label{sec:viewaxes}
-Imagine now the 3d projection of the graph from Fig.~\ref{fig:tet}, a regular tetrahedron. An angle of view directly at any of the four faces of the demographic time tetrahedron reveals the plane-perspective of a Lexis-like identity. In other words, the viewing axis is set as \emph{normal} to one of the faces of the tetrahedron. Interactive Fig.~\ref{fig:viewaxes} may help visualize the notion of viewing axes--- the view on a plane is orthogonal if an axis line is reduced to appear as a point in the centroid of the tetrahedron. The view axes of the four triad identities map to the four medians (axes of 3-fold symmetry) of the tetrahedron, depicted in Fig.~\ref{fig:depviewaxes} for the APC plane. Independent dyad planes are revealed when the viewing angle is such that the midpoints of opposite tetrahedral edges are aligned. There are three pairs of opposite edges (LP, TC, AD), and therefore three viewing angles of this kind, which map to the bimedians of the tetrahedron (axes of 2-fold symmetry), depicted in Fig.~\ref{fig:indepviewaxes} with magenta lines.
+Imagine the graph from Fig.~\ref{fig:tet} projected as a 3d regular tetrahedron. An angle of view directly at any of the four faces of the demographic time tetrahedron reveals the plane-perspective of a Lexis-like identity. In other words, the angle of view is set as \emph{normal} to one of the faces of the tetrahedron, and the respective plane is orthogonal to the median  (axes of 3-fold symmetry) of the tetrahedron. Interactive Fig.~\ref{fig:depviewaxes} may help visualize the notion of viewing axes--- if the tetrahedron were rotated so that the dashed line were reduced to a single point, we would be looking directly at the APC (Lexis plane), and at a \emph{depth} determined by a given value of D or T or L. Independent dyad planes are revealed when the viewing angle is such that the midpoints of opposite tetrahedral edges are aligned. There are three pairs of opposite edges (LP, TC, AD), and therefore three viewing angles of this kind, which map to the bimedians of the tetrahedron (axes of 2-fold symmetry), depicted in Fig.~\ref{fig:indepviewaxes} with a dashed line passing through the midpoints of L and P.
 
 \begin{figure}
 \begin{subfigure}[t]{0.45\linewidth}
@@ -318,7 +318,7 @@ Imagine now the 3d projection of the graph from Fig.~\ref{fig:tet}, a regular te
     \resizebox{\linewidth}{\linewidth}{
     \input{S1/fig2_medians.tex}
     }
-    \caption{(placeholder diagram) The four view axes of the triad dependencies map to the medians of the tetrahedron.}
+    \caption{The four view axes of the triad dependencies map to the medians of the tetrahedron. The APC view axis is depicted with a dashed line. TPD, CDL, or TAL would be other possibilities.}
     \label{fig:depviewaxes}
 \end{subfigure}
 ~~
@@ -327,7 +327,7 @@ Imagine now the 3d projection of the graph from Fig.~\ref{fig:tet}, a regular te
     \resizebox{\linewidth}{\linewidth}{
      \input{S1/fig2_bimedians.tex}
      }
-    \caption{(Placeholder diagram) The three view axes of the independent planes map to the bimedians of the tetrahedron.}
+    \caption{The three view axes of the independent planes map to the bimedians of the tetrahedron. The LP view axis is depicted with a dashed line. AD or TC would be other possibilities.}
     \label{fig:indepviewaxes}       
 \end{subfigure}
 \caption{The seven principal view axes of the demographic time identity. Figures are interactive if viewed in a recent version of Adobe Reader. Click each figure to activate. A mouse wheel (or right click and drag) can be used to zoom. Left click and drag to rotate.}
@@ -343,87 +343,12 @@ This is a temporary note. I've noticed some equivalencies when taking cross-sect
 
 
 \section*{Data}
-We illustrate concepts using RAND version 2016v1 of the United States Health and Retirement Study (HRS) \citep{HRS, RAND}. These data are used to illustrate how independent time perspectives can be used to take cross-sections of phenomena with multiple time dimensions. We 
-
-\subsection*{HRS}
-We use US Health and Retirement Study data to estimate how the prevalence of X varies over age A, time-to-death T, and year of birth C. Prevalence is defined as the average value of the outcome in each combination of A, T, and C. We estimate it using logistic regression, where natural splines over A, T, and C are covariates. The procedure takes account of the sampling structure of the HRS, and further details can be found in \citet{riffe2017hle}. Since the edges A, T, C in Fig.~\ref{fig:tet} are both connected and touch all four vertices in the graph, our smoothed prevalence fills the 3d space defined by the demographic time identity. Prevalence estimates are for exact time points, such that we can define the remaining demographic time variables directly as follows: $P = C + A$; $D = P + T$; $L = A + T$. This lets us explore the space in a structured way using cross-sections.
+We illustrate concepts using RAND version 2016v1 of the United States Health and Retirement Study (HRS) \citep{HRS, RAND}. These data are used to illustrate how independent time perspectives can be used to take cross-sections of phenomena with multiple time dimensions. We use this data to estimate how the prevalence of X varies over age A, time-to-death T, and year of birth C. Prevalence is defined as the average value of the outcome in each combination of A, T, and C. We estimate it using logistic regression, where natural splines over A, T, and C are covariates. The procedure takes account of the sampling structure of the HRS, and further details can be found in \citet{riffe2017hle}. Since the edges A, T, C in Fig.~\ref{fig:tet} are both connected and touch all four vertices in the graph, our smoothed prevalence fills the 3d space defined by the demographic time identity. Prevalence estimates are for exact time points, such that we can define the remaining demographic time variables directly as follows: $P = C + A$; $D = P + T$; $L = A + T$. This lets us explore the space in a structured way using cross-section planes that are orthogonal to the medians and bimedians 
 
 \subsection*{Availability of data and materials}
 Both the BALSAC and RAND HRS are available free of charge, and both require registration. For this reason we cannot openly share them in a repository. However, we give detailed instructions for requesting the exact source data used in this paper are available in an OSF repository. We also include intermediate aggregate data objects to pick up part way through analyses. This repository also contains annotated \texttt{R} code to reproduce the intermediate data objects from the source data, and code for all figures and calculations from the manuscript.
 The following url leads to an anonymized version of the repository, to facilitate blind review:
 \url{https://url/to/anonymous/osf/repository/forthcoming}
-
-\section*{Independent time surfaces of population structure}
-%As a first pass to demonstrate concepts, we cross-tabulate Qu\'{e}bec's historical population structure by the three sets of independent demographic time measures. Each cross-tabulation is represented as a demographic surface using filled contour heat maps to create Lexis-like surfaces. These surfaces are distinct from Lexis surfaces in a few important ways. Lexis surfaces are drawn with diagonal lines at a slope equal to the aspect ratio between time units in $y$ and time units in $x$, usually 45$^\circ$ (APC, LCD). Other triad time surfaces might be drawn with descending diagonals (TPD, TAL). Surfaces on independent planes might have features that run horizontally, vertically or in both 45$^\circ$ and -45$^\circ$ diagonals, depending on the case, but in general it only makes sense to draw them as a standard Cartesian grid without any diagonals, although they could be drawn with diagonals running in both directions. 
-
-%As mentioned, the three independent dyads in the demographic time identity each consist in one event measure and one duration measure. Our convention for orienting the Cartesian plane is to use the date measure as abscissa ($x$-axis) and the duration measure as ordinate ($y$-axis). Since a duration measure is the difference between two event dates, this means that independent dyads in this particular identity only arise when three event dates are known, which identifies the full demographic time identity (PCD implies TAL). Tabulations by two independent time measures can only be done in practice if each of the six demographic time measures are either observed or derivable. 
-
-\subsection*{LP: Lifespan and period}
-%Following this standard orientation, we draw an LP diagram with period in abscissa and lifespan in the ordinate axis. This is an ageless diagram. An individual with a lifespan of 80 years is represented as a horizontal line spanning from the time of birth until the time of death. That is, for each increment in P, L is uniform within an individual. An individual lifespan, which determines the ordinate, is only known in retrospect. On a single lifeline, one can trace the progression of age (and the other time measures) from left to right.  Fig.~\ref{fig:lpd} shows an example of an LP diagram that includes some illustrative lifelines. The lifeline labelled \textbf{A} is in a lower ordinate position because it represents a shorter life, whereas the lifeline \textbf{B} represents a longer life. These example lifelines do not overlap, but for aggregate data tabulated by L and P, any given coordinate contains a mixture of ages. Heterogeneity of this kind is greater for longer lives than for shorter lives.
-
-REDO figure for HRS, note to self.
-\begin{figure}
-\centering
-\includegraphics[scale=.7]{Figures/LPdiagram.pdf}
-\caption{LP diagram, with example lifelines. Lifeline \textbf{A} starts with a birth (solid circle) in 1836, and ends with a death (crossed circle) in 1849. Lifeline \textbf{B} starts with a birth in 1940, and ends with a death in 2023. The ordinate position L is equal to the length of each life.}
-\label{fig:lpd}
-\end{figure}
-
-%Fig.~\ref{fig:lpq} displays the Qu\'{e}bec population structure on an LP surface. Higher $y$ values correspond to longer lives, and therefore more overlapped underlying lifelines. The upper regions of the surface are thus smoother with respect to time than lower regions. Growth over time in to-be-long-lived individuals could occur due to population growth or mortality improvement. We know this pattern is not due to migration because this population was mostly closed in this time. For Qu\'{e}bec, increasing contours over time are primarily due to population growth. 
-
-%Shorter lives (lower L) reveal the rhythms of mortality, adding a peculiar relief to the surface. High-mortality years are marked with vertical cliffs in population structure: Right-aligned cliffs are found on the LP surface when many lives over a range of ages are simultaneously extinguished. These vertical rifts trace back to births over a range of years, producing the -45$\circ$ feature \includegraphics{Figures/LP_mort_tri.pdf}. Mortality shocks therefore produce raised triangle relief pattern in population structure. A single isolated year with an extremely high number of births could produce a raised left-edge, but fertility shocks of this kind are far less prominent than mortality shocks in this population. Some known epidemics are marked below the surface with red strips \citep[cf Figure 1.1][]{mazan2011} 
-
-%\begin{figure}
-%\centering
-%\includegraphics[scale=.9]{Figures/QuebecLP.pdf}
-%\caption{Population structure by length of life and year. %Logged counts}
-%\label{fig:lpq}
-%\end{figure}
-
-%The inverted step pattern on the right edge of this surface betrays some of the peculiarities of data collection for this source. Death information comes from burial records, which had some age constraints in data collection, depending on the period: For years 1800 to 1825 only deaths in ages 50 and greater were collected. For years 1826 to 1850, only deaths in ages 75 and greater were collected. Exceptions to this block edge structure owe to the use of multiple potential sources for death dates. Since lifelines accrue to the LP surface only after deaths occur, the right-side region of Fig.~\ref{fig:lpq} is incomplete: further increments will happen as death data are added to the series. This incompleteness is less for shorter lives, which accrue quickly to the surface due to their brevity.
-
-\FloatBarrier
-\subsection*{TC: Time-to-death and cohort}
-
-%The time-to-death T distribution of an extinct and closed birth cohort C (defined as a birth cohort all members of which have died) reveals its life table. Fig.~\ref{fig:tcd} shows an example of a TC diagram, where C is in abscissa and T is the ordinate variable. A lifeline on the CT plane is drawn as a vertical segment extending downward from birth until death on the bottom axis. For example, lifeline \textbf{A} represents an individual born in 1624 and dying at age 20 in 1644. In an aggregate of population exposure, this lifeline contributes 1 to the count in each time step descending from 20 to 0 --- the entire countdown timeline. Since each member of a birth cohort eventually comes to die, the coordinate $T = 0$ is maximally heterogeneous with respect to any of the other demographic time measures (A,L,P,D), and lifeline overlap decreases in higher T.
-
-\begin{figure}
-\centering
-\includegraphics[scale=.6]{Figures/TCdiagram.pdf}
-\caption{TC diagram, with example lifelines. Lifeline \textbf{A} is from the 1624 birth cohort, and starts with a birth (solid circle) with 20 remaining years of life, and ends with a death (crossed circle) on the bottom axis (year 1644). Lifeline \textbf{B} is from the 1638 birth cohort, starting with 94 remaining years of life at birth, and ending with death in 1732.}
-\label{fig:tcd}
-\end{figure}
-
-%Fig.~\ref{fig:tcq} shows a TC tabulation of the Quebec population structure. A few features of this surface stand out. First, as a cohort ages, vertical strips are completed upwards. Ergo, the lower regions of the surface are more complete than the upper regions, and the slanted step structure on the right edge of the surface corresponds to the block-step pattern of the LP surface in Fig~\ref{fig:lpq}. Second, the relatively sparse earlier cohorts are visible as vertical strips. This pattern is due to left-censoring on the moment of migration. As the series progresses rightward the cohort experience becomes more completely described in the closed population renewal, making the series smoother. In general, we see the population grow as birth year advances. If one were to normalize cohort size to something constant then the surface would closely resemble an AC Lexis surface of survivorship.
-
-%\begin{figure}
-%\includegraphics[scale=.9]{Figures/QuebecTC.pdf}
-%\caption{Population structure by time to death and birth cohort.}
-%\label{fig:tcq}
-%\end{figure}
-
-%\FloatBarrier
-\subsection*{AD: Age and year of death}
-
-%Following our convention, we draw an AD diagram with year of death D in the abscissa and age A in the ordinate. Lifelines in the AD diagram start at age 0 on the bottom axis, and rise vertically until the age at death, always within the same death cohort D. The AD diagram is therefore the reverse of the TC diagram: Fig.~\ref{fig:add} uses the same lifelines as Fig.~\ref{fig:tcd}. Thus the lifeline \textbf{A} starts at age 0 and rises until death at age 20 in 1644 (D). D is constant for an individual in this diagram. In the TC diagram the line for the same life was drawn 20 years earlier in the year of birth, and the lifeline descends rather than rises. 
-\begin{figure}
-\centering
-\includegraphics[scale=.6]{Figures/ADdiagram.pdf}
-\caption{AD diagram, with example lifelines (same as in previous diagrams). Lifeline \textbf{A} is destined to die in 1644, starting with a birth (solid circle) at age 0, and ending with a death (crossed circle) on at age 20. Lifeline \textbf{B} is destined to die in 1732, starting at age 0 and rising to a death at age 94 in 1732.}
-\label{fig:add}
-\end{figure}
-
-%In a population aggregate, exposure accrues as in the other diagram settings: lifelines contribute 1 year to exposure in each year over the lifecourse. There is no direct way to infer a life table from an AD population structure unless the population happens to be in stationary renewal \citep{villavicencio2016symmetries}, and in this narrow case the TC surface would appear identical to the AD surface. Fig.~\ref{fig:adq} shows an AD tabulation of the same Qu\'{e}bec data. Whereas vertical striation in the TC tabulation of Fig.~\ref{fig:tcq} was primarily due to birth cohort size, in Fig.~\ref{fig:adq} vertical striation results from mortality shocks. Dark vertical lines in this surface correspond to the right edge of the \emph{mortality triangles} of the LP surface. Light vertical strips might be due to stochasticity and sparseness in early years, to under-coverage or under-registration of deaths in particular years, or to selection following large mortality shocks \citep{luy2019life}. The surface has a hard right edge because the source data collection ceases around 1850, but recall from the LP surface that different age ranges were collected until different final years. Since deaths for the years 1826 to 1850 were only collected for ages 75+, the AD surface is flat in ages 0 to 74 for these same years. Likewise the preceding quarter century will be flat for age 0 to 49. [[[Tim, what accounts for the vertical darker strips in these time intervals?]]] The AD surface of Fig.~\ref{fig:adq} is therefore incomplete in the area corresponding to the white space below the stepped right edge of Fig.~\ref{fig:lpq}.
-
-%\begin{figure}
-%\includegraphics[scale=.9]{Figures/QuebecAD.pdf}
-%\caption{Population structure by age and year of death.}
-%\label{fig:adq}
-%\end{figure}
-
-\FloatBarrier
-%\section*{Independent time surfaces as cross-sections}
-%Here use example of HRS prevalence surfaces produced at novel \emph{cut} angles. I'm thinking maybe small multiples, since each would be a fly-through of cross sections in fixed intervals. There would be 3 independent fly-throughs, and 4 Lexis-like fly throughs. These would be  like Fig.~(7) of \cite{riffe2017demographictime}, which is a fly-though at the TAL viewing angle. So, maybe each fly-through is a column and each perspective is a row? Maybe 10-year jumps in columns to imply 3-4 columns? Total? For example, each TAL slice in that Fig 7 is held for a fixed C. It would have been possible to hold P or D fixed instead, but I guess the actually slices would be identical, just the labels would change. Just need to be clear about it when labelling said panel figure.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -538,3 +463,84 @@ REDO figure for HRS, note to self.
 
 \end{backmatter}
 \end{document}
+
+
+% TR: deprecate enture Quebec section, because we only produced
+% flattened surfaces, which although they contain patterns that are
+%fun to interpret, half of them are due to boundary conditions
+% that introduce tricky kinds of heterogeneity. We therefore
+% would like to focus on controlled cross-sections of the 3d demographic
+% timespace.
+
+
+%\section*{Independent time surfaces of population structure}
+%As a first pass to demonstrate concepts, we cross-tabulate Qu\'{e}bec's historical population structure by the three sets of independent demographic time measures. Each cross-tabulation is represented as a demographic surface using filled contour heat maps to create Lexis-like surfaces. These surfaces are distinct from Lexis surfaces in a few important ways. Lexis surfaces are drawn with diagonal lines at a slope equal to the aspect ratio between time units in $y$ and time units in $x$, usually 45$^\circ$ (APC, LCD). Other triad time surfaces might be drawn with descending diagonals (TPD, TAL). Surfaces on independent planes might have features that run horizontally, vertically or in both 45$^\circ$ and -45$^\circ$ diagonals, depending on the case, but in general it only makes sense to draw them as a standard Cartesian grid without any diagonals, although they could be drawn with diagonals running in both directions. 
+
+%As mentioned, the three independent dyads in the demographic time identity each consist in one event measure and one duration measure. Our convention for orienting the Cartesian plane is to use the date measure as abscissa ($x$-axis) and the duration measure as ordinate ($y$-axis). Since a duration measure is the difference between two event dates, this means that independent dyads in this particular identity only arise when three event dates are known, which identifies the full demographic time identity (PCD implies TAL). Tabulations by two independent time measures can only be done in practice if each of the six demographic time measures are either observed or derivable. 
+
+%\subsection*{LP: Lifespan and period}
+%Following this standard orientation, we draw an LP diagram with period in abscissa and lifespan in the ordinate axis. This is an ageless diagram. An individual with a lifespan of 80 years is represented as a horizontal line spanning from the time of birth until the time of death. That is, for each increment in P, L is uniform within an individual. An individual lifespan, which determines the ordinate, is only known in retrospect. On a single lifeline, one can trace the progression of age (and the other time measures) from left to right.  Fig.~\ref{fig:lpd} shows an example of an LP diagram that includes some illustrative lifelines. The lifeline labelled \textbf{A} is in a lower ordinate position because it represents a shorter life, whereas the lifeline \textbf{B} represents a longer life. These example lifelines do not overlap, but for aggregate data tabulated by L and P, any given coordinate contains a mixture of ages. Heterogeneity of this kind is greater for longer lives than for shorter lives.
+
+%REDO figure for HRS, note to self.
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.7]{Figures/LPdiagram.pdf}
+%\caption{LP diagram, with example lifelines. Lifeline \textbf{A} starts with a birth (solid circle) in 1836, and ends with a death (crossed circle) in 1849. Lifeline \textbf{B} starts with a birth in 1940, and ends with a death in 2023. The ordinate position L is equal to the length of each life.}
+%\label{fig:lpd}
+%\end{figure}
+
+%Fig.~\ref{fig:lpq} displays the Qu\'{e}bec population structure on an LP surface. Higher $y$ values correspond to longer lives, and therefore more overlapped underlying lifelines. The upper regions of the surface are thus smoother with respect to time than lower regions. Growth over time in to-be-long-lived individuals could occur due to population growth or mortality improvement. We know this pattern is not due to migration because this population was mostly closed in this time. For Qu\'{e}bec, increasing contours over time are primarily due to population growth. 
+
+%Shorter lives (lower L) reveal the rhythms of mortality, adding a peculiar relief to the surface. High-mortality years are marked with vertical cliffs in population structure: Right-aligned cliffs are found on the LP surface when many lives over a range of ages are simultaneously extinguished. These vertical rifts trace back to births over a range of years, producing the -45$\circ$ feature \includegraphics{Figures/LP_mort_tri.pdf}. Mortality shocks therefore produce raised triangle relief pattern in population structure. A single isolated year with an extremely high number of births could produce a raised left-edge, but fertility shocks of this kind are far less prominent than mortality shocks in this population. Some known epidemics are marked below the surface with red strips \citep[cf Figure 1.1][]{mazan2011} 
+
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.9]{Figures/QuebecLP.pdf}
+%\caption{Population structure by length of life and year. %Logged counts}
+%\label{fig:lpq}
+%\end{figure}
+
+%The inverted step pattern on the right edge of this surface betrays some of the peculiarities of data collection for this source. Death information comes from burial records, which had some age constraints in data collection, depending on the period: For years 1800 to 1825 only deaths in ages 50 and greater were collected. For years 1826 to 1850, only deaths in ages 75 and greater were collected. Exceptions to this block edge structure owe to the use of multiple potential sources for death dates. Since lifelines accrue to the LP surface only after deaths occur, the right-side region of Fig.~\ref{fig:lpq} is incomplete: further increments will happen as death data are added to the series. This incompleteness is less for shorter lives, which accrue quickly to the surface due to their brevity.
+
+%\FloatBarrier
+%\subsection*{TC: Time-to-death and cohort}
+
+%The time-to-death T distribution of an extinct and closed birth cohort C (defined as a birth cohort all members of which have died) reveals its life table. Fig.~\ref{fig:tcd} shows an example of a TC diagram, where C is in abscissa and T is the ordinate variable. A lifeline on the CT plane is drawn as a vertical segment extending downward from birth until death on the bottom axis. For example, lifeline \textbf{A} represents an individual born in 1624 and dying at age 20 in 1644. In an aggregate of population exposure, this lifeline contributes 1 to the count in each time step descending from 20 to 0 --- the entire countdown timeline. Since each member of a birth cohort eventually comes to die, the coordinate $T = 0$ is maximally heterogeneous with respect to any of the other demographic time measures (A,L,P,D), and lifeline overlap decreases in higher T.
+
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.6]{Figures/TCdiagram.pdf}
+%\caption{TC diagram, with example lifelines. Lifeline \textbf{A} is from the 1624 birth cohort, and starts with a birth (solid circle) with 20 remaining years of life, and ends with a death (crossed circle) on the bottom axis (year 1644). Lifeline \textbf{B} is from the 1638 birth cohort, starting with 94 remaining years of life at birth, and ending with death in 1732.}
+%\label{fig:tcd}
+%\end{figure}
+
+%Fig.~\ref{fig:tcq} shows a TC tabulation of the Quebec population structure. A few features of this surface stand out. First, as a cohort ages, vertical strips are completed upwards. Ergo, the lower regions of the surface are more complete than the upper regions, and the slanted step structure on the right edge of the surface corresponds to the block-step pattern of the LP surface in Fig~\ref{fig:lpq}. Second, the relatively sparse earlier cohorts are visible as vertical strips. This pattern is due to left-censoring on the moment of migration. As the series progresses rightward the cohort experience becomes more completely described in the closed population renewal, making the series smoother. In general, we see the population grow as birth year advances. If one were to normalize cohort size to something constant then the surface would closely resemble an AC Lexis surface of survivorship.
+
+%\begin{figure}
+%\includegraphics[scale=.9]{Figures/QuebecTC.pdf}
+%\caption{Population structure by time to death and birth cohort.}
+%\label{fig:tcq}
+%\end{figure}
+
+%\FloatBarrier
+%\subsection*{AD: Age and year of death}
+
+%Following our convention, we draw an AD diagram with year of death D in the abscissa and age A in the ordinate. Lifelines in the AD diagram start at age 0 on the bottom axis, and rise vertically until the age at death, always within the same death cohort D. The AD diagram is therefore the reverse of the TC diagram: Fig.~\ref{fig:add} uses the same lifelines as Fig.~\ref{fig:tcd}. Thus the lifeline \textbf{A} starts at age 0 and rises until death at age 20 in 1644 (D). D is constant for an individual in this diagram. In the TC diagram the line for the same life was drawn 20 years earlier in the year of birth, and the lifeline descends rather than rises. 
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.6]{Figures/ADdiagram.pdf}
+%\caption{AD diagram, with example lifelines (same as in previous diagrams). Lifeline \textbf{A} is destined to die in 1644, starting with a birth (solid circle) at age 0, and ending with a death (crossed circle) on at age 20. Lifeline \textbf{B} is destined to die in 1732, starting at age 0 and rising to a death at age 94 in 1732.}
+%\label{fig:add}
+%\end{figure}
+
+%In a population aggregate, exposure accrues as in the other diagram settings: lifelines contribute 1 year to exposure in each year over the lifecourse. There is no direct way to infer a life table from an AD population structure unless the population happens to be in stationary renewal \citep{villavicencio2016symmetries}, and in this narrow case the TC surface would appear identical to the AD surface. Fig.~\ref{fig:adq} shows an AD tabulation of the same Qu\'{e}bec data. Whereas vertical striation in the TC tabulation of Fig.~\ref{fig:tcq} was primarily due to birth cohort size, in Fig.~\ref{fig:adq} vertical striation results from mortality shocks. Dark vertical lines in this surface correspond to the right edge of the \emph{mortality triangles} of the LP surface. Light vertical strips might be due to stochasticity and sparseness in early years, to under-coverage or under-registration of deaths in particular years, or to selection following large mortality shocks \citep{luy2019life}. The surface has a hard right edge because the source data collection ceases around 1850, but recall from the LP surface that different age ranges were collected until different final years. Since deaths for the years 1826 to 1850 were only collected for ages 75+, the AD surface is flat in ages 0 to 74 for these same years. Likewise the preceding quarter century will be flat for age 0 to 49. [[[Tim, what accounts for the vertical darker strips in these time intervals?]]] The AD surface of Fig.~\ref{fig:adq} is therefore incomplete in the area corresponding to the white space below the stepped right edge of Fig.~\ref{fig:lpq}.
+
+%\begin{figure}
+%\includegraphics[scale=.9]{Figures/QuebecAD.pdf}
+%\caption{Population structure by age and year of death.}
+%\label{fig:adq}
+%\end{figure}
+
+%\FloatBarrier
+%\section*{Independent time surfaces as cross-sections}
+%Here use example of HRS prevalence surfaces produced at novel \emph{cut} angles. I'm thinking maybe small multiples, since each would be a fly-through of cross sections in fixed intervals. There would be 3 independent fly-throughs, and 4 Lexis-like fly throughs. These would be  like Fig.~(7) of \cite{riffe2017demographictime}, which is a fly-though at the TAL viewing angle. So, maybe each fly-through is a column and each perspective is a row? Maybe 10-year jumps in columns to imply 3-4 columns? Total? For example, each TAL slice in that Fig 7 is held for a fixed C. It would have been possible to hold P or D fixed instead, but I guess the actually slices would be identical, just the labels would change. Just need to be clear about it when labelling said panel figure.

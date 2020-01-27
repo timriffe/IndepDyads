@@ -110,7 +110,11 @@ edge.mids <- function(rad=1,frac=.5,alpha=0,beta=0,gamma=0){
 	mids
 }
 
-
+tri_centroid_3d <- function(this.tri){
+	P1 <- this.tri[1, ]
+	PM <- colMeans(this.tri[-1, ])
+	PM + (P1 - PM) / 3
+}
 
 medians <- function(rad=1, alpha=0, beta=0, gamma=0){
 	
@@ -125,9 +129,7 @@ medians <- function(rad=1, alpha=0, beta=0, gamma=0){
 	
 	centroid <- function(verti = 1, verts){
 		this.tri <- as.matrix(verts[-verti, ])
-		P1 <- this.tri[1, ]
-		PM <- colMeans(this.tri[-1, ])
-		PM + (P1 - PM) / 3
+		tri_centroid_3d(this.tri)
 	}
 	cents   <- t(sapply(1:4, centroid, verts = verts))
 	meds$x2 <- cents[, "x"]
@@ -167,6 +169,53 @@ bimedian_plane_sq <- function(
     mids
 }
 
+median_plane_tri_centroid <- function(
+	triad = "APC",
+	rad = 1.2,
+	alpha=0,
+	beta = 0,
+	gamma = 0){
+	
+	stopifnot(triad %in% c("APC","TPD","LCD","TAL"))
+	
+	lets     <- unlist(strsplit(triad,split=""))
+	measures <- c("P","C","D","A","T","L")
+	others   <- measures[!measures %in% lets]
+	verts    <- tetverts_unit(rad=rad,alpha=alpha,beta=beta,gamma=gamma)
+	
+	vx       <- verts$x
+	vy       <- verts$y
+	vz       <- verts$z
+	
+	# vertex pairings
+	vi1                <- c(1,1,1,2,2,3)
+	vi2                <- c(2,3,4,3,4,4)
+	pairings           <- cbind(vi1,vi2)
+	rownames(pairings) <- measures
+
+	
+	# vertices, with names of opposite triads
+	verti              <- 1:4
+	names(verti)       <- c("TAL","LCD","TPD","APC")
+	verti              <- verti[triad]
+	
+	# so now everything is relative to verti, we want
+	# three points on the conjoining edges that are 1/3
+	# frac is 1/3 for this vertex, 2/3 for all others.
+	
+	w                  <- ifelse(pairings == verti, 1/3,2/3)
+	rownames(w)        <- measures
+	w                  <- w[others, ]
+	pairings           <- pairings[others, ]
+	
+	
+	x     <- vx[pairings[,1]] * w[,1] + vx[pairings[,2]] * w[,2]
+	y     <- vy[pairings[,1]] * w[,1] + vy[pairings[,2]] * w[,2]
+	z     <- vz[pairings[,1]] * w[,1] + vz[pairings[,2]] * w[,2]
+	mids  <- data.frame(x = x, y = y, z = z)
+    mids
+}
+
 
 AssignColour <- function (x) {
 	if (x == "A") result <- "#D23737"
@@ -177,35 +226,35 @@ AssignColour <- function (x) {
 	if (x == "L") result <- "#C5752B"
 	return(result)
 }
-tet  <- tetrahedron_a()
-tetm <- edge.mids(rad=1.1,frac=.33) 
-triads <- c("APC","TPD","CDL","TAL")
-meds <- medians(rad=1.3)
-# let's start with unit space: c(-2,2) for everything?
-xlim <- c(-3,3)
-ylim <- c(-3,3)
-zlim <- c(-3,3)
+# tet  <- tetrahedron_a()
+# tetm <- edge.mids(rad=1.1,frac=.33) 
+# triads <- c("APC","TPD","CDL","TAL")
+# meds <- medians(rad=1.3)
+# # let's start with unit space: c(-2,2) for everything?
+# xlim <- c(-3,3)
+# ylim <- c(-3,3)
+# zlim <- c(-3,3)
 
 # set up device
-rgl.close()
-par3d(FOV=0)
-plot3d(xlim = xlim, ylim = ylim, zlim = zlim, 
-		box = FALSE, 
-		aspect = c(1, 1, 1),
-		axes = FALSE, 
-		type ='n',
-		xlab = "",
-		ylab = "",
-		zlab = "")
-bg3d("white")
-for (i in 1:nrow(tet)){
-	rgl.linestrips(
-			x = c(tet$x1[i], tet$x2[i]), 
-			y = c(tet$y1[i], tet$y2[i]), 
-			z = c(tet$z1[i], tet$z2[i]), 
-			color = AssignColour(tet$edge[i]), lwd = 4)
-	text3d(x = tetm$xm[i], y = tetm$ym[i], z = tetm$zm[i], tetm$edge[i], col = AssignColour(tetm$edge[i]), cex = 3)
-}
+# rgl.close()
+# par3d(FOV=0)
+# plot3d(xlim = xlim, ylim = ylim, zlim = zlim, 
+# 		box = FALSE, 
+# 		aspect = c(1, 1, 1),
+# 		axes = FALSE, 
+# 		type ='n',
+# 		xlab = "",
+# 		ylab = "",
+# 		zlab = "")
+# bg3d("white")
+# for (i in 1:nrow(tet)){
+# 	rgl.linestrips(
+# 			x = c(tet$x1[i], tet$x2[i]), 
+# 			y = c(tet$y1[i], tet$y2[i]), 
+# 			z = c(tet$z1[i], tet$z2[i]), 
+# 			color = AssignColour(tet$edge[i]), lwd = 4)
+# 	text3d(x = tetm$xm[i], y = tetm$ym[i], z = tetm$zm[i], tetm$edge[i], col = AssignColour(tetm$edge[i]), cex = 3)
+# }
 #verts <- tetverts()
 # label vertices for now:
 #for (i in 1:4){
@@ -225,40 +274,40 @@ for (i in 1:nrow(tet)){
 
 # the four triad normal view axes (medians)
 
-for (i in 1:4){
-	rgl.linestrips(
-			x = c(meds[triads[i],"x1"], meds[triads[i],"x2"]), 
-			y = c(meds[triads[i],"y1"], meds[triads[i],"y2"]), 
-			z = c(meds[triads[i],"z1"], meds[triads[i],"z2"]), 
-			color = "#00FFFF50", lwd = 2)
-	text3d(x = meds[triads[i],"x2"],meds[triads[i],"y2"],meds[triads[i],"z2"],triads[i], cex = 1,col="black")
-}
-
-#text3d(-.5,-.5,-.5,"Tim Riffe (2018)", cex = 1.5,col="black")
-#text3d(1,1,1,"demographic time view axes", cex = 1.5,col="black")
-
-writeASY(title = "DepViewAxes",outtype="pdflatex",width=3,height=3,defaultFontsize = 14)
-getwd()
-
-rgl.close()
-par3d(FOV=0)
-plot3d(xlim = xlim, ylim = ylim, zlim = zlim, 
-		box = FALSE, 
-		aspect = c(1, 1, 1),
-		axes = FALSE, 
-		type ='n',
-		xlab = "",
-		ylab = "",
-		zlab = "")
-bg3d("white")
-for (i in 1:nrow(tet)){
-	rgl.linestrips(
-			x = c(tet$x1[i], tet$x2[i]), 
-			y = c(tet$y1[i], tet$y2[i]), 
-			z = c(tet$z1[i], tet$z2[i]), 
-			color = AssignColour(tet$edge[i]), lwd = 4)
-	text3d(x = tetm$xm[i], y = tetm$ym[i], z = tetm$zm[i], tetm$edge[i], col = AssignColour(tetm$edge[i]), cex = 3)
-}
+# for (i in 1:4){
+# 	rgl.linestrips(
+# 			x = c(meds[triads[i],"x1"], meds[triads[i],"x2"]), 
+# 			y = c(meds[triads[i],"y1"], meds[triads[i],"y2"]), 
+# 			z = c(meds[triads[i],"z1"], meds[triads[i],"z2"]), 
+# 			color = "#00FFFF50", lwd = 2)
+# 	text3d(x = meds[triads[i],"x2"],meds[triads[i],"y2"],meds[triads[i],"z2"],triads[i], cex = 1,col="black")
+# }
+# 
+# #text3d(-.5,-.5,-.5,"Tim Riffe (2018)", cex = 1.5,col="black")
+# #text3d(1,1,1,"demographic time view axes", cex = 1.5,col="black")
+# 
+# writeASY(title = "DepViewAxes",outtype="pdflatex",width=3,height=3,defaultFontsize = 14)
+# getwd()
+# 
+# rgl.close()
+# par3d(FOV=0)
+# plot3d(xlim = xlim, ylim = ylim, zlim = zlim, 
+# 		box = FALSE, 
+# 		aspect = c(1, 1, 1),
+# 		axes = FALSE, 
+# 		type ='n',
+# 		xlab = "",
+# 		ylab = "",
+# 		zlab = "")
+# bg3d("white")
+# for (i in 1:nrow(tet)){
+# 	rgl.linestrips(
+# 			x = c(tet$x1[i], tet$x2[i]), 
+# 			y = c(tet$y1[i], tet$y2[i]), 
+# 			z = c(tet$z1[i], tet$z2[i]), 
+# 			color = AssignColour(tet$edge[i]), lwd = 4)
+# 	text3d(x = tetm$xm[i], y = tetm$ym[i], z = tetm$zm[i], tetm$edge[i], col = AssignColour(tetm$edge[i]), cex = 3)
+# }
 #verts <- tetverts()
 # label vertices for now:
 #for (i in 1:4){
@@ -266,18 +315,18 @@ for (i in 1:nrow(tet)){
 #}
 
 # the three independant view axes (bimedian)
-tetbm   <- tetrahedron_a(rad=1.5)
-tetbml  <- tetrahedron_a(rad=1.6)
-indeps  <- matrix(c("A","T","L","D","C","P"),ncol=2)
-indepsl <- paste0(indeps[,1],indeps[,2])
-for (i in 1:3){
-	rgl.linestrips(
-			x = c(tetbm[indeps[i,1],"xm"], tetbm[indeps[i,2],"xm"]), 
-			y = c(tetbm[indeps[i,1],"ym"], tetbm[indeps[i,2],"ym"]), 
-			z = c(tetbm[indeps[i,1],"zm"], tetbm[indeps[i,2],"zm"]), 
-			color = "#FF00FF50", lwd = 2)
-	text3d(x = tetbml[indeps[i,1],"xm"],tetbml[indeps[i,1],"ym"],tetbml[indeps[i,1],"zm"],indepsl[i], cex = 1,col="black")
-}
+# tetbm   <- tetrahedron_a(rad=1.5)
+# tetbml  <- tetrahedron_a(rad=1.6)
+# indeps  <- matrix(c("A","T","L","D","C","P"),ncol=2)
+# indepsl <- paste0(indeps[,1],indeps[,2])
+# for (i in 1:3){
+# 	rgl.linestrips(
+# 			x = c(tetbm[indeps[i,1],"xm"], tetbm[indeps[i,2],"xm"]), 
+# 			y = c(tetbm[indeps[i,1],"ym"], tetbm[indeps[i,2],"ym"]), 
+# 			z = c(tetbm[indeps[i,1],"zm"], tetbm[indeps[i,2],"zm"]), 
+# 			color = "#FF00FF50", lwd = 2)
+# 	text3d(x = tetbml[indeps[i,1],"xm"],tetbml[indeps[i,1],"ym"],tetbml[indeps[i,1],"zm"],indepsl[i], cex = 1,col="black")
+# }
 
 # the four triad normal view axes (medians)
 #triads <- c("APC","TPD","CDL","TAL")
@@ -294,16 +343,16 @@ for (i in 1:3){
 #text3d(-.5,-.5,-.5,"Tim Riffe (2018)", cex = 1.5,col="black")
 #text3d(1,1,1,"demographic time view axes", cex = 1.5,col="black")
 
-writeASY(title = "IndepViewAxes",outtype="pdflatex",width=3,height=3,defaultFontsize = 14)
-getwd()
+# writeASY(title = "IndepViewAxes",outtype="pdflatex",width=3,height=3,defaultFontsize = 14)
+# getwd()
 
 
 
 
-apcmedx;apcmedy;apcmedz
-tpdmedx;tpdmedy;tpdmedz
-talmedx;talmedy;talmedz
-cdlmedx;cdlmedy;cdlmedz
+# apcmedx;apcmedy;apcmedz
+# tpdmedx;tpdmedy;tpdmedz
+# talmedx;talmedy;talmedz
+# cdlmedx;cdlmedy;cdlmedz
 
 get_tikz_coords <- function(rad = 1, 
 						   alpha = 0, 
@@ -313,6 +362,7 @@ get_tikz_coords <- function(rad = 1,
 						   .bimedian = FALSE,
 							dyad="LP",
 							rad2=1.2,
+							triad="APC",
 							...){
 	
 # work on turning this into gsubbable text
@@ -344,8 +394,22 @@ blob <- "
 
  % bimed intersection plane
 %\\draw[-, color={rgb:red,1;green,1;blue,1}, opacity=.5, line width = {0.1pt}] (bmintx1,bminty1,bmintz1)--(bmintx2,bminty2,bmintz2)--(bmintx3,bminty3,bmintz3)--(bmintx4,bminty4,bmintz4)--cycle;
-
+% 0,0,0
 %\\node[mark size=.3pt,color={rgb:red,1;green,1;blue,1}, opacity=.5] at (0,0,0) {\\pgfuseplotmark{*}}; 
+
+
+% redish transparent triad plane passing through midpoint 
+% (match to median line)
+% med plane
+%\\fill[-, fill={rgb:red,1;green,0;blue,0}, opacity=.08] (tpx1,tpy1,tpz1)--(tpx2,tpy2,tpz2)--(tpx3,tpy3,tpz3)--cycle; 
+
+ % med intersection plane
+%\\draw[-, color={rgb:red,1;green,1;blue,1}, opacity=.5, line width = {0.1pt}] (tpintx1,tpinty1,tpintz1)--(tpintx2,tpinty2,tpintz2)--(tpintx3,tpinty3,tpintz3)--cycle;
+% tri centroid:
+%\\node[mark size=.3pt,color={rgb:red,1;green,1;blue,1}, opacity=.5] at (tpmidx,tpmidy,tpmidz) {\\pgfuseplotmark{*}}; 
+
+
+
 
 
 % light shaded faces
@@ -385,6 +449,19 @@ blob <- "
 % A midpoint
 %\\node[mark size=.5pt,color={rgb:red,210;green,55;blue,55}] at (bcx,bcy,bcz) {\\pgfuseplotmark{*}}; 
 
+% median plan intersection points
+% intersection 1
+%\\node[mark size=.5pt,color={rgb:red,1;green,0;blue,0}] at (tpintx1,tpinty1,tpintz1) {\\pgfuseplotmark{*}}; 
+%  2
+%\\node[mark size=.5pt,color={rgb:red,1;green,0;blue,0}] at (tpintx2,tpinty2,tpintz2) {\\pgfuseplotmark{*}}; 
+ % 3 (match color by checking about)
+%\\node[mark size=.5pt,color={rgb:red,1;green,0;blue,0}] at (tpintx3,tpinty3,tpintz3) {\\pgfuseplotmark{*}}; 
+% helper dots for getting colors right :-)
+%\\node at (tpintx1,tpinty1,tpintz1) {\\tiny $1$};      
+%\\node at (tpintx2,tpinty2,tpintz2) {\\tiny$2$};       
+%\\node at (tpintx3,tpinty3,tpintz3) {\\tiny$3$};  
+
+
 % node helper labels
 % \\node at (A) {\\small A};
 % \\node at (B) {\\small B};
@@ -410,14 +487,32 @@ blob <- "
 							   beta = beta, 
 							   gamma = gamma)
 	# shaded plane
-	bm    <- bimedian_plane_sq(dyad = dyad,
+	bm     <- bimedian_plane_sq(dyad = dyad,
 		                       rad=rad2,
 							   alpha = alpha, 
 							   beta = beta, 
 							   gamma = gamma)
 	
-	verts <- zapsmall(as.matrix(verts))
-	meds  <- zapsmall(as.matrix(meds))
+	# or the other shaded plane
+	tp     <- median_plane_tri_centroid(rad=rad2,
+								    triad=triad,
+									alpha=alpha,
+									beta = beta, 
+									gamma = gamma)
+	tpint  <- median_plane_tri_centroid(rad=rad,
+									triad=triad,
+									alpha=alpha,
+									beta = beta, 
+									gamma = gamma)
+    tpmid  <- tri_centroid_3d(tpint)
+    
+	verts  <- zapsmall(as.matrix(verts))
+	meds   <- zapsmall(as.matrix(meds))
+	bm     <- zapsmall(as.matrix(bm))
+	bmint  <- zapsmall(as.matrix(bmint))
+	tp     <- zapsmall(as.matrix(tp))
+	tpint  <- zapsmall(as.matrix(tpint))
+	tpmid  <- zapsmall(tpmid)
 	# median parameters to gsub in:
 	library(magrittr)
 	blob <- 
@@ -509,6 +604,37 @@ blob <- "
 			gsub(pattern="bmintz2",replacement =  bmint[2,"z"], .) %>%
 			gsub(pattern="bmintz3",replacement =  bmint[3,"z"], .) %>%
 			gsub(pattern="bmintz4",replacement =  bmint[4,"z"], .) 
+		
+		# median plane:
+		blob <- 
+			blob %>% 
+			gsub(pattern="tpx1",replacement =  tp[1,"x"], .) %>%
+			gsub(pattern="tpx2",replacement =  tp[2,"x"], .) %>%
+			gsub(pattern="tpx3",replacement =  tp[3,"x"], .) %>%
+	
+			gsub(pattern="tpy1",replacement =  tp[1,"y"], .) %>%
+			gsub(pattern="tpy2",replacement =  tp[2,"y"], .) %>%
+			gsub(pattern="tpy3",replacement =  tp[3,"y"], .) %>%
+		
+			gsub(pattern="tpz1",replacement =  tp[1,"z"], .) %>%
+			gsub(pattern="tpz2",replacement =  tp[2,"z"], .) %>%
+			gsub(pattern="tpz3",replacement =  tp[3,"z"], .) %>%
+
+			gsub(pattern="tpintx1",replacement =  tpint[1,"x"], .) %>%
+			gsub(pattern="tpintx2",replacement =  tpint[2,"x"], .) %>%
+			gsub(pattern="tpintx3",replacement =  tpint[3,"x"], .) %>%
+
+			gsub(pattern="tpinty1",replacement =  tpint[1,"y"], .) %>%
+			gsub(pattern="tpinty2",replacement =  tpint[2,"y"], .) %>%
+			gsub(pattern="tpinty3",replacement =  tpint[3,"y"], .) %>%
+
+			gsub(pattern="tpintz1",replacement =  tpint[1,"z"], .) %>%
+			gsub(pattern="tpintz2",replacement =  tpint[2,"z"], .) %>%
+			gsub(pattern="tpintz3",replacement =  tpint[3,"z"], .) %>% 
+			
+			gsub(pattern="tpmidx",replacement =  tpmid["x"], .) %>%
+			gsub(pattern="tpmidy",replacement =  tpmid["y"], .) %>%
+			gsub(pattern="tpmidz",replacement =  tpmid["z"], .)
 			
 
 	cat(blob, ...)
@@ -519,6 +645,8 @@ get_tikz_coords(1,
 				beta = -30,
 				gamma = 30,
 				.median = TRUE, 
+				triad = "APC",
+				rad2=1.4,
 				file = here("IndepDyads",
                             "S1",
                             "fig2_medians.tex"))

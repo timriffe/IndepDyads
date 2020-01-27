@@ -333,40 +333,60 @@ blob <- "
 \\draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (D) -- (3*apcmedx, 3*apcmedy, 3*apcmedz); % APC median;
 
 % bimedian lines: pick one
-% \\draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (1.1*cdx,1.1*cdy,1.1*cdz) -- (1.1*abx,1.1*aby,1.1*abz); % $LP$ bimedian
-% \\draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (1.1*bcx,1.1*bcy,1.1*bcz) -- (1.1*adx,1.1*ady,1.1*adz); % $AD$ bimedian
-% \\draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (1.1*bdx,1.1*bdy,1.1*bdz) -- (1.1*acx,1.1*acy,1.1*acz); % $TC$ bimedian
+% \\draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (1.3*cdx,1.3*cdy,1.3*cdz) -- (1.3*abx,1.3*aby,1.3*abz); % $LP$ bimedian
+% \\draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (1.3*bcx,1.3*bcy,1.3*bcz) -- (1.1*adx,1.3*ady,1.3*adz); % $AD$ bimedian
+% \\draw[->,color={rgb:red,1;green,1;blue,1}, densely dotted, line width = {0.2pt}] (1.3*bdx,1.3*bdy,1.3*bdz) -- (1.3*acx,1.3*acy,1.3*acz); % $TC$ bimedian
 
 % redish transparent independent plane passing through midpoint 
 % (match to bimedian line)
-%\\draw[-, fill={rgb:red,1;green,0;blue,0}, opacity=.08] (bmx1,bmy1,bmz1)--(bmx2,bmy2,bmz2)--(bmx3,bmy3,bmz3)--(bmx4,bmy4,bmz4)--cycle; % bimed plane
+% bimed plane
+%\\fill[-, fill={rgb:red,1;green,0;blue,0}, opacity=.08] (bmx1,bmy1,bmz1)--(bmx2,bmy2,bmz2)--(bmx3,bmy3,bmz3)--(bmx4,bmy4,bmz4)--cycle; 
 
-%\\draw[-, color={rgb:red,1;green,1;blue,1}, opacity=.5] (bmintx1,bminty1,bmintz1)--(bmintx2,bminty2,bmintz2)--(bmintx3,bminty3,bmintz3)--(bmintx4,bminty4,bmintz4); % bimed plane
+ % bimed intersection plane
+%\\draw[-, color={rgb:red,1;green,1;blue,1}, opacity=.5, line width = {0.1pt}] (bmintx1,bminty1,bmintz1)--(bmintx2,bminty2,bmintz2)--(bmintx3,bminty3,bmintz3)--(bmintx4,bminty4,bmintz4)--cycle;
+
+%\\node[mark size=.3pt,color={rgb:red,1;green,1;blue,1}, opacity=.5] at (0,0,0) {\\pgfuseplotmark{*}}; 
+
 
 % light shaded faces
-\\draw[-, fill={rgb:red,1;green,1;blue,1}, opacity=.05] (A)--(D)--(B)--cycle; % TDP
-\\draw[-, fill={rgb:red,1;green,1;blue,1}, opacity=.05] (A)--(D)--(C)--cycle; % CDL
-\\draw[-, fill={rgb:red,1;green,1;blue,1}, opacity=.05] (B)--(D)--(C)--cycle; % TAL
-\\draw[-, fill={rgb:red,1;green,1;blue,1}, opacity=.05] (A)--(B)--(C)--cycle; % APC
+\\fill[-, fill={rgb:red,1;green,1;blue,1}, opacity=.05] (A)--(D)--(B)--cycle;       % TDP
+\\fill[-, fill={rgb:red,1;green,1;blue,1}, opacity=.05] (A)--(D)--(C)--cycle;       % CDL
+\\fill[-, fill={rgb:red,1;green,1;blue,1}, opacity=.05] (B)--(D)--(C)--cycle;       % TAL
+\\fill[-, fill={rgb:red,1;green,1;blue,1}, opacity=.05] (A)--(B)--(C)--cycle;       % APC
 
 % color edges
-\\draw[-, color ={rgb:red,136;green,31;blue,147}, line width = {0.3pt}] (A)--(D); % D
-\\draw[-, color ={rgb:red,197;green,117;blue,43}, line width = {0.3pt}] (D)--(C); % L
-\\draw[-, color ={rgb:red,78;green,201;blue,59}, line width = {0.3pt}] (D)--(B); % T
-\\draw[-, color ={rgb:red,210;green,55;blue,55}, line width = {0.3pt}] (B)--(C); % A
-\\draw[-, color ={rgb:red,49;green,145;blue,201}, line width = {0.3pt}] (A)--(B); % P
-\\draw[-, color ={rgb:red,210;green,188;blue,45}, line width = {0.3pt}] (A)--(C); % C
+\\draw[-, color ={rgb:red,136;green,31;blue,147}, line width = {0.3pt}] (A)--(D);   % D
+\\draw[-, color ={rgb:red,197;green,117;blue,43}, line width = {0.3pt}] (D)--(C);   % L
+\\draw[-, color ={rgb:red,78;green,201;blue,59}, line width = {0.3pt}] (D)--(B);    % T
+\\draw[-, color ={rgb:red,210;green,55;blue,55}, line width = {0.3pt}] (B)--(C);    % A
+\\draw[-, color ={rgb:red,49;green,145;blue,201}, line width = {0.3pt}] (A)--(B);   % P
+\\draw[-, color ={rgb:red,210;green,188;blue,45}, line width = {0.3pt}] (A)--(C);   % C
 
 % edge labels
-\\node[above, color={rgb:red,49;green,145;blue,201}] at (abx,aby,abz) {\\tiny $p$}; % AB mean
-\\node[below, color={rgb:red,210;green,188;blue,45}] at (acx,acy,acz) {\\tiny$c$};  % AC mean
-\\node[above, color={rgb:red,136;green,31;blue,147}] at (adx,ady,adz) {\\tiny$d$};  % AD mean
-\\node[left, color={rgb:red,78;green,201;blue,59}] at (bdx,bdy,bdz) {\\tiny$t$};   % BD mean
-\\node[left, color={rgb:red,197;green,117;blue,43}] at (cdx,cdy,cdz) {\\tiny$l$};  % CD mean
-\\node[right, color={rgb:red,210;green,55;blue,55}] at (bcx,bcy,bcz) {\\tiny$a$};  % BC mean
+% temp positions: above;below;below left; above; below
+\\node[above, color={rgb:red,49;green,145;blue,201}] at (abx,aby,abz) {\\tiny $p$};      % AB mean
+\\node[below, color={rgb:red,210;green,188;blue,45}] at (acx,acy,acz) {\\tiny$c$};       % AC mean
+\\node[below left, color={rgb:red,136;green,31;blue,147}] at (adx,ady,adz) {\\tiny$d$};  % AD mean
+\\node[above, color={rgb:red,78;green,201;blue,59}] at (bdx,bdy,bdz) {\\tiny$t$};        % BD mean
+\\node[below, color={rgb:red,197;green,117;blue,43}] at (cdx,cdy,cdz) {\\tiny$l$};       % CD mean
+\\node[above, color={rgb:red,210;green,55;blue,55}] at (bcx,bcy,bcz) {\\tiny$a$};        % BC mean
+
+% bimedian line intersection points:
+% P midpoint
+%\\node[mark size=.5pt,color={rgb:red,49;green,145;blue,201}] at (abx,aby,abz) {\\pgfuseplotmark{*}}; 
+% C midpoint
+%\\node[mark size=.5pt,color={rgb:red,210;green,188;blue,45}] at (acx,acy,acz) {\\pgfuseplotmark{*}}; 
+ % D midpoint
+%\\node[mark size=.5pt,color={rgb:red,136;green,31;blue,147}] at (adx,ady,adz) {\\pgfuseplotmark{*}}; 
+% T midpoint
+%\\node[mark size=.5pt,color={rgb:red,78;green,201;blue,59}] at (bdx,bdy,bdz) {\\pgfuseplotmark{*}}; 
+% L midpoint
+%\\node[mark size=.5pt,color={rgb:red,197;green,117;blue,43}] at (cdx,cdy,cdz) {\\pgfuseplotmark{*}}; 
+% A midpoint
+%\\node[mark size=.5pt,color={rgb:red,210;green,55;blue,55}] at (bcx,bcy,bcz) {\\pgfuseplotmark{*}}; 
 
 % node helper labels
-%\\node at (A) {\\small A};
+% \\node at (A) {\\small A};
 % \\node at (B) {\\small B};
 % \\node at (C) {\\small C};
 % \\node at (D) {\\small D};
@@ -494,7 +514,6 @@ blob <- "
 	cat(blob, ...)
 }
 
-
 get_tikz_coords(1,
 				alpha = 20,
 				beta = -30,
@@ -504,14 +523,18 @@ get_tikz_coords(1,
                             "S1",
                             "fig2_medians.tex"))
 
-get_tikz_coords(1,
-				alpha = 20,
-				beta = -30,
-				gamma = 30,
-				.median = FALSE,
-				.bimedian = TRUE,
-				file = here("IndepDyads",
-							"S1",
-							"fig2_bimedians.tex"))
+# decent draft in place. Don't re-run because 
+# some things manually altered.
+# get_tikz_coords(1,
+# 				alpha = 20,
+# 				beta = -30,
+# 				gamma = 30,
+# 				.median = FALSE,
+# 				.bimedian = TRUE,
+# 				dyad="LP",
+# 				rad2=1.4,
+# 				file = here("IndepDyads",
+# 							"S1",
+# 							"fig2_bimedians.tex"))
 	
 

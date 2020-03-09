@@ -218,11 +218,11 @@
 
 \begin{abstract} % abstract
 \parttitle{Background} 
-The demographic time identity consists in a linear relationship between all pairs of six fundamental time measures: age, period, cohort, time to death, length of life, and time of death. Certain subsets of time measures in this and other higher order identities consist in measures that are independent of one another.
+The demographic time identity consists in a linear relationship between all pairs of six fundamental time measures: age, period, cohort, time to death, length of life, and time of death. Certain subsets of time measures in this and other higher order identities consist in time measures that are independent of one another.
 \parttitle{Objective} 
-We aim to describe the relationship between independent time measures and the identities within which they are nested, with special attention to the demographic time identity and its three independent time dyads. We also aim to determine whether data structured on such time dyads might be useful in demographic research.
+We aim to clarify the relationship between independent time measures and the identities within which they are nested, with special attention to the demographic time identity and its three independent time dyads. We also aim to determine whether data structured on such time dyads might be useful in demographic research.
 \parttitle{Data and Methods} 
-We illustrate concepts visually based on prevalence data estimated from the US Health and Retirement study.
+We illustrate concepts visually based on disability prevalence data estimated from the US Health and Retirement study. We display and evaluate several varieties of prevalence surfaces.
 \parttitle{Results} 
 We show that a Cartesian mapping of independent time dyads forms a redundant mapping of the demographic timespace. These add three novel demographic perspectives to four previously described Lexis-like perspectives, for a total of seven proposed standard perspectives. 
 \parttitle{Conclusions} 
@@ -237,10 +237,12 @@ We show independent sets of time measures to be consistent with the temporal ide
 %%                                          %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 \begin{keyword}
-\kwd{sample}
-\kwd{article}
-\kwd{author}
+\kwd{age structure}
+\kwd{data visualization}
+\kwd{age-period-cohort}
+\kwd{disability prevalence}
 \end{keyword}
 
 % MSC classifications codes, if any
@@ -336,9 +338,14 @@ Although the demographic time identity is based on only three simple linear rela
 \label{fig:viewaxes}
 \end{figure}
 
-Data structured by the demographic time identity can be selected such that its Cartesian representation is a cross-section orthogonal to any of the seven view axes illustrated in Fig.~\ref{fig:viewaxes}. There is no reason not to do this for outcome measures, for example disease prevalence, in search of meaningful patterns. Further, when \emph{slicing} through such a complex timespace, we are agnostic about cut angles in general, but \emph{snapping} to axes defined on the basis of unit time measures leads to easier interpretation.
 
-\subsection*{Cross-section equivalencies}
+
+\FloatBarrier
+\subsection*{Surface equivalencies}
+Data structured by the demographic time identity can be visualized as a surface on a Cartesian grid, where any two time measures define the abscissa and ordinate. Thus there are $\binom{6}{2}$ possible axis combinations for surfaces of this kind. Any such surface must be held constant for a third time measure. For instance, if we visualize data on a TAL plane, this is done holding a value of C, D, or P constant, for example the TAL plane of the 1915 birth cohort. For a plane defined with a triad identity, one may control for any of the remaining three measures. Independent planes can be held constant for any of the four remaining time measures: for example, the AD plane may be held constant for one of C, P, T, or L. For instance, one may view the AD plane of the 1915 birth cohort. In this case, one will notice that the TAL and AD planes for the 1915 birth cohort are different representations of the exact same set of data points.
+
+selected such that its Cartesian representation is a cross-section orthogonal to any of the seven view axes illustrated in Fig.~\ref{fig:viewaxes}. There is no reason not to do this for outcome measures, for example disease prevalence, in search of meaningful patterns. Further, when \emph{slicing} through such a complex timespace, we are agnostic about cut angles in general, but \emph{snapping} to axes defined on the basis of unit time measures leads to easier interpretation.
+
 Use this section to give a formal introduction to how a single control variable and depth implies a single surface, but the abscissa and ordinate choices can vary, implying different rotations and potentially giving different insights.
 
 This is a temporary note. I've noticed some equivalencies when taking cross-sections of the hexad timespace using the HRS data. We have four triad identities and three independent dyads. For each of these, when taking a cross-section of the 3d space, one needs to specify a control variable. For example, for APC, one could control for T, L or D. Certain combinations of abscissa, ordinate and control measure yield identical images (albeit with different axis labels due to different time measures). For example, APC, LCD, AD, and LP are all identical when controlled for T. TPD, LCD, LP, and TC are all identical when controlled for A. And in general for each of the six possible controls, there are four ways to specify a plane that will yield identically filled surfaces. By extension, we conclude that there are six *fundamental* cross sections. I deposit this text here temporarily, but this is in need of further verification, as my data filtering may need some refinement for the case of independent dyads. Specifically, for a given independent dyad we may not wish to hold one of the other four measures constant. And of course this could all be my mistake.
